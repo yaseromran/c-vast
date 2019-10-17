@@ -1,0 +1,108 @@
+get Education : http://localhost:8000/education/resumeId  
+
+Delete Education : http://localhost:8000/education/educationId 
+
+
+required Fields in post and put : 
+1-resume_id
+2-degree_level
+3_university
+4-major
+5-from
+6-isPresent
+
+
+post : 
+
+url : http://localhost:8000/education
+
+
+
+body : {
+	
+"resume_id":1,
+	
+"degree_level":"Master",
+	
+"university": {
+"name": "Halab","url" : "www.Halab.com",
+"country":"Syria",
+"description":"",
+"city":"Halab",
+"street_address":"",
+"longitude":"",
+"latitude":""
+},
+	
+"major":{"name":"Medicne"},
+
+"isPresent":false,
+	
+"from":{ 
+"year":"2013",
+	"month":"5"
+	},
+	
+"to":{
+	"year":"2018",
+	"month":"5"
+	}
+	
+
+}
+
+
+
+Update :
+
+url : http://localhost:8000/education/$educationId 
+
+
+body :
+
+{
+
+"resume_id":1,
+	
+"degree_level":"Master",
+
+"grade":"70",
+
+"full_grade":"100",
+
+"university": {
+	"name": "Halab4",
+"url" : "www.Halab3.com",
+"country":"Syria",
+"description":"",
+"city":"Halab",
+"street_address":"",
+"longitude":"",
+	"latitude":""
+	},
+
+"major":{"name":"Medicne"},
+
+"minor":{"name":"Bones", "major_id":"2"},
+
+"projects":[
+
+{"title":"First","description":"best project"},
+	
+{"title":"Second","description":"Nice project"}
+	
+],
+	
+"isPresent":false,
+	
+"from":{ 
+"year":"2013",
+	"month":"5"
+	},
+
+"to":{"year":"2013",
+"month":"5"}
+	
+
+}
+

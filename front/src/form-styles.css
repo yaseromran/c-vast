@@ -1,0 +1,1061 @@
+
+.form-horizontal, .fixed-helper {
+  font-family: 'Roboto', sans-serif;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-bottom: 1px solid #ccc;
+}
+
+.form-control {
+  box-shadow: none;
+  border-radius: 0px;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+  transition: all .2s ease;
+  padding-bottom: 0;
+  height: 32px;
+}
+
+.form-control[disabled] {
+  background: #fff;
+  border-bottom: 1px dashed #ccc;
+}
+
+/* I Deleted { :host >>> } when move it outside the component */
+.has-error .form-control {
+  box-shadow: none !important;
+  border-color: #a94442;
+}
+
+label {
+  font-weight: normal;
+}
+
+.has-error .control-label {
+  color: #a94442 !important;
+}
+
+.has-error .error-message {
+  color: #a94442;
+  position: absolute;
+  left: 100%;
+  top: 10px;
+  width: 60%;
+}
+
+.form-control-feedback {
+  right: 25px;
+  z-index: 0;
+}
+
+.form-control-feedback.glyphicon-ok {
+  color: #35b558;
+}
+
+.form-horizontal .has-feedback .form-control-feedback {
+  right: 25px;
+}
+
+.alignment-right {
+  text-align: right;
+}
+
+.radio-choose.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  margin-top: 7px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.radio-choose.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.radio-choose .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  border: 2px solid #aaa;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: all .15s ease;
+}
+
+.radio-choose.container input:checked ~ .checkmark {
+  background-color: #fff;
+  border: 2px solid #03253f;
+}
+
+.radio-choose .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.radio-choose.container input:checked ~ .checkmark:after {
+  display: block;
+  animation: zoom-it-out .2s ease;
+}
+
+.radio-choose.container .checkmark:after {
+  left: 2px;
+  top: 2px;
+  width: 12px;
+  height: 12px;
+  background: #03253f;
+  border-radius: 50%;
+}
+
+.radio-choose .checkmark:before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.radio-choose.container input:checked ~ .checkmark:before {
+  animation: change-color .5s ease;
+}
+
+@keyframes zoom-it-out {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes change-color {
+  0% {
+    background: #03253f44;
+    transform: scale(1);
+  }
+  60% {
+    background: #03253f22;
+    transform: scale(2.5);
+  }
+  100% {
+    background: #03253f00;
+    transform: scale(2.5);
+  }
+}
+
+.focus-no-padding {
+  padding-left: 0 !important;
+  background: #fff;
+  min-height: 32px
+}
+
+.focus-no-padding .custom-underline {
+  position: absolute;
+  width: calc(100% - 15px);
+  height: 2px;
+  left: 0;
+  bottom: 0;
+  background-color: #4f94df;
+  transform: scale(0);
+  transform-origin: left;
+  transition: all .3s ease;
+}
+
+.focus-no-padding .form-control:focus ~ .custom-underline {
+  transform: scale(1);
+}
+
+.focus-no-padding:after {
+  transform-origin: left;
+}
+
+.btn-primary {
+  background-color: #276ea4;
+}
+
+.btn {
+  border-radius: 5px;
+}
+
+.btn-block {
+  width: auto;
+  margin: auto;
+}
+
+/*.btn a:hover{*/
+  /*text-decoration: none;*/
+  /*color: white;*/
+/*}*/
+
+/*.form-group, .custom-row {*/
+  /*margin-bottom: 25px;*/
+/*}*/
+
+textarea {
+  resize: vertical;
+}
+
+.text-area-letters {
+  position: absolute;
+  right: 15px;
+  width: calc(100% - 15px);
+  text-align: right;
+  padding: 3px 5px;
+}
+
+.div-margin-top-40 {
+  margin-top: 40px;
+}
+
+.div-margin-bo-25 {
+  margin-bottom: 25px;
+}
+.div-margin-bo-10 {
+  margin-bottom: 10px;
+}
+.btn-delete {
+  background: transparent;
+  color: #aaa;
+  border: 0;
+  outline: 0;
+  font-size: 18px;
+  padding: 0;
+  margin: 0 6px;
+}
+
+.btn-delete .fa-trash {
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+}
+
+.btn-delete:hover {
+  background: #ffd46a;
+  color: #777;
+  border: 0;
+  outline: 0;
+}
+
+.btn-delete-big {
+  width: 37px;
+  height: 34px;
+  margin: 0;
+}
+.label-color{
+  color:#4f94df;
+}
+@media screen and (max-width: 768px) {
+  .alignment-right {
+    text-align: left;
+  }
+
+  .fixed-helper {
+    display: none;
+  }
+
+  .has-error .error-message {
+    top: 100%;
+    left: 0;
+    width: calc(100% - 15px);
+    text-align: right;
+  }
+
+  .has-error textarea ~ .error-message {
+    top: calc(100% + 26px);
+  }
+}
+
+.control-label {
+  font-weight: normal;
+  font-size: 16px;
+  color: #03253f;
+}
+
+.form-control {
+  font-size: 16px;
+}
+
+.flex_row {
+  display: flex;
+  align-items: center;
+}
+
+.prev-border {
+  border: 2px solid #ddd;
+  padding-top: 30px;
+  border-radius: 10px;
+}
+
+.prev-border p.add-certification-p {
+  text-align: center;
+  background: white;
+  color: #999;
+  position: absolute;
+  padding: 0 10px;
+  top: -20px;
+  height: 40px;
+  line-height: 40px;
+  left: 5%;
+  font-size: 16px;
+}
+
+.minamize-certification {
+  position: absolute;
+  right: 5%;
+  width: 40px;
+  height: 22px;
+  text-align: center;
+  line-height: 22px;
+  font-size: 1.6rem;
+  background: #eee;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.minamize-certification .fa {
+  transform: rotateZ(0deg);
+  transition: all .5s ease;
+}
+
+.minamize-certification .fa.rotate {
+  transform: rotateZ(180deg);
+}
+
+/*.form-horizontal .form-group {*/
+  /*margin-left: 0;*/
+  /*margin-right: 0;*/
+/*}*/
+
+.table-preview {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table-preview td, th {
+  border: 0;
+  text-align: center;
+  padding: 5px 8px;
+}
+
+.table-preview td:not(:first-of-type) {
+  border-left: 1px solid #ddd;
+}
+
+.table-preview th {
+  font-size: 16px;
+  padding: 10px 0;
+}
+
+.table-preview th span {
+  width: 100%;
+  display: block;
+  padding: 0 10px;
+}
+
+.table-preview th:not(:first-of-type) span {
+  border-left: 1px solid #03253f;
+}
+
+.table-preview tbody tr {
+  border-bottom: 1px solid #ddd;
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.table-preview tbody tr.ui-sortable-helper {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
+.table-preview thead tr:first-of-type {
+  border-bottom: 2px solid #c8d4dd;
+  background: #c8d4dd;
+  color: #03253f;
+}
+
+.table-preview tr:nth-of-type(even) {
+  background: #f4f4f4;
+}
+.table-preview tr:nth-of-type(odd) {
+  background: #fff;
+}
+
+.table-preview tr:last-of-type {
+  border-bottom: 0;
+}
+
+.table-preview-container {
+  border: 2px solid #c8d4dd;
+  border-radius: 10px;
+  margin-top: 5px;
+  overflow: hidden;
+}
+
+.modal {
+  z-index: 10010;
+}
+
+.strike {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.strike label {
+  margin-bottom: 0;
+}
+
+.strike > span {
+  position: relative;
+  display: inline-block;
+}
+
+.strike > span:before, .strike > span:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 9999px;
+  height: 1px;
+  background: #ddd;
+}
+
+.strike > span:before {
+  right: 100%;
+  margin-right: 15px;
+}
+
+.strike > span:after {
+  left: 100%;
+  margin-left: 15px;
+}
+
+.text-area-p {
+  position: absolute;
+  right: 15px;
+  top: 100%;
+  text-align: right;
+}
+
+.extraInformation {
+  display: none;
+}
+
+h3.sub-title {
+  margin: 20px;
+  color: #03253f;
+}
+
+.m-b-25 {
+  margin-bottom: 25px;
+}
+
+.btn-fa-info {
+  padding: 0;
+  margin: 0 6px;
+  border: 0;
+}
+
+.btn-fa-info .fa-info {
+  width: 25px;
+  height: 25px;
+  border-radius: 4px;
+  line-height: 25px;
+}
+
+.label-bot-bit {
+  color: #4f94df;
+}
+
+.input-group .custom-underline {
+  width: calc(100% - 33px);
+}
+
+.focus-no-padding-textarea textarea.form-control {
+  border: 1px solid #ccc;
+  position: relative;
+  width: 100%;
+}
+
+.focus-no-padding-textarea textarea.form-control:focus {
+  border: 1px solid #ccc;
+}
+
+.focus-no-padding-textarea textarea.form-control:focus {
+  border: 1px solid #4f94df;
+}
+
+.custom-full-line {
+  display: none;
+}
+
+.focus-container {
+  position: relative;
+}
+
+.add-project {
+  position: absolute;
+  top: 0;
+  left: 85%;
+  height: 100%;
+  border-left: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
+}
+
+
+@media all and (max-width: 992px) and (min-width: 768px) {
+  .add-project {
+    left: 75%;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .add-project {
+    width: 60px;
+  }
+}
+
+@media all and (min-width: 768px) {
+  .flex_row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .modal-dialog {
+    width: 85%;
+  }
+
+}
+
+@media only screen and (max-width: 760px) {
+  .table-preview-container {
+    margin: 0 -15px;
+  }
+
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tr {
+    margin: 0;
+  }
+
+  thead tr:nth-of-type(1) {
+    display: none;
+  }
+
+  .table-preview tbody tr {
+    cursor: default;
+  }
+
+  .table-preview td {
+    border: none !important;
+    position: relative;
+    padding-left: 50%;
+    text-align: left;
+  }
+
+  td:before {
+    position: absolute;
+    top: 0;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    padding-top: 5px;
+    white-space: nowrap;
+    text-align: right;
+  }
+
+  th:last-of-type {
+    display: none;
+  }
+
+  /* I Deleted { :host >>> } when move it outside the component */
+  .ui-dialog.ui-widget .ui-dialog-content {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+}
+
+.focus-no-padding.has-val {
+  background: #fff;
+}
+
+.form-control {
+  background: transparent;
+  z-index: 2;
+  position: absolute;
+  width: calc(100% - 15px);
+}
+
+.form-control[disabled] {
+  background: transparent;
+}
+
+.custom-control-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: 15px;
+  font-size: 16px;
+  color: #999;
+  transition: all .3s ease;
+}
+
+.form-control:focus ~ .custom-control-label, .has-val .form-control ~ .custom-control-label {
+  transform: translateX(-100%);
+  margin-left: -15px;
+  font-size: 16px;
+  color: #4f94df;
+}
+
+.form-group, .custom-row {
+  margin-bottom: 35px;
+}
+
+/*@media screen and (max-width: 768px) {*/
+  /*.form-control:focus ~ .custom-control-label, .has-val .form-control ~ .custom-control-label {*/
+    /*transform: translate(0, -75%);*/
+    /*margin-left: 0px;*/
+    /*font-size: 14px;*/
+  /*}*/
+
+  /*.focus-no-padding {*/
+    /*min-height: 26px;*/
+  /*}*/
+
+  /*.form-control {*/
+    /*padding-top: 0;*/
+    /*height: 26px;*/
+  /*}*/
+/*}*/
+
+.ui-sortable-helper {
+  display: table;
+}
+
+
+/****** START I Deleted { :host >>> } when move it outside the component ********/
+
+.ui-autocomplete .ui-inputtext {
+  height: 30px;
+  margin-top: 2px;
+  width: 100% !important;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.form-control.ui-autocomplete.ui-widget {
+  border: 0;
+  padding: 0 15px 0 0 ;
+  display: inherit;
+  width: 100% !important;
+}
+
+.focus-no-padding .ui-inputwrapper-focus ~ .custom-underline {
+  transform: scale(1);
+}
+
+.focus-no-padding .ui-inputwrapper-focus ~ .custom-control-label,
+.has-val ~ .custom-control-label {
+  transform: translateX(-100%);
+  margin-left: -15px;
+  font-size: 16px;
+  color: #4f94df;
+}
+
+/* Dropdown styles*/
+
+.ui-dropdown .ui-dropdown-trigger {
+  border: 0 !important;
+}
+
+.ui-dropdown label.ui-dropdown-label:hover {
+  border: 0;
+}
+
+.ui-dropdown {
+  height: 30px;
+  margin-top: 3px;
+  width: 100% !important;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.has-error .ui-dropdown {
+  border-bottom: 1px solid rgb(169, 68, 66);
+}
+
+.has-error .ui-dropdown label.ui-dropdown-label {
+  color: rgb(169, 68, 66);
+}
+
+.ui-dropdown:not(.ui-state-disabled):hover {
+  background-color: #fff;
+}
+
+.ui-dropdown:focus {
+  background-color: red;
+}
+
+p-dropdown.ng-dirty.ng-invalid > .ui-dropdown {
+  border-bottom-color: rgb(169, 68, 66) !important;
+}
+
+p-autocomplete.ng-dirty.ng-invalid > .ui-autocomplete > .ui-inputtext {
+  border-bottom-color: rgb(169, 68, 66);
+}
+
+p-autocomplete.ng-dirty.ng-invalid ~ .custom-control-label {
+  color: rgb(169, 68, 66);
+}
+
+.has-val p-autocomplete.ng-dirty.ng-invalid ~ .custom-control-label, p-autocomplete.ng-dirty.ng-invalid.ui-inputwrapper-focus ~ .custom-control-label {
+  color: #4f94df;
+}
+
+.has-error p-autocomplete .ui-autocomplete .ui-inputtext {
+  border-bottom-color: #a94442;
+}
+
+.ui-dropdown .ui-dropdown-trigger {
+  height: 96%;
+  background: #fff;
+}
+
+.form-control.ng-invalid:focus {
+  border-bottom-color: grey !important;
+}
+
+.ui-inputwrapper-focus ~ .custom-control-label, .has-val ~ .custom-control-label {
+  transform: translateX(-100%);
+  margin-left: -15px;
+  color: #4f94df;
+}
+
+.ui-dropdown .ui-dropdown-trigger .ui-dropdown-trigger-icon:before {
+  content: "\f0d7";
+  font-family: fontAwesome;
+}
+
+.ui-dropdown-items-wrapper, .ui-dropdown-panel .ui-dropdown-filter-container {
+  min-width: 100%;
+}
+
+.ui-dropdown-filter.ui-inputtext.ui-widget.ui-state-default.ui-corner-all {
+  z-index: 0;
+}
+
+/*.ui-dropdown-panel.ui-widget-content.ui-corner-all {*/
+  /*width: 110px;*/
+/*}*/
+
+p-dropdown.ng-dirty.ng-invalid > .ui-dropdown {
+  border-bottom-color: #ddd !important;
+}
+
+ p-autocomplete.ng-dirty.ng-invalid > .ui-autocomplete > .ui-inputtext {
+  border-bottom-color: #ccc;
+}
+
+p-autocomplete.ng-dirty.ng-invalid ~ .custom-control-label {
+  color: #999;
+}
+
+.has-val p-autocomplete.ng-dirty.ng-invalid ~ .custom-control-label, p-autocomplete.ng-dirty.ng-invalid.ui-inputwrapper-focus ~ .custom-control-label {
+  color: #4f94df;
+}
+
+.has-error p-autocomplete .ui-autocomplete .ui-inputtext {
+  border-bottom-color: #a94442 !important;
+}
+
+/* Dialog Styles */
+/*.ui-dialog.ui-corner-all {*/
+  /*width: 85%;*/
+  /*z-index: 100000 !important;*/
+/*}*/
+
+/*.ui-dialog.ui-shadow {*/
+  /*box-shadow: 0 0 0 1000px #000a;*/
+/*}*/
+
+/*.ui-dialog .ui-dialog-titlebar-icon {*/
+
+  /*width: 30px !important;*/
+  /*height: 30px !important;*/
+  /*text-align: center;*/
+  /*border: 0 !important;*/
+  /*padding: 0 !important;*/
+  /*top: 22px;*/
+  /*right: 12px;*/
+  /*position: absolute;*/
+/*}*/
+
+/*.ui-dialog.ui-widget .ui-dialog-titlebar {*/
+  /*background: #fff;*/
+  /*border-bottom: 1px solid #ddd;*/
+/*}*/
+
+/*.ui-dialog .ui-dialog-titlebar-icon:hover {*/
+  /*background: transparent;*/
+  /*border-color: transparent;*/
+/*}*/
+
+/*.ui-dialog .ui-dialog-titlebar-icon span {*/
+  /*width: 30px !important;*/
+  /*height: 30px !important;*/
+  /*line-height: 30px;*/
+  /*font-size: 18px;*/
+  /*display: inline-block;*/
+  /*content: "\00d7";*/
+  /*font-family: FontAwesome;*/
+  /*background: transparent !important;*/
+/*}*/
+
+/*.ui-dialog .ui-dialog-titlebar-icon span:before {*/
+  /*content: "\f00d";*/
+/*}*/
+
+@media screen and (max-width: 768px) {
+  .form-control:focus ~ .custom-control-label, .has-val .form-control ~ .custom-control-label {
+    transform: translate(0, -75%);
+    margin-left: 0px;
+    font-size: 14px;
+  }
+
+  .focus-no-padding .ui-inputwrapper-focus ~ .custom-control-label, .has-val ~ .custom-control-label {
+    transform: translate(0, -75%);
+    margin-left: 0px;
+    font-size: 14px;
+    color: #4f94df;
+  }
+
+  .focus-no-padding {
+    min-height: 26px !important;
+  }
+
+  .form-control {
+    padding-top: 0;
+    height: 26px;
+  }
+
+  .margin-top-7 {
+    margin-top: 7px;
+  }
+
+  .ui-autocomplete .ui-inputtext {
+    height: 26px;
+    margin-top: 0px;
+  }
+}
+
+.editStyle {
+  text-decoration: none !important;
+  color: #fff !important;
+  width: fit-content;
+}
+
+.ui-dropdown label.ui-dropdown-label{
+  padding-left: 12px;
+  padding-right: 30px;
+  font-size: 16px;
+  background: transparent;
+  color: #555;
+}
+.ui-autocomplete .ui-inputtext{
+  padding-left: 12px;
+  padding-right: 30px;
+  font-size: 16px;
+  color: #555;
+}
+
+.ui-dropdown{
+  background: transparent !important;
+  z-index:2;
+  -webkit-transition: z-index 0s ease 1s;
+  -moz-transition: z-index 0s ease 1s;
+  -ms-transition: z-index 0s ease 1s;
+  -o-transition: z-index 0s ease 1s;
+  transition: z-index 0s ease 1s;
+
+}
+.ui-dropdown.ui-dropdown-open{
+  z-index:3;
+  -webkit-transition: z-index 0s ease 0s;
+  -moz-transition: z-index 0s ease 0s;
+  -ms-transition: z-index 0s ease 0s;
+  -o-transition: z-index 0s ease 0s;
+  transition: z-index 0s ease 0s;
+}
+.has-error  p-dropdown.ng-invalid > .ui-dropdown {
+  border-bottom-color: #a94442 !important;
+}
+
+.ui-dialog.ui-widget .ui-dialog-content{
+  padding: 0px;
+}
+
+
+.custom-checkbox{
+  display:flex;
+  align-items: center;
+}
+.custom-checkbox input{
+  width:12%;
+  height: 18px;
+  margin:0;
+}
+/****** END I Deleted { :host >>> } when move it outside the component ********/
+
+.golden-star{
+  color:gold;
+}
+.gray-star{
+  color:gray;
+}
+.description-cell-align{
+  text-align: justify !important;
+}
+.description-cell-align ol , .description-cell-align ul{
+  padding-left:16px !important;
+}
+
+/************* PRELOADER *************/
+
+.preloader{
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.infinity {
+  width: 120px;
+  height: 60px;
+  position: relative;
+}
+.infinity div, .infinity span {
+  position: absolute;
+}
+.infinity div {
+  top: 0;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  animation: rotate 6.9s linear infinite;
+}
+.infinity div  span {
+  left: -8px;
+  top: 50%;
+  margin: -8px 0 0 0;
+  width: 16px;
+  height: 16px;
+  display: block;
+  background: #8c6ff0;
+  box-shadow: 2px 2px 8px rgba(140 , 111, 240, .09);
+  border-radius: 50%;
+  transform: rotate(90deg);
+  animation: move 6.9s linear infinite;
+}
+.infinity div  span:before,
+.infinity div  span:after {
+  content: '';
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  background: inherit;
+  top: 50%;
+  left: 50%;
+  margin: -7px 0 0 -7px;
+  box-shadow: inherit;
+}
+.infinity div  span:before {
+  animation: drop1 .8s linear infinite;
+}
+.infinity div  span:after{
+  animation: drop2 .8s linear infinite .4s;
+}
+.infinity div:nth-child(2){
+  animation-delay: -2.3s;
+}
+.infinity div:nth-child(2) span {
+  animation-delay: -2.3s;
+}
+.infinity div:nth-child(3) {
+  animation-delay: -4.6s;
+}
+.infinity div:nth-child(3) span {
+  animation-delay: -4.6s;
+}
+@keyframes rotate {
+  50% {
+    transform: rotate(360deg);
+    margin-left: 0;
+  }
+  50.0001%,
+  100% {
+    margin-left: -60px;
+  }
+}
+
+@keyframes move {
+  0%,50% {
+    left: -8px;
+  }
+  25% {
+    background: #5628EE;
+  }
+  75% {
+    background: #23C4F8;;
+  }
+  50.0001%,
+  100% {
+    left: auto;
+    right: -8px;
+  }
+}
+
+@keyframes drop1 {
+  100% {
+    transform: translate(32px, 8px) scale(0);
+  }
+}
+
+@keyframes drop2 {
+  0% {
+    transform: translate(0, 0) scale(.9);
+  }
+  100% {
+    transform: translate(32px, -8px) scale(0);
+  }
+}

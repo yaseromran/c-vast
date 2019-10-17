@@ -1,0 +1,56 @@
+<div id="page-sidebar" [ngClass]="sideBarStatus">
+  <span class="toggle-sidebar" (click)="changeSideBarStatus()"><i class="fa fa-angle-left li-icon" aria-hidden="true"></i></span>
+
+  <div class="main-menu" >
+    <ul *ngIf="cvSections">
+      <li *ngIf="cvSections.personal_info_visible"><a routerLink="personal" routerLinkActive="active"><i class="fa fa-user li-icon" aria-hidden="true"></i><span class="li-name" translate>sidebar.personalInformation</span></a></li>
+      <li *ngIf="cvSections.contact_info_visible"><a routerLink="contactinformation" routerLinkActive="active"><i class="fa fa-envelope li-icon" aria-hidden="true"></i><span class="li-name" translate>sidebar.contactInformation</span></a></li>
+      <li *ngIf="cvSections.language_visible"><a routerLink="languages" routerLinkActive="active"><i class="fa fa-language li-icon" aria-hidden="true"></i><span class="li-name" translate>sidebar.languages</span></a></li>
+      <li *ngIf="cvSections.education_visible"><a routerLink="education" routerLinkActive="active"><i class="fa fa-graduation-cap li-icon" aria-hidden="true"></i><span class="li-name" translate>sidebar.education</span></a></li>
+      <li *ngIf="cvSections.work_exp_visible"><a routerLink="work-experience" routerLinkActive="active"><i class="fa fa-briefcase li-icon" aria-hidden="true"></i><span class="li-name" translate>sidebar.workExperience</span></a></li>
+      <li *ngIf="cvSections.skill_visible"><a routerLink="skills" routerLinkActive="active"><i class="fa fa-pencil li-icon" aria-hidden="true"></i><span class="li-name" translate>sidebar.skills</span></a></li>
+      <li *ngIf="cvSections.summary_visible"><a routerLink="summary" routerLinkActive="active"><i class="fa fa-sticky-note-o li-icon" aria-hidden="true"></i><span class="li-name" translate>sidebar.summary</span></a></li>
+      <li *ngIf="cvSections.objective_visible"><a routerLink="objective" routerLinkActive="active"><i class="fa fa-sticky-note-o li-icon" aria-hidden="true"></i><span class="li-name" translate>sidebar.objective</span></a></li>
+      <li *ngIf="cvSections.driving_visible"><a routerLink="driving-license" routerLinkActive="active"><i class="fa fa-car li-icon" aria-hidden="true"></i><span class="li-name" translate>sidebar.drivingLicence</span></a></li>
+      <li *ngIf="cvSections.achievement_visible"><a routerLink="achievements" routerLinkActive="active"><i class="fa fa-star-half-o li-icon" aria-hidden="true"></i><span class="li-name" translate>sidebar.achievements</span></a></li>
+      <li *ngIf="cvSections.certification_visible"><a routerLink="certifications" routerLinkActive="active"><i class="fa fa-certificate li-icon" aria-hidden="true"></i><span class="li-name" translate>sidebar.certification</span></a></li>
+      <li *ngIf="cvSections.publication_visible"><a routerLink="publications" routerLinkActive="active"><i class="fa fa-copy li-icon" aria-hidden="true"></i><span class="li-name" translate>sidebar.publications</span></a></li>
+      <li *ngIf="cvSections.project_visible"><a routerLink="projects" routerLinkActive="active"><i class="fa fa-copy li-icon" aria-hidden="true"></i><span class="li-name" translate>sidebar.projects</span></a></li>
+      <li *ngIf="cvSections.portfolio_visible"><a routerLink="portfolios" routerLinkActive="active"><i class="fa fa-user li-icon" aria-hidden="true"></i><span class="li-name" translate>sidebar.portfolios</span></a></li>
+      <li *ngIf="cvSections.training_visible"><a routerLink="training" routerLinkActive="active"><i class="fa fa-certificate li-icon" aria-hidden="true"></i><span class="li-name" translate>sidebar.training</span></a></li>
+      <li *ngIf="cvSections.membership_visible"><a routerLink="memberships" routerLinkActive="active"><i class="fa fa-flag li-icon" aria-hidden="true"></i><span class="li-name" translate>sidebar.membership</span></a></li>
+      <li *ngIf="cvSections.volunteer_visible"><a routerLink="volunteers" routerLinkActive="active"><i class="fa fa-flag li-icon" aria-hidden="true"></i><span class="li-name" translate>sidebar.volunteers</span></a></li>
+      <li *ngIf="cvSections.conference_visible"><a routerLink="conferences-workshop-seminar" routerLinkActive="active"><i class="fa fa-star-half-o li-icon" aria-hidden="true"></i><span class="li-name" translate>sidebar.conferencesWorkshopSeminar</span></a></li>
+      <li *ngIf="cvSections.hobbies_interest_visible"><a routerLink="hobbies-interests" routerLinkActive="active"><i class="fa fa-bicycle li-icon" aria-hidden="true"></i><span class="li-name" translate>sidebar.hobbiesInterests</span></a></li>
+      <li *ngIf="cvSections.reference_visible"><a routerLink="references" routerLinkActive="active"><i class="fa fa-envelope li-icon" aria-hidden="true"></i><span class="li-name" translate>sidebar.references</span></a></li>
+      <li>
+        <a>
+          <button style="background: 0;border: 0;outline: 0;margin: 0;padding: 0;" data-toggle="modal"
+                  data-target="#sidebarModal" (click)="displayModal()">
+            <img src="./assets/images/sections-management.png" class="img-responsive" style="display:inline;width:42px;">
+            <span class="li-name" translate>shared.sectionsManagement</span>
+          </button>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<div class="modal fade" id="sidebarModal" *ngIf="display" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog"  role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" (click)="closeModal()" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModal2Label" translate>shared.sectionsManagement</h4>
+      </div>
+      <app-sections-management [cvSections]="cvSections"
+                               [resumeId]="resumeId"
+                               (closeModalPopup)="handlePopup($event)"
+                               (cancelModalPopup)="closeModal()">
+
+      </app-sections-management>
+    </div>
+  </div>
+</div>
+

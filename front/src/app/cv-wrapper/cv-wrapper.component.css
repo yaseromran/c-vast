@@ -1,0 +1,14 @@
+
+.wrapper{
+  overflow-x:hidden ;
+  color:#555;
+  height: 100%;
+  width: 100%;
+  font-family: 'Exo2-Regular', sans-serif;
+}
+
+@media screen and (max-width :768px){
+  html{
+    font-size: 85%;
+  }
+}

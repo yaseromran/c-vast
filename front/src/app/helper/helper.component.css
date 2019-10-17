@@ -1,0 +1,78 @@
+/* Start THE FORM */
+ .fixed-helper{
+  font-family: 'Roboto', sans-serif;
+}
+/* Start HELPER */
+.fixed-helper{
+  position:fixed;
+  right:0;
+  z-index: 2;
+  height:100vh;
+  background:#e8eeff;
+  top:0px;
+  transition:all .5s ease;
+}
+.fixed-helper span{
+  margin-top:142px;
+  padding:25px;
+  display:block;
+  color: #666;
+  font-size: 16px;
+}
+.fixed-helper.hide-helper{
+  right:-25%;
+}
+.fixed-helper .toggle-helper{
+  position: fixed;
+  right: 25%;
+  top: 190px;
+  font-size: 22px;
+  background: #e8eeff;
+  width: 30px;
+  height: 40px;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  text-align: center;
+  padding-top: 5px;
+  cursor: pointer;
+  transition:all .5s ease;
+}
+.fixed-helper.hide-helper .toggle-helper{
+  right: 0px;
+}
+/* End HELPER */
+
+/* Start Responsive */
+@media screen and (max-width:1400px) {
+  .fixed-helper span{
+    margin-top:117px;
+  }
+  .fixed-helper .toggle-helper{
+    top: 167px;
+  }
+}
+@media screen and (max-width:1024px) {
+   .fixed-helper span{
+    margin-top:107px;
+  }
+   .fixed-helper .toggle-helper{
+    top: 157px;
+  }
+}
+@media screen and (max-width:824px) {
+   .fixed-helper span{
+    margin-top:97px;
+  }
+   .fixed-helper .toggle-helper {
+    top: 147px;
+  }
+}
+@media screen and (max-width:768px) {
+  .alignment-right{
+    text-align:left;
+  }
+  .fixed-helper{
+    display:none;
+  }
+}
+/* End Responsive */

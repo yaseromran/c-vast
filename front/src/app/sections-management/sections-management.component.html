@@ -1,0 +1,54 @@
+<div class="modal-body-container" >
+  <div class="modal-body ">
+   <form class="form-horizontal validate-form"
+            #form="ngForm"
+            [formGroup]="sectionsManagementForm"
+            (keydown.enter)="$event.preventDefault()"
+            (ngSubmit)="form.valid &&  submit()">
+     <div class="row">
+       <div class="col-sm-12">
+        <div class="form-group">
+            <div class="col-xs-4 col-xxs-12">
+              <p class="listbox-label" translate>shared.additionalCvSections</p>
+              <p-listbox [options]="unSelected" multiple="multiple" checkbox="checkbox" formControlName="unSelected"
+                         optionLabel="name" [style]="{'width':'100%'}">
+                <ng-template let-item pTemplate="item">
+                  <span style="font-size: 16px;padding: .25em">
+                    <i class="fa fa-{{item.value.fa}}" aria-hidden="true"></i>
+                    <span translate>{{item.label}}</span>
+                  </span>
+                </ng-template>
+              </p-listbox>
+            </div>
+
+            <div class="col-xs-4 col-xxs-12 text-center margin-top-not-mobile">
+              <button class="btn btn-success btn-block add-remove-btn" (click)="addCvSection($event)" translate>
+                shared.add <i class="fa fa-arrow-right" aria-hidden="true"></i>
+              </button>
+              <button class="btn btn-danger btn-block add-remove-btn" (click)="removeCvSection($event)" translate>
+                shared.remove <i class="fa fa-arrow-left" aria-hidden="true"></i>
+              </button>
+            </div>
+
+            <div class="col-xs-4 col-xxs-12 disable-items">
+              <p class="listbox-label" translate>shared.myCvSections</p>
+              <p-listbox [options]="selected" multiple="multiple" checkbox="checkbox" formControlName="selected"
+                         optionLabel="name" [style]="{'width':'100%'}">
+                <ng-template let-item pTemplate="item">
+                  <span style="font-size: 16px;padding: .25em" (click)="onClick(item.value.disabled)" [ngStyle]="item.value.disabled? {'display': 'inline-block', 'width': '100%', 'cursor': 'default'} : ''">
+                    <i class="fa fa-{{item.value.fa}}" aria-hidden="true"></i>
+                    <span translate>{{item.label}}</span>
+                  </span>
+                </ng-template>
+              </p-listbox>
+            </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-success "><i class="fa fa-floppy-o"></i> <span translate>shared.save</span></button>
+          <button (click)="cancel($event)" class="btn btn-default " translate>shared.cancel</button>
+        </div>
+       </div>
+     </div>
+   </form>
+  </div>
+</div>

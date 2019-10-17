@@ -1,0 +1,4 @@
+
+<div *ngFor="let resume of resumes ; let i = index ">
+    <a [routerLink]="['/resume-wrapper',resume.id]">Resume {{i +1 }}</a>
+</div>

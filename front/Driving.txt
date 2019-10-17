@@ -1,0 +1,35 @@
+Post 
+http://localhost:8000/driving
+
+{
+"resume_id" : "1",
+	
+"license_type" : "all",
+	
+"country" : "syria" ,
+
+"international" : "true",
+	
+"category" :[{"name" :"A1" },{"name" :"A3" }]
+}
+
+get
+http://localhost:8000/driving/$resumeId
+
+update
+put
+http://localhost:8000/driving/$drivingId
+{
+"resume_id" : "1",
+
+"license_type" : "all",
+	
+"country" : "syria" ,
+	
+"international" : "1"
+
+}
+
+
+delete 
+http://localhost:8000/education/$drivingId

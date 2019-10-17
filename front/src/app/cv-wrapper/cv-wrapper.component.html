@@ -1,0 +1,11 @@
+<div class="wrapper" [ngClass]="{'rtl':textDir}">
+  <top-navbar></top-navbar>
+  <page-navbar [resumeId]="resumeId" ></page-navbar>
+  <sidebar [resumeId]="resumeId" ></sidebar>
+  <router-outlet></router-outlet>
+  <helper *ngIf="showHelper()"></helper>
+  <div style="position:fixed; top:81px;right: 10px; z-index: 11111;">
+    <button class="btn btn-primary" (click)="changeLang('en')">En</button>
+    <button class="btn btn-primary" (click)="changeLang('ar')">Ar</button>
+  </div>
+</div>

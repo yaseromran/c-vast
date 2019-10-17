@@ -1,0 +1,119 @@
+<div id="page-content-wrapper" [style.margin-left]="marginLeft">
+
+  <div class="page-content preview-all-page-content">
+    <div class="page-title"><i class="fa fa-user" aria-hidden="true"></i>
+      <a routerLink="/resume-wrapper/{{resume_id}}/personal/" style="text-decoration: none !important;"><span translate>personalInformation.title</span> </a>
+      <span style="margin: 0 10px;color: orange;">|</span> <span translate>shared.preview</span></div>
+    <form class="form-horizontal">
+      <div class="row flex-row">
+        <div class="col-sm-8 col-xs-12 flex-order-sm-2">
+
+          <div class="form-group">
+            <div class="col-xs-5 left-col-preview-alignright">
+              <p translate>personalInformation.firstName</p>
+            </div>
+            <div class="col-xs-7 focus-no-padding">
+              <p class="user-input">{{ first_name || " " }}</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-5   left-col-preview-alignright">
+              <p translate>personalInformation.middleName</p>
+            </div>
+            <div class="col-xs-7  focus-no-padding">
+              <p class="user-input">{{ middle_name || " " }}</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-5 left-col-preview-alignright">
+              <p translate>personalInformation.lastName</p>
+            </div>
+            <div class="col-xs-7  focus-no-padding">
+              <p class="user-input">{{ last_name || " " }}</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-5 left-col-preview-alignright">
+              <p translate>personalInformation.resumeTitle</p>
+            </div>
+            <div class="col-xs-7  focus-no-padding">
+              <p class="user-input">{{ resume_title || " " }}</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-5 left-col-preview-alignright">
+              <p translate>personalInformation.gender</p>
+            </div>
+            <div class="col-xs-7  focus-no-padding">
+              <p class="user-input">{{ gender || " " }}</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-5 left-col-preview-alignright">
+              <p translate>personalInformation.maritalStatus</p>
+            </div>
+            <div class="col-xs-7  focus-no-padding">
+              <p class="user-input">{{ marital_status || " " }}</p>
+            </div>
+          </div>
+
+          <div class="form-group" *ngFor="let nationality of nationalities; let i = index">
+            <div class="col-xs-5 left-col-preview-alignright">
+              <p translate>personalInformation.nationality <span *ngIf="i > 0">{{ i + 1 }}</span></p>
+            </div>
+            <div class="col-xs-7  focus-no-padding">
+              <p class="user-input">{{ nationality }}</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-5 left-col-preview-alignright">
+              <p translate>personalInformation.dateOfBirth</p>
+            </div>
+            <div class="col-xs-7  focus-no-padding">
+              <p class="user-input">{{ string_date_of_birth || " " }} <span translate>personalInformation.age</span> : {{ age || " " }} <span translate>personalInformation.years</span></p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-5 left-col-preview-alignright">
+              <p translate>personalInformation.placeOfBirth</p>
+            </div>
+            <div class="col-xs-7  focus-no-padding">
+              <p class="user-input" *ngIf="place_of_birth">
+                <span *ngIf="place_of_birth.city">{{ place_of_birth.city || " " }}</span>
+                <span *ngIf="place_of_birth.country"> , {{ place_of_birth.country || " " }}</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-5 left-col-preview-alignright">
+              <p translate>personalInformation.currentLocation</p>
+            </div>
+            <div class="col-xs-7  focus-no-padding">
+              <p class="user-input" *ngIf="current_location">
+                <span *ngIf="current_location.city">{{ current_location.city || " " }}</span>
+                <span *ngIf="current_location.country"> , {{ current_location.country || " " }}</span>
+              </p>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-sm-3 col-sm-offset-1 col-xs-12 flex-order-sm-1">
+          <div class="user-pro-pic text-center">
+            <img src="../../assets/images/Capture.PNG" class="img-responsive">
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success btn-block" (click)="back()">
+        <i class="fa fa-pencil"></i> <span translate>shared.edit</span>
+      </button>
+    </form>
+  </div>
+</div>

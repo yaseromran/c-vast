@@ -1,0 +1,370 @@
+<div class="preloader" *ngIf="personalInformationId == null">
+  <div class="infinity">
+    <div>
+      <span></span>
+    </div>
+    <div>
+      <span></span>
+    </div>
+    <div>
+      <span></span>
+    </div>
+  </div>
+</div>
+
+<div id="page-content-wrapper" [style.margin-left]="marginLeft" [hidden]="personalInformationId == null">
+
+  <div class="page-content">
+    <div class="page-title"><i class="fa fa-user" aria-hidden="true"></i> <span translate>personalInformation.title</span></div>
+    <form #form="ngForm" [formGroup]="personalForm" (ngSubmit)="submit()" class="form-horizontal validate-form">
+
+      <div class="row clearfix flex-row">
+        <div class="col-sm-8 col-xs-12 flex-order-sm-2">
+          <div class="custom-row clearfix" [ngClass]="{'has-error': form.submitted && isInvalid('first_name')}">
+            <div class=" col-sm-4 alignment-right">
+            </div>
+            <div class=" col-sm-8 focus-no-padding validate-input" [ngClass]="{'has-val':personalForm.controls['first_name'].value}" data-validate="First Name is required">
+              <input type="text" formControlName="first_name"
+                     class="form-control" id="firstName">
+              <span class="custom-underline"></span>
+              <span *ngIf="form.submitted && isInvalid('first_name')" class="glyphicon form-control-feedback glyphicon-remove" aria-hidden="true"></span>
+              <span *ngIf="form.submitted && isInvalid('first_name')" class="error-message" translate>validationMessages.required</span>
+              <label class="control-label custom-control-label" translate>personalInformation.firstName</label>
+            </div>
+          </div>
+
+          <div class="custom-row clearfix" >
+            <div class=" col-sm-4 alignment-right">
+            </div>
+            <div class=" col-sm-8 focus-no-padding validate-input" [ngClass]="{'has-val':personalForm.controls['middle_name'].value}"data-validate="Middle Name is required">
+              <input type="text" formControlName="middle_name"
+                     class="form-control" id="middleName">
+              <span class="custom-underline"></span>
+              <!--<span *ngIf="form.submitted && isInvalid('middle_name')" class="glyphicon form-control-feedback glyphicon-remove" aria-hidden="true"></span>-->
+              <!--<span *ngIf="form.submitted && isInvalid('middle_name')" class="error-message" translate>validationMessages.required</span>-->
+              <label class="control-label custom-control-label" translate>personalInformation.middleName</label>
+            </div>
+          </div>
+
+          <div class="custom-row clearfix" [ngClass]="{'has-error':form.submitted && isInvalid('last_name')}">
+            <div class=" col-sm-4 alignment-right">
+            </div>
+            <div class=" col-sm-8 focus-no-padding validate-input" [ngClass]="{'has-val':personalForm.controls['last_name'].value}" data-validate="Last Name is required">
+              <input type="text" formControlName="last_name"
+                     class="form-control" id="lastName" >
+              <span class="custom-underline"></span>
+              <span *ngIf="form.submitted && isInvalid('last_name')" class="glyphicon form-control-feedback glyphicon-remove" aria-hidden="true"></span>
+              <span *ngIf="form.submitted && isInvalid('last_name')" class="error-message" translate>validationMessages.required</span>
+              <label class="control-label custom-control-label" translate>personalInformation.lastName</label>
+            </div>
+          </div>
+          <div class="custom-row clearfix">
+            <div class=" col-sm-4 alignment-right">
+            </div>
+            <div class=" col-sm-8 focus-no-padding" [ngClass]="{'has-val':personalForm.controls['resume_title'].value}">
+              <input type="text"  formControlName="resume_title"
+                     class="form-control" id="resumeTitle">
+              <span class="custom-underline"></span>
+              <span class="error-message"></span>
+              <label class="control-label custom-control-label" translate>personalInformation.resumeTitle</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3 col-sm-offset-1 col-xs-12  flex-order-sm-1">
+          <a href="#" class="user-pro-pic text-center">
+            <img src="./assets/images/Capture.PNG" class="img-responsive">
+            <p translate>personalInformation.uploadYourPhoto</p>
+          </a>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <div class="col-sm-8" [ngClass]="{'has-error': form.submitted && isInvalid('gender')}">
+          <div class="row align-bottom">
+            <div class=" col-sm-4 alignment-right">
+              <!--<label class="control-label">Gender</label>-->
+            </div>
+            <div class="col-sm-4 col-xs-6">
+              <label class="container radio-choose" translate>personalInformation.female
+                <input type="radio" formControlName="gender" id="inlineRadio1" value="female">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+            <div class="col-sm-4 col-xs-6">
+              <label class="container radio-choose" translate>personalInformation.male
+                <input type="radio" formControlName="gender" id="inlineRadio2" value="male">
+                <span class="checkmark"></span>
+              </label>
+              <span *ngIf="form.submitted && isInvalid('gender')" class="error-message" translate>validationMessages.required</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-8" ><!--[ngClass]="{'has-error':form.submitted && !isDDValid(maritalStatusControl)}"-->
+          <div class="row">
+            <div class=" col-sm-4 alignment-right">
+            </div>
+            <div class="col-sm-8 focus-no-padding" [ngClass]="{'has-val':personalForm.controls['marital_status_id'].value}">
+              <p-dropdown [options]="maritalStatusOpts"
+                          optionLabel="name"
+                          formControlName="marital_status"
+                          [filter]="true"
+                          (onChange)="changeMaritalStatus()"
+                          [ngClass] = " {'has-val':personalForm.controls['marital_status_id'].value}">
+                <ng-template let-nat pTemplate="nat">
+                  <div class="ui-helper-clearfix" style="position: relative;height: 25px;">
+                    <div style="font-size:14px;float:left;margin-top:4px">{{nat.label}}</div>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+              <!--<span *ngIf="form.submitted && !isDDValid(maritalStatusControl)" class="glyphicon  form-control-feedback glyphicon-remove" aria-hidden="true"></span>-->
+              <!--<span *ngIf="form.submitted && !isDDValid(maritalStatusControl)" class="error-message" translate>validationMessages.required</span>-->
+              <label class="control-label custom-control-label" translate>personalInformation.maritalStatus</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-8">
+          <div formArrayName="nationalities">
+            <div *ngFor="let item of nationalities.controls; let i = index;" [ngClass]="{'has-error':form.submitted && !isDDValid(item) || form.submitted && item.errors}" class="row margin-bo-15">
+              <div class=" col-sm-4 alignment-right">
+              </div>
+              <div class="col-md-7 col-sm-6 col-xs-9 focus-no-padding custom-col-md-7" >
+                <p-dropdown [options]="nationalityOpts2"
+                            optionLabel="name"
+                            [formControlName]="i"
+                            [filter]="true"
+                            [ngClass] = " {'has-val':item.value.nationality_id}"
+                            #selectedNat
+                            (onChange)="selectNationality(i, item)">
+                  <ng-template let-it pTemplate="selectedItem">
+                    <img *ngIf ="it.label !== ''" src="./assets/images/countries/{{it.value.nationality_id}}.gif"
+                         style="width:16px;margin-top:4px; float:right;"/>
+                    <span style="vertical-align:middle">{{it.label}}</span>
+                  </ng-template>
+                  <ng-template let-nat pTemplate="it">
+                    <img *ngIf ="nat.label !== ''"  src="./assets/images/countries/{{nat.value.nationality_id}}.gif" style="float:right;margin-top:4px"  />
+                    <div class="ui-helper-clearfix" style="position: relative;height: 25px;">
+                      <div style="font-size:14px;float:left;margin-top:4px">{{nat.label}}</div>
+                    </div>
+                  </ng-template>
+                </p-dropdown>
+
+
+                <span *ngIf="form.submitted && item.errors" class="glyphicon form-control-feedback glyphicon-remove" aria-hidden="true"></span>
+                <label *ngIf="i == 0" class="control-label custom-control-label" translate>personalInformation.nationality</label>
+              </div>
+              <div class="col-md-1 col-sm-2 col-xs-3 focus-no-padding-button custom-col-md-1">
+                <button *ngIf="i == 0" (click)="addNationality($event)" class="btn btn-primary rounded-corner-button">
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+                <button *ngIf="i > 0" (click)="removeNationality($event, i)" class="btn btn-delete btn-delete-big">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
+              </div>
+              <span *ngIf="form.submitted && !isDDValid(item)" class="error-message" translate>validationMessages.required</span>
+              <span *ngIf="form.submitted && item.errors" class="error-message" translate>validationMessages.duplicatedNationality</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group" formGroupName="date_of_birth">
+        <div class="col-sm-8">
+          <div class="row" [ngClass]="{'has-error':form.submitted && (isInvalid('year') || isInvalid('month') || isInvalid('day')) }">
+            <div class=" col-sm-4 alignment-right">
+            </div>
+            <div class="custom-col-3 col-no-padding focus-no-padding" [ngClass]="{'has-val':dateOfBirthControl.controls['year'].value}">
+              <p-dropdown [options]="yearOpts"
+                          formControlName="year"
+                          [filter]="true"
+                          placeholder=" "
+                          [ngClass] = " {'has-val':getValueToDD(dateOfBirthControl.controls['year'])}"
+                          #selectedYear
+                          (onChange)="onChangeYear(selectedYear.value, selectedMonth.value, selectedDay.value)">
+                <ng-template let-year pTemplate="item">
+                  <div class="ui-helper-clearfix" style="position: relative;height: 25px;">
+                    <div style="font-size:14px;float:left;margin-top:4px">{{year.label}}</div>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+              <span class="custom-underline"></span>
+              <span *ngIf="form.submitted && isInvalid('year')" class="glyphicon form-control-feedback glyphicon-remove" aria-hidden="true"></span>
+              <label class="control-label custom-control-label">
+                <span class="not-mobile-label" translate>personalInformation.dateOfBirth</span>
+                <span class="only-mobile-label" translate>personalInformation.year</span>
+              </label>
+
+            </div>
+            <div class="custom-col-3 col-no-padding focus-no-padding">
+              <p-dropdown [options]="monthOpts"
+                          formControlName="month"
+                          [filter]="true"
+                          placeholder="Month"
+                          #selectedMonth
+                          (onChange)="onChangeMonth(selectedMonth.value, selectedYear.value, selectedDay.value)">
+                <ng-template let-it pTemplate="selectedItem">
+                  <span  style=" vertical-align:middle; float:left;" translate>{{it.label}}</span>
+                </ng-template>
+                <ng-template let-month pTemplate="item">
+                  <div class="ui-helper-clearfix" style="position: relative;height: 25px;">
+                    <div style="font-size:14px;float:left;margin-top:4px" translate>{{month.label}}</div>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+              <span class="custom-underline"></span>
+              <span *ngIf="form.submitted && isInvalid('month')" class="glyphicon form-control-feedback glyphicon-remove" aria-hidden="true"></span>
+            </div>
+            <div class="custom-col-3 focus-no-padding">
+              <p-dropdown [options]="dayOpts"
+                          formControlName="day"
+                          [filter]="true"
+                          placeholder="Day"
+                          #selectedDay>
+                <ng-template let-day pTemplate="item">
+                  <div class="ui-helper-clearfix" style="position: relative;height: 25px;">
+                    <div style="font-size:14px;float:left;margin-top:4px">{{day.label}}</div>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+              <span class="custom-underline"></span>
+              <span *ngIf="form.submitted && isInvalid('day')" class="glyphicon form-control-feedback glyphicon-remove" aria-hidden="true"></span>
+            </div>
+            <span *ngIf="form.submitted && (isInvalid('year') || isInvalid('month') || isInvalid('day'))"
+                  class="error-message" translate>validationMessages.required</span>
+          </div>
+        </div>
+      </div>
+
+      <div formGroupName="place_of_birth" class="form-group ">
+        <div class="col-sm-8 ">
+          <div class="row">
+            <div class="custom-row clearfix">
+              <div class=" col-sm-4 alignment-right">
+              </div>
+              <div class="col-sm-8 focus-no-padding" [ngClass]="{'has-val':placeOfBirthControl.controls['fullPlace'].value}">
+                <input formControlName="fullPlace" placeholder=" "
+                       type="text" class="form-control" id="placeOfBirth" #birthSearch (keyup.enter)="placeOfBirthKeyUp($event)">
+                <label class="control-label custom-control-label" translate>personalInformation.placeOfBirth</label>
+              </div>
+            </div>
+            <div class="custom-row clearfix"
+                 [ngClass]="{'has-val':placeOfBirthControl.controls['country'].value}"
+                 [hidden]="!placeOfBirthControl.controls['country'].value">
+              <div class=" col-sm-4 alignment-right">
+              </div>
+              <div class=" col-sm-8 focus-no-padding">
+                <input formControlName="country" type="text" class="form-control" id="countryOfBirth" disabled>
+                <label class="control-label custom-control-label" translate>personalInformation.country</label>
+              </div>
+            </div>
+
+            <div class="custom-row clearfix"
+                 [ngClass]="{'has-val':placeOfBirthControl.controls['city'].value}"
+                 [hidden]="!placeOfBirthControl.controls['city'].value">
+              <div class=" col-sm-4 alignment-right">
+              </div>
+              <div class=" col-sm-8 focus-no-padding">
+                <input formControlName="city" type="text" class="form-control" id="cityOfBirth" disabled>
+                <label class="control-label custom-control-label" translate>personalInformation.city</label>
+              </div>
+            </div>
+            <div class="custom-row clearfix">
+              <div class="col-sm-8 col-sm-offset-4 focus-no-padding">
+                <app-map [sub]="birthSub" birthOrCurrent="birth" [type]="birthType" [search]="birthSearchRef"></app-map>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div formGroupName="current_location" class="row div-margin-bottom-15">
+        <div class="col-sm-8">
+          <div class="row">
+            <div class="custom-row clearfix">
+              <div class=" col-sm-4 alignment-right">
+              </div>
+              <div class=" col-sm-8 focus-no-padding" [ngClass]="{'has-val':currentLocationControl.controls['fullLocation'].value}">
+                <input formControlName="fullLocation" placeholder=" "
+                       type="text" class="form-control" id="currentLocation" #currentSearch (keyup.enter)="currentLocationKeyUp($event)">
+                <label class="control-label custom-control-label" translate>personalInformation.currentLocation</label>
+              </div>
+            </div>
+
+            <div class="custom-row clearfix"
+                 [ngClass]="{'has-val':currentLocationControl.controls['country'].value}"
+                 [hidden]="!currentLocationControl.controls['country'].value">
+              <div class=" col-sm-4 alignment-right">
+              </div>
+              <div class=" col-sm-8 focus-no-padding">
+                <input formControlName="country"type="text" class="form-control" id="currentLocationCountry" disabled>
+                <label class="control-label custom-control-label" translate>personalInformation.country</label>
+              </div>
+            </div>
+
+            <div class="custom-row clearfix"
+                 [ngClass]="{'has-val':currentLocationControl.controls['city'].value}"
+                 [hidden]="!currentLocationControl.controls['city'].value">
+              <div class=" col-sm-4 alignment-right">
+              </div>
+              <div class=" col-sm-8 focus-no-padding">
+                <input formControlName="city" type="text" class="form-control" id="currentLocationCity" disabled>
+                <label class="control-label custom-control-label" translate>personalInformation.city</label>
+              </div>
+            </div>
+
+            <div class="custom-row clearfix"
+                 [ngClass]="{'has-val':currentLocationControl.controls['postal_code'].value}"
+                 [hidden]="!currentLocationControl.controls['postal_code'].value">
+              <div class=" col-sm-4 alignment-right">
+              </div>
+              <div class=" col-sm-8 focus-no-padding">
+                <input formControlName="postal_code" type="text" class="form-control" id="postalCode" disabled>
+                <label class="control-label custom-control-label" translate>personalInformation.postalCode</label>
+              </div>
+            </div>
+
+            <div class="custom-row clearfix"
+                 [ngClass]="{'has-val':currentLocationControl.controls['street_address'].value}"
+                 [hidden]="!currentLocationControl.controls['street_address'].value">
+              <div class=" col-sm-4 alignment-right">
+              </div>
+              <div class=" col-sm-8 focus-no-padding">
+                <input formControlName="street_address" type="text" class="form-control" id="streetAddress" disabled>
+                <label class="control-label custom-control-label" translate>personalInformation.streetAddress</label>
+              </div>
+            </div>
+            <div class="custom-row clearfix">
+              <div class="col-sm-8 col-sm-offset-4 focus-no-padding">
+                <app-map [sub]="currentSub" birthOrCurrent="current" [type]="currentType" [search]="currentSearchRef"></app-map>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <div class="form-group div-margin-top-40">
+        <div class="col-sm-8">
+          <div class="row">
+            <div class="col-sm-8 col-sm-offset-4 focus-no-padding-button">
+              <button type="submit" class="btn btn-success btn-block">
+                <i class="fa fa-floppy-o"></i> <span translate>shared.save</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--<p>  {{ form.value | json }} </p>-->
+    </form>
+  </div>
+</div>
