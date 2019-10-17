@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2019 at 12:27 PM
+-- Generation Time: Oct 17, 2019 at 08:34 AM
 -- Server version: 10.1.40-MariaDB
 -- PHP Version: 7.3.5
 
@@ -25,62 +25,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admins`
---
-
-CREATE TABLE `admins` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `admin_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `verified` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `verification_token` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `admins`
---
-
-INSERT INTO `admins` (`id`, `created_at`, `updated_at`, `admin_name`, `email`, `password`, `remember_token`, `verified`, `verification_token`) VALUES
-(1, NULL, NULL, 'yaser', 'pgreen@example.org', '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', 'TJZiaZVQqQ', '1', NULL),
-(2, NULL, NULL, 'ahmad', 'pgreen2@example.org', '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', NULL, '1', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `admins_logs`
---
-
-CREATE TABLE `admins_logs` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `companies_status_id` int(10) UNSIGNED NOT NULL,
-  `company_method_verfication_id` int(10) UNSIGNED NOT NULL,
-  `admin_id` int(10) UNSIGNED DEFAULT NULL,
-  `admin_description` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `company_id` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `admins_logs`
---
-
-INSERT INTO `admins_logs` (`id`, `companies_status_id`, `company_method_verfication_id`, `admin_id`, `admin_description`, `created_at`, `updated_at`, `company_id`) VALUES
-(1, 1, 1, 1, 'this is good company', '2019-09-30 07:05:42', '2019-09-30 07:05:42', 0),
-(2, 1, 1, 1, 'this is good company', '2019-09-30 07:08:18', '2019-09-30 07:08:18', 0),
-(3, 1, 1, 1, 'this is good company', '2019-09-30 07:08:26', '2019-09-30 07:08:26', 0),
-(4, 1, 1, 1, 'this is good company', '2019-09-30 07:09:34', '2019-09-30 07:09:34', 0),
-(5, 1, 1, 1, 'this is good company', '2019-09-30 07:17:07', '2019-09-30 07:17:07', 1),
-(6, 1, 1, 1, 'this is good company', '2019-09-30 07:18:33', '2019-09-30 07:18:33', 1),
-(7, 1, 1, 1, 'this is gooخخخخd company', '2019-09-30 07:18:39', '2019-09-30 07:18:39', 1);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `companies`
 --
 
@@ -92,19 +36,52 @@ CREATE TABLE `companies` (
   `is_verified` tinyint(1) NOT NULL DEFAULT '0',
   `company_status_id` int(10) UNSIGNED DEFAULT NULL,
   `company_method_verfication_id` int(10) UNSIGNED DEFAULT NULL,
-  `admin_id` int(10) UNSIGNED DEFAULT NULL,
   `admin_description` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `contact_numner` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+  `contact_numner` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `admin_user_id` int(10) UNSIGNED DEFAULT NULL,
+  `user_id` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `companies`
 --
 
-INSERT INTO `companies` (`id`, `main_language_id`, `created_at`, `updated_at`, `is_verified`, `company_status_id`, `company_method_verfication_id`, `admin_id`, `admin_description`, `email`, `contact_numner`) VALUES
-(1, 2, NULL, NULL, 0, 1, 1, 1, 'this is gooخخخخd company', '', ''),
-(3, 2, NULL, NULL, 0, 2, 2, 2, '', '', '');
+INSERT INTO `companies` (`id`, `main_language_id`, `created_at`, `updated_at`, `is_verified`, `company_status_id`, `company_method_verfication_id`, `admin_description`, `email`, `contact_numner`, `admin_user_id`, `user_id`) VALUES
+(1, 2, NULL, NULL, 0, 1, 1, 'this is good company', '', '', 1, 2),
+(3, 2, NULL, NULL, 0, 2, 2, '', '', '', NULL, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `company_admins_logs`
+--
+
+CREATE TABLE `company_admins_logs` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `company_status_id` int(10) UNSIGNED NOT NULL,
+  `company_method_verfication_id` int(10) UNSIGNED NOT NULL,
+  `admin_description` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `company_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `company_admins_logs`
+--
+
+INSERT INTO `company_admins_logs` (`id`, `company_status_id`, `company_method_verfication_id`, `admin_description`, `created_at`, `updated_at`, `company_id`, `user_id`) VALUES
+(1, 1, 1, 'this is good company', '2019-09-30 07:05:42', '2019-09-30 07:05:42', 0, NULL),
+(2, 4, 1, 'this is good company', '2019-09-30 07:08:18', '2019-09-30 07:08:18', 0, NULL),
+(3, 1, 1, 'this is good company', '2019-09-30 07:08:26', '2019-09-30 07:08:26', 0, NULL),
+(4, 1, 1, 'this is good company', '2019-09-30 07:09:34', '2019-09-30 07:09:34', 0, NULL),
+(5, 1, 1, 'this is good company', '2019-09-30 07:17:07', '2019-09-30 07:17:07', 1, NULL),
+(6, 1, 1, 'this is good company', '2019-09-30 07:18:33', '2019-09-30 07:18:33', 1, 2),
+(7, 4, 1, 'this is gooخخخخd company', '2019-09-30 07:18:39', '2019-09-30 07:18:39', 1, 2),
+(8, 1, 1, 'this is good company', '2019-10-15 16:22:50', '2019-10-15 16:22:50', 1, 1),
+(9, 1, 1, 'this is good company', '2019-10-16 04:17:54', '2019-10-16 04:17:54', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -2680,7 +2657,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (230, '2019_09_14_055935_edit_compnay_table', 97),
 (231, '2019_09_14_065935_add_relations_compnay_table', 98),
 (232, '2019_09_14_066935_edit_compnay_table', 99),
-(233, '2019_08_07_172951_edit_compnay_table', 100);
+(233, '2019_08_07_172951_edit_compnay_table', 100),
+(234, '2016_09_18_115526_drop_admin_table', 101),
+(235, '2011_09_14_065935_add_relations_compnay_table', 102),
+(236, '2011_09_18_195935_rename_admins_logs_table', 103),
+(237, '2011_09_18_195935_edit_company_admins_logs_table', 104);
 
 -- --------------------------------------------------------
 
@@ -4320,6 +4301,34 @@ CREATE TABLE `oauth_access_tokens` (
   `expires_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `oauth_access_tokens`
+--
+
+INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes`, `revoked`, `created_at`, `updated_at`, `expires_at`) VALUES
+('08ee2cdc690816dab6a0e50a8ffc8970921262598e7b28b697051ecf5458ffd186c20d52bcd32b2e', NULL, 3, NULL, '[]', 0, '2019-10-03 06:11:50', '2019-10-03 06:11:50', '2020-10-03 09:11:50'),
+('20175197ac1c97549d89b13a44707cb81ec65cf708b87a177c553328218b85986c3d59da0745a981', 32, 6, 'MyApp', '[\"user\"]', 0, '2019-10-09 15:43:43', '2019-10-09 15:43:43', '2020-10-09 18:43:43'),
+('49116477a500f77caf74f426f71fe6419eee5a37d9c609d19a9384c7668ef3010d95aa6a9c342aaa', 27, 6, 'MyApp', '[\"user\"]', 0, '2019-10-05 07:33:35', '2019-10-05 07:33:35', '2020-10-05 10:33:35'),
+('4f8fe454b41a036d6894650d4caf6b223c1be7d6b3fe41ae422d0cda27a28d143482cb028ba80c90', 1, 6, 'MyApp', '[\"user\"]', 0, '2019-10-11 15:53:00', '2019-10-11 15:53:00', '2020-10-11 18:53:00'),
+('563fca1c31b46dd9f228465494a7297a7acd868ae6a9d402ed0545385bf6837d0ac1f5df7f356e03', NULL, 3, NULL, '[]', 0, '2019-10-03 06:19:14', '2019-10-03 06:19:14', '2020-10-03 09:19:14'),
+('775d5e2214f5fc817529aab49be9aa7332662b606c5eecda6a20ffcca48aacfab5253c95d347a525', 1, 6, 'MyApp', '[\"user\"]', 0, '2019-10-11 16:07:59', '2019-10-11 16:07:59', '2020-10-11 19:07:59'),
+('9ee6b999d57783e84f6fd12acaad23667f6dfbcf9e36c0fdfbddec47f0d43c52d53776243c7688b7', NULL, 3, NULL, '[]', 0, '2019-10-03 19:08:32', '2019-10-03 19:08:32', '2020-10-03 22:08:32'),
+('a503c77e2a942ba7729f58036c26ea85bb16230f4416151eae20d37895ceab501ec1d73d3462324d', 33, 6, 'MyApp', '[\"user\"]', 0, '2019-10-09 15:49:39', '2019-10-09 15:49:39', '2020-10-09 18:49:39'),
+('a5d143928cea086989720fcdbca41502e61931defa05b3b0f974584ddfc0eeb4f00cdabab60e8acb', 35, 6, 'MyApp', '[\"user\"]', 0, '2019-10-11 04:11:19', '2019-10-11 04:11:19', '2020-10-11 07:11:19'),
+('a62bc8fba67bbd2feac49d4fbc05eeb08e26424bc079e0b8e6151a0d99a2cb852ef9efdf8010de2f', 26, 6, 'MyApp', '[\"employeer\"]', 0, '2019-10-05 07:32:08', '2019-10-05 07:32:08', '2020-10-05 10:32:08'),
+('aa67740f26b4a8db2abd7675424b601809cbea4bfa06a3f4837048c4e25431be3fc883851fff4811', 36, 6, 'MyApp', '[\"user\"]', 0, '2019-10-11 07:31:23', '2019-10-11 07:31:23', '2020-10-11 10:31:23'),
+('aa8dfb2ac0f4572ac851c7e6d88bd52214b8caee89cde4f27b0631eb03aa875ba0e18ecd6e2bee90', 1, 6, 'MyApp', '[\"employeer\"]', 0, '2019-10-11 17:11:24', '2019-10-11 17:11:24', '2020-10-11 20:11:24'),
+('b335dced797ca4f9317198aba2aa2be11512a18c6ba81d5462be423a12c91fe387d1dfe7f397eaef', NULL, 3, NULL, '[]', 0, '2019-10-04 04:41:10', '2019-10-04 04:41:10', '2020-10-04 07:41:10'),
+('bd598e3fd446adb60dd2394513c33c503790c0fb1dd54b603fb836a84938d5e665f82326af9e628f', 1, 6, 'MyApp', '[\"employeer\"]', 0, '2019-10-11 17:33:36', '2019-10-11 17:33:36', '2020-10-11 20:33:36'),
+('bf17adfe3b1bd9b57dc2d73bc4a3b5ab1993e37b2d9be29cbfb4547510b953b25170550c351f49bc', 1, 6, 'MyApp', '[\"employeer\"]', 0, '2019-10-11 16:09:36', '2019-10-11 16:09:36', '2020-10-11 19:09:36'),
+('c67ddb30780d20326fbce53bbe4fae55f10a3f50ee28495f7047b6b1011f3c7a1e97537bf096ef8b', 24, 6, 'MyApp', '[]', 0, '2019-10-05 03:58:18', '2019-10-05 03:58:18', '2020-10-05 06:58:18'),
+('c82adc43c15f259c574f1780a87f79f9441b44ef135cf7ccdfe52f3b21d516c91e982b99b7c4f1bc', NULL, 3, NULL, '[]', 0, '2019-10-03 06:21:21', '2019-10-03 06:21:21', '2020-10-03 09:21:21'),
+('d0f61f57bceb68847b1fcc189c0ffd79a2f2fd95617641f102f7f8a29802379a674964ba79eee30b', 2, 6, 'MyApp', '[\"user\"]', 0, '2019-10-15 15:52:31', '2019-10-15 15:52:31', '2020-10-15 18:52:31'),
+('dad9a33af290784b78fe4c185f58051c2726d61bd17585ce6e80b9098575ab34b3d82fc97f7d58c7', 25, 6, 'MyApp', '[\"*\"]', 0, '2019-10-05 04:51:58', '2019-10-05 04:51:58', '2020-10-05 07:51:58'),
+('db1a32ed65752e417b553da4eed74fda7afb8bb105240e73e4df31dd64c5457dab8ba170a06e238f', 1, 6, 'MyApp', '[\"employeer\"]', 0, '2019-10-11 17:34:32', '2019-10-11 17:34:32', '2020-10-11 20:34:32'),
+('efcc0af00d598fe628911997468018f7bc8d5e9ffdc47df948e5f32b7116b6e0733d7f2c18c319a2', 30, 6, 'MyApp', '[\"user\"]', 0, '2019-10-09 04:17:16', '2019-10-09 04:17:16', '2020-10-09 07:17:16'),
+('f67d6ea8eff5da1a0174feae874ac0e2bd7e332d4e83e549bad096700c2eceabf005ac62cb5782c1', 1, 6, 'MyApp', '[\"employeer\"]', 0, '2019-10-11 17:34:00', '2019-10-11 17:34:00', '2020-10-11 20:34:00');
+
 -- --------------------------------------------------------
 
 --
@@ -4354,6 +4363,20 @@ CREATE TABLE `oauth_clients` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `oauth_clients`
+--
+
+INSERT INTO `oauth_clients` (`id`, `user_id`, `name`, `secret`, `redirect`, `personal_access_client`, `password_client`, `revoked`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'Laravel Personal Access Client', 'Lspw3K4sVQm0F6a1wtN1la2cOfrYlp7GEtCGpcM5', 'http://localhost', 1, 0, 0, '2019-10-03 03:20:20', '2019-10-03 03:20:20'),
+(2, NULL, 'Laravel Password Grant Client', 'L9p0BctqlvWUlGLHJie1GPs16nMVsd8lZSTXK3MO', 'http://localhost', 0, 1, 0, '2019-10-03 03:20:20', '2019-10-03 03:20:20'),
+(3, 0, 'clientyaser', '3BAFuDcuGxrCPs48QRp6OSzsMzFUkF2t1btS8syF', 'http://localhost/auth/callback', 0, 0, 0, '2019-10-03 05:52:10', '2019-10-03 05:52:10'),
+(4, NULL, 'Laravel Personal Access Client', 'fw77Oxs5UA2PjUYQ1j2ulV4ivkIDiKqUjTehR9UQ', 'http://localhost', 1, 0, 0, '2019-10-03 19:06:57', '2019-10-03 19:06:57'),
+(5, NULL, 'Laravel Password Grant Client', 'Yn9eK1L05lfqUAx5gJOBmx724JkqDRRRlWmQefwD', 'http://localhost', 0, 1, 0, '2019-10-03 19:06:57', '2019-10-03 19:06:57'),
+(6, NULL, 'Laravel Personal Access Client', 'IgIzoFdMJ9gkZwzNeyxpPF2h1RbTJN5EEk4N1Ujq', 'http://localhost', 1, 0, 0, '2019-10-05 02:51:31', '2019-10-05 02:51:31'),
+(7, NULL, 'Laravel Password Grant Client', 'MIR2NUC80xIDk1HqA8lz7OtQADOc0lXltWokXkBu', 'http://localhost', 0, 1, 0, '2019-10-05 02:51:31', '2019-10-05 02:51:31'),
+(8, 11, 'test', 'xjiOZx4WVjI378nTklgk5vSMVlW2BEod5Jwf8fPP', 'http://localhost/auth/callback', 0, 0, 0, '2019-10-09 15:50:00', '2019-10-09 15:50:00');
+
 -- --------------------------------------------------------
 
 --
@@ -4366,6 +4389,15 @@ CREATE TABLE `oauth_personal_access_clients` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `oauth_personal_access_clients`
+--
+
+INSERT INTO `oauth_personal_access_clients` (`id`, `client_id`, `created_at`, `updated_at`) VALUES
+(1, 1, '2019-10-03 03:20:20', '2019-10-03 03:20:20'),
+(2, 4, '2019-10-03 19:06:57', '2019-10-03 19:06:57'),
+(3, 6, '2019-10-05 02:51:31', '2019-10-05 02:51:31');
 
 -- --------------------------------------------------------
 
@@ -4707,9 +4739,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `provider_name`, `provider_id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `verified`, `verification_token`, `created_at`, `updated_at`, `avatar`) VALUES
-(1, NULL, NULL, 'Miss Erna Runte', 'thuel@example.com', NULL, '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', 'Iph7UnA9SX', '1', NULL, '2018-08-25 10:56:44', '2018-08-25 10:56:44', NULL),
-(19, 'google', '117628170669220070110', 'Yaser Omran', 'engineeryaseromran@gmail.com', '2019-09-02 12:29:04', NULL, NULL, '1', NULL, '2019-09-02 12:29:04', '2019-09-02 12:29:04', 'https://lh4.googleusercontent.com/-NNgI4Jf1plE/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf8yHGq87r1S7f7AcV5PvOcxQYv-g/s96-c/photo.jpg'),
-(23, 'facebook', '1661645057436787', 'ياسر عمران', 'yaser84yaser@hotmail.com', '2019-09-12 09:02:58', NULL, NULL, '1', NULL, '2019-09-12 09:02:58', '2019-09-12 09:02:58', 'https://graph.facebook.com/1661645057436787/picture?type=normal');
+(1, NULL, NULL, '11111', '11111@gg.com', NULL, '$2y$10$IOQ36X88oxMY04KXe85OguOGFozj9oiq0zS3PJmH2jn.6ZrX5V2DW', NULL, '0', NULL, '2019-10-11 15:53:00', '2019-10-11 15:53:00', NULL),
+(2, NULL, NULL, 'yaser', 'yaser@yaser.yas', NULL, '$2y$10$P.7usJoHgjHMMrNjZukga.QuE0u5y9.S9uIvNCrR0Z5fFBuq2EOwS', NULL, '0', NULL, '2019-10-15 15:52:31', '2019-10-15 15:52:31', NULL);
 
 -- --------------------------------------------------------
 
@@ -4774,29 +4805,24 @@ INSERT INTO `work_exp_companies` (`id`, `work_experience_id`, `name`, `country`,
 --
 
 --
--- Indexes for table `admins`
---
-ALTER TABLE `admins`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `admins_logs`
---
-ALTER TABLE `admins_logs`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `admins_logs_admin_id_foreign` (`admin_id`),
-  ADD KEY `admins_logs_companies_status_id_foreign` (`companies_status_id`),
-  ADD KEY `admins_logs_company_method_verfication_id_foreign` (`company_method_verfication_id`);
-
---
 -- Indexes for table `companies`
 --
 ALTER TABLE `companies`
   ADD PRIMARY KEY (`id`),
   ADD KEY `companies_main_language_id_foreign` (`main_language_id`),
-  ADD KEY `companies_admin_id_foreign` (`admin_id`),
   ADD KEY `companies_company_status_id_foreign` (`company_status_id`),
-  ADD KEY `companies_company_method_verfication_id_foreign` (`company_method_verfication_id`);
+  ADD KEY `companies_company_method_verfication_id_foreign` (`company_method_verfication_id`),
+  ADD KEY `companies_admin_user_id_foreign` (`admin_user_id`),
+  ADD KEY `companies_user_id_foreign` (`user_id`);
+
+--
+-- Indexes for table `company_admins_logs`
+--
+ALTER TABLE `company_admins_logs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `admins_logs_companies_status_id_foreign` (`company_status_id`),
+  ADD KEY `admins_logs_company_method_verfication_id_foreign` (`company_method_verfication_id`),
+  ADD KEY `company_admins_logs_user_id_foreign` (`user_id`);
 
 --
 -- Indexes for table `company_industries`
@@ -5288,22 +5314,16 @@ ALTER TABLE `work_exp_companies`
 --
 
 --
--- AUTO_INCREMENT for table `admins`
---
-ALTER TABLE `admins`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `admins_logs`
---
-ALTER TABLE `admins_logs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
 -- AUTO_INCREMENT for table `companies`
 --
 ALTER TABLE `companies`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `company_admins_logs`
+--
+ALTER TABLE `company_admins_logs`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `company_industries`
@@ -5561,7 +5581,7 @@ ALTER TABLE `marital_status_translations`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=235;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=238;
 
 --
 -- AUTO_INCREMENT for table `minors`
@@ -5591,13 +5611,13 @@ ALTER TABLE `nationality_translations`
 -- AUTO_INCREMENT for table `oauth_clients`
 --
 ALTER TABLE `oauth_clients`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `oauth_personal_access_clients`
 --
 ALTER TABLE `oauth_personal_access_clients`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `personal_informations`
@@ -5663,7 +5683,7 @@ ALTER TABLE `translated_languages`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `work_experiences`
@@ -5682,21 +5702,22 @@ ALTER TABLE `work_exp_companies`
 --
 
 --
--- Constraints for table `admins_logs`
---
-ALTER TABLE `admins_logs`
-  ADD CONSTRAINT `admins_logs_admin_id_foreign` FOREIGN KEY (`admin_id`) REFERENCES `admins` (`id`),
-  ADD CONSTRAINT `admins_logs_companies_status_id_foreign` FOREIGN KEY (`companies_status_id`) REFERENCES `company_statuses` (`id`),
-  ADD CONSTRAINT `admins_logs_company_method_verfication_id_foreign` FOREIGN KEY (`company_method_verfication_id`) REFERENCES `company_method_verfications` (`id`);
-
---
 -- Constraints for table `companies`
 --
 ALTER TABLE `companies`
-  ADD CONSTRAINT `companies_admin_id_foreign` FOREIGN KEY (`admin_id`) REFERENCES `admins` (`id`),
+  ADD CONSTRAINT `companies_admin_user_id_foreign` FOREIGN KEY (`admin_user_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `companies_company_method_verfication_id_foreign` FOREIGN KEY (`company_method_verfication_id`) REFERENCES `company_method_verfications` (`id`),
   ADD CONSTRAINT `companies_company_status_id_foreign` FOREIGN KEY (`company_status_id`) REFERENCES `company_statuses` (`id`),
-  ADD CONSTRAINT `companies_main_language_id_foreign` FOREIGN KEY (`main_language_id`) REFERENCES `translated_languages` (`id`);
+  ADD CONSTRAINT `companies_main_language_id_foreign` FOREIGN KEY (`main_language_id`) REFERENCES `translated_languages` (`id`),
+  ADD CONSTRAINT `companies_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `company_admins_logs`
+--
+ALTER TABLE `company_admins_logs`
+  ADD CONSTRAINT `admins_logs_companies_status_id_foreign` FOREIGN KEY (`company_status_id`) REFERENCES `company_statuses` (`id`),
+  ADD CONSTRAINT `admins_logs_company_method_verfication_id_foreign` FOREIGN KEY (`company_method_verfication_id`) REFERENCES `company_method_verfications` (`id`),
+  ADD CONSTRAINT `company_admins_logs_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `company_industries`
