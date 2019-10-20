@@ -15,6 +15,7 @@ use App\Models\Company\CompanyMethodVerfication;
 use App\Models\Company\CompanyStatus;
 use App\Models\Company\CompanyType;
 use App\Models\WorkExperience\CompanyIndustry;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -56,7 +57,7 @@ class CompanyAdminRepository implements CompanyAdminRepositoryInterface
         $apiController->validate($request,$rule_filter);
         return DB::transaction(function () use ($request,$company_id) {
             $company = Company::findOrFail($company_id)->first();
-            $company->admin_user_id = 1;
+            $company->admin_user_id =  $request->user()->id;
             $company->admin_description = $request->admin_description;
             $company->company_method_verfication_id = $request->company_method_verfication_id;
             $company->company_status_id = $request->company_status_id;
@@ -125,7 +126,8 @@ if($companyProfileTranslations==null)
         //   $companySpecialtiesForCompany=CompanySpecialtiesForCompany ::with(array('specialties') )->get();
         if($companyProfile!=null)
         {
-            return response()->json(['success' => 'true','data' => $companyProfile], 200);
+            $user = User::where('id', $company->admin_user_id)->first();
+            return response()->json(['success' => 'true','data' => $companyProfile,'Handled by'=>$user], 200);
         }
         else
         {
