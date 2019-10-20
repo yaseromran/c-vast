@@ -78,14 +78,23 @@ class CompanyAdminRepository implements CompanyAdminRepositoryInterface
         {
             return response()->json(['error' => 'no compnay profile for this company id',], 400);
         }
-        $translated_languages_id=$request['translated_languages_id'];
-        if($translated_languages_id==null)
-        {
-            $company = Company::findOrFail($companyProfile->company_id)->first();
-            $translated_languages_id = $company->main_language_id;
-        }
-
+        $translated_languages_id=1;
         $companyProfileTranslations=CompanyProfileTranslation::where([['translated_languages_id','=',$translated_languages_id], ['company_profile_id', '=', $companyProfile->id]])->first();
+if($companyProfileTranslations==null)
+{
+    $company = Company::findOrFail($companyProfile->company_id)->first();
+    if($company->main_language_id!=null)
+    {
+        $translated_languages_id = $company->main_language_id;
+    }
+    $companyProfileTranslations=CompanyProfileTranslation::where([['translated_languages_id','=',$translated_languages_id], ['company_profile_id', '=', $companyProfile->id]])->first();
+    if($companyProfileTranslations==null)
+    {
+        $translated_languages_id=0;
+    }
+}
+
+
         //return $companyProfileTranslations;
         if($companyProfileTranslations==null)    return response()->json(['error' => 'no compnay profile for this language',], 400);
         $companyProfile  =  CompanyProfile:: where('company_id', $company_id)
@@ -101,9 +110,11 @@ class CompanyAdminRepository implements CompanyAdminRepositoryInterface
 
                 $query->select(['method_verfication_name', 'id']);
             })  )
-            ->with(array('companyProfileTranslations' => function ($query) use ($company_id,$translated_languages_id)
+            ->with(array('companyProfileTranslations' => function ($query) use ($translated_languages_id)
             {
-
+                if($translated_languages_id!=0) {
+                    $query->where('translated_languages_id', '=', $translated_languages_id);
+                }
             })  )
 
 
