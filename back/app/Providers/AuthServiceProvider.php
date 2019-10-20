@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Providers;
+use App\Models\UserRole\Role;
 use Carbon\Carbon;
 use Laravel\Passport\Passport;
 
@@ -26,11 +27,14 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        Passport::tokensCan([
-            'user' => 'user links ',
-            'admin' => 'all links ',
-            'employeer' => 'employeer',
-        ]);
+        $role=[];
+        $result=        Role::all(['name','description']) ;
+        foreach($result as $r){
+
+            $role[$r->name]=[$r->description];
+        }
+
+        Passport::tokensCan($role);
 
         Passport::routes(function ($router) {
             $router->forAccessTokens();

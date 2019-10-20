@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Models\UserRole\Role;
+use App\Models\UserRole\RoleUser;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Resume;
@@ -53,5 +55,37 @@ class User extends Authenticatable // implements    JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class)->withTimestamps();
+    }
+    public function  getRole()
+    {
+       return $this->roles()->first(['name'])->makeHidden('pivot');
+
+
+    }
+    //one role
+    public function hasRole($role)
+    {
+        if ($this->roles()->where('name', $role)->first()) {
+            return true;
+        }
+        return false;
+    }
+    //set Role for User
+    public function setRole($user_id, $role)
+    {
+        $user = self::where('id', $user_id)->first();
+        $Role = Role::where('name', $role)->first();
+        if ($user != null) {
+            RoleUser::create([
+                'user_id' => $user->id,
+                'role_id' => $Role->id
+            ]);
+        }
     }
 }

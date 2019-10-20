@@ -10,6 +10,7 @@ use App\Models\Company\CompanyProfile;
 use App\Models\Company\CompanyIndustriesForCompany;
 use App\Models\Company\CompanySpecialtiesForCompany;
 use App\Models\Company\CompanySocialMedia;
+use App\Models\UserRole\Role;
 use App\Models\WorkExperience\CompanyIndustry;
 use App\Models\TranslatedLanguages\TranslatedLanguages;
 use App\Models\Company\CompanyType;
@@ -30,7 +31,7 @@ protected  $companyAdminRepository;
 
     public function __construct()
     {
-      //   $this->middleware('jwt.auth');
+        $this->middleware(['auth:api', 'scopes:admin'])->only(['show_company_verfication_logs_4_admin','save_company_verfication_4_admin','show_all_company_verfication_data_4_admin','getAllCompanyData4Admin','index4Admin']);
         $this->companyAdminRepository=new CompanyAdminRepository(new Company());
     }
     /**
@@ -76,6 +77,7 @@ protected  $companyAdminRepository;
 
     public function index4Admin(Request $request)
     {
+
      // DB::enableQueryLog();
      return    $this->companyAdminRepository->all($request) ;
      //  $query = DB::getQueryLog();

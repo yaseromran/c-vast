@@ -20,15 +20,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request)
 
 //Auth routes
 Route::post('login', 'AuthController@login');
-Route::post('register', 'AuthController@register');
+Route::post('login_user', 'AuthController@loginUser');
+Route::post('register_user', 'AuthController@registerUser');
 // Route for admin permissions
 Route::prefix('admin')->group(function() {
-    Route::post('login', 'AuthController@adminLogin');
+    Route::post('login', 'AuthController@loginAdmin');
     Route::post('register', 'AuthController@adminRegister');
 });
 
 Route::prefix('employeer')->group(function() {
-    Route::post('login', 'AuthController@employeerLogin');
+    Route::post('login', 'AuthController@loginEmployeer');
     Route::post('register', 'AuthController@employeerRegister');
 });
 
@@ -87,7 +88,7 @@ Route::get('companydata/{company_id}', 'Company\CompanyController@companydata');
 //////////////////////////////////// company profile/////////////////////////////////////
 
 
-Route::get('show_company_profile/{company_id}', 'Company\CompanyProfileController@show')->middleware(['auth:api', 'scope:admin,employeer']);
+Route::get('show_company_profile/{company_id}', 'Company\CompanyProfileController@show')->middleware(['auth:api', 'scope:admin,user']);
 Route::delete('delete_profile/{company_id}', 'Company\CompanyProfileController@destroy');
 Route::Post('upload_company_logo/{company_id}', 'Company\CompanyProfileController@upload_logo');
 //Route::Post('store_profile', 'Company\CompanyProfileController@store');
@@ -112,15 +113,15 @@ Route::Post('signfacebook', 'Auth\LoginController@signWithFacebook');
 
 ////////////////////////////admins by  yaser ////////////////////////////////////////////
 
-Route::get('show_all_company_4_admin', 'Company\CompanyController@index4Admin');
+Route::get('show_all_company_4_admin', 'Company\CompanyController@index4Admin')->middleware(['auth:api', 'scope:admin']);
 
-Route::get('show_all_company_data_4_admin', 'Company\CompanyController@getAllCompanyData4Admin');
+Route::get('show_all_company_data_4_admin', 'Company\CompanyController@getAllCompanyData4Admin')->middleware(['auth:api', 'scope:admin']);
 
-Route::get('show_all_company_verfication_data_4_admin', 'Company\CompanyController@show_all_company_verfication_data_4_admin');
+Route::get('show_all_company_verfication_data_4_admin', 'Company\CompanyController@show_all_company_verfication_data_4_admin')->middleware(['auth:api', 'scope:admin']);
 
-Route::Post('save_company_verfication_4_admin/{company_id}', 'Company\CompanyController@save_company_verfication_4_admin');
+Route::Post('save_company_verfication_4_admin/{company_id}', 'Company\CompanyController@save_company_verfication_4_admin')->middleware(['auth:api', 'scope:admin']);
 
-Route::get('show_company_verfication_logs_4_admin/{company_id}', 'Company\CompanyController@show_company_verfication_logs_4_admin');
+Route::get('show_company_verfication_logs_4_admin/{company_id}', 'Company\CompanyController@show_company_verfication_logs_4_admin')->middleware(['auth:api', 'scope:admin']);
 
-Route::get('show_company_info_4_admin/{company_id}', 'Company\CompanyProfileController@show_company_info_4_admin');
+Route::get('show_company_info_4_admin/{company_id}', 'Company\CompanyProfileController@show_company_info_4_admin')->middleware(['auth:api', 'scope:admin']);
 

@@ -239,9 +239,14 @@ class CompanyAdminRepository implements CompanyAdminRepositoryInterface
 
 
 
+
                                                   if($request->has("company_status_id")) // if field  company_status_id   exist in filter
                                                   {
                                                     $q->where('companies.company_status_id', '=', $request->company_status_id);
+                                                  }
+                                                  else{
+                                                     // $q->where('companies.company_status_id', '>', -1);
+                                                      $q->orwhereNull('companies.company_status_id');
                                                   }
                                                   if($request->has("company_id")) // if field  company_id   exist in filter
                                                   {

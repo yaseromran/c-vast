@@ -23,7 +23,7 @@ class CompanyProfileController extends ApiController
 
     public function __construct()
     {
-       // $this->middleware(['auth:api', 'scopes:admin,employeer'])->except(['index', 'show']);
+        $this->middleware(['auth:api', 'scopes:admin'])->only('show_company_info_4_admin');
         $this->companyAdminRepository=new CompanyAdminRepository(new Company());
     }
     /**
