@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2019 at 08:34 AM
+-- Generation Time: Oct 21, 2019 at 08:07 AM
 -- Server version: 10.1.40-MariaDB
 -- PHP Version: 7.3.5
 
@@ -48,8 +48,8 @@ CREATE TABLE `companies` (
 --
 
 INSERT INTO `companies` (`id`, `main_language_id`, `created_at`, `updated_at`, `is_verified`, `company_status_id`, `company_method_verfication_id`, `admin_description`, `email`, `contact_numner`, `admin_user_id`, `user_id`) VALUES
-(1, 2, NULL, NULL, 0, 1, 1, 'this is good company', '', '', 1, 2),
-(3, 2, NULL, NULL, 0, 2, 2, '', '', '', NULL, 2);
+(1, 2, NULL, NULL, 0, NULL, 1, 'this is good company', '', '', 1, 2),
+(3, 2, NULL, NULL, 0, 4, 2, '', '', '', NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -2661,7 +2661,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (234, '2016_09_18_115526_drop_admin_table', 101),
 (235, '2011_09_14_065935_add_relations_compnay_table', 102),
 (236, '2011_09_18_195935_rename_admins_logs_table', 103),
-(237, '2011_09_18_195935_edit_company_admins_logs_table', 104);
+(237, '2011_09_18_195935_edit_company_admins_logs_table', 104),
+(239, '2011_09_30_065201_create_roles_table', 105),
+(240, '2011_09_30_065958_create_role_user_table', 106);
 
 -- --------------------------------------------------------
 
@@ -4308,22 +4310,42 @@ CREATE TABLE `oauth_access_tokens` (
 INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes`, `revoked`, `created_at`, `updated_at`, `expires_at`) VALUES
 ('08ee2cdc690816dab6a0e50a8ffc8970921262598e7b28b697051ecf5458ffd186c20d52bcd32b2e', NULL, 3, NULL, '[]', 0, '2019-10-03 06:11:50', '2019-10-03 06:11:50', '2020-10-03 09:11:50'),
 ('20175197ac1c97549d89b13a44707cb81ec65cf708b87a177c553328218b85986c3d59da0745a981', 32, 6, 'MyApp', '[\"user\"]', 0, '2019-10-09 15:43:43', '2019-10-09 15:43:43', '2020-10-09 18:43:43'),
+('211a134d205df022abb3ebccd504b62831cf44647d72da538ecd1c8c4c3ed8b02f6055bbef191b93', 7, 6, 'MyApp', '[\"employeer\"]', 0, '2019-10-19 09:13:24', '2019-10-19 09:13:24', '2020-10-19 12:13:24'),
+('22f156fea2b529ceae55a625f64f0d66b03ed7ae65a8fb7d7e915458a511a0e46160487d453336c6', 7, 6, 'MyApp', '[\"employeer\"]', 0, '2019-10-19 09:15:34', '2019-10-19 09:15:34', '2020-10-19 12:15:34'),
+('28cbd2f0bce894b7befb09976f6914aa8fb26a06436a5c464eb3b2667a8a56af0672734dafc3abde', 19, 6, 'MyApp', '[\"*\"]', 0, '2019-10-20 03:55:01', '2019-10-20 03:55:01', '2020-10-20 06:55:01'),
+('292edc07b97517c8f325b2d13f957d72542fe91bb9dbbd48761d2fa51686808585a63332dcc1a11c', 25, 6, 'MyApp', '[\"*\"]', 0, '2019-10-20 04:00:27', '2019-10-20 04:00:27', '2020-10-20 07:00:27'),
+('2e43cd375cd85e06a0ac5006258bd6d5eada89caf5433d5f7606b3de9451a039502cb4b9f5f45dc5', 22, 6, 'MyApp', '[\"*\"]', 0, '2019-10-20 03:57:22', '2019-10-20 03:57:22', '2020-10-20 06:57:22'),
+('31ff12c0020191378126d544b429479d7aa8e0c3fce952c1347cdc167ef4c440ce745ac5fa3db37e', 28, 6, 'MyApp', '[\"*\"]', 0, '2019-10-20 05:00:10', '2019-10-20 05:00:10', '2020-10-20 08:00:10'),
+('37cd13755d5fc21d9b5e29ea33d90d6324489f1c522cd44a7b5f84f468f75ed6112ae8282130e01c', 8, 6, 'MyApp', '[\"*\"]', 0, '2019-10-20 03:46:56', '2019-10-20 03:46:56', '2020-10-20 06:46:56'),
+('3b04b311a30cdc85c2f19e1dca1232cce73790073927ced209e4521a36468778bd2c5647c256e3fc', 3, 6, 'MyApp', '[\"user\"]', 0, '2019-10-17 06:40:28', '2019-10-17 06:40:28', '2020-10-17 09:40:28'),
+('3b288c6e04ea47a6494f6a3c44ef934146abc89abb7437a5acfb84f56a21736ceb846fdf999270fa', 7, 6, 'MyApp', '[\"user\"]', 0, '2019-10-19 08:59:21', '2019-10-19 08:59:21', '2020-10-19 11:59:21'),
+('41eed7e4651ec774e40cdb110eb648da66b6f405c9fd4ccc72c1c5b5974649f319e995afa3491131', 7, 6, 'MyApp', '[\"user\"]', 0, '2019-10-19 09:11:53', '2019-10-19 09:11:53', '2020-10-19 12:11:53'),
 ('49116477a500f77caf74f426f71fe6419eee5a37d9c609d19a9384c7668ef3010d95aa6a9c342aaa', 27, 6, 'MyApp', '[\"user\"]', 0, '2019-10-05 07:33:35', '2019-10-05 07:33:35', '2020-10-05 10:33:35'),
 ('4f8fe454b41a036d6894650d4caf6b223c1be7d6b3fe41ae422d0cda27a28d143482cb028ba80c90', 1, 6, 'MyApp', '[\"user\"]', 0, '2019-10-11 15:53:00', '2019-10-11 15:53:00', '2020-10-11 18:53:00'),
 ('563fca1c31b46dd9f228465494a7297a7acd868ae6a9d402ed0545385bf6837d0ac1f5df7f356e03', NULL, 3, NULL, '[]', 0, '2019-10-03 06:19:14', '2019-10-03 06:19:14', '2020-10-03 09:19:14'),
+('691c66a7b0c3be9230bb9b3c8e867faca15be64085fa5ca1d103e170bbe44e17a67976ea84a9fc94', 7, 6, 'MyApp', '[\"user\"]', 0, '2019-10-20 03:35:01', '2019-10-20 03:35:01', '2020-10-20 06:35:01'),
+('6b40213a1dd758de1481a0cfc8b5f8b4c8db2df7950de740315c6770bd4a480518d497aaa2b1c2ab', 27, 6, 'MyApp', '[\"user\"]', 0, '2019-10-20 04:03:05', '2019-10-20 04:03:05', '2020-10-20 07:03:05'),
+('6c95bba80181fde74ba59cbae9a06119240b1c25ced9e8a936c1bb165dc08e78ecc6a0c1cb5a5f54', 6, 6, 'MyApp', '[\"user\",\"employeer\"]', 0, '2019-10-19 08:52:06', '2019-10-19 08:52:06', '2020-10-19 11:52:06'),
 ('775d5e2214f5fc817529aab49be9aa7332662b606c5eecda6a20ffcca48aacfab5253c95d347a525', 1, 6, 'MyApp', '[\"user\"]', 0, '2019-10-11 16:07:59', '2019-10-11 16:07:59', '2020-10-11 19:07:59'),
+('90a6670e89769982148ebb6a84639aef071493ae1af2496c01f5a8f41da1156825603dce50529575', 26, 6, 'MyApp', '[\"*\"]', 0, '2019-10-20 04:01:14', '2019-10-20 04:01:14', '2020-10-20 07:01:14'),
+('9daf97d13dd06efb54a6470b71c4e86d0de8947f495d1bd0c54225646cfe027b1f9c41884ccb22b4', 7, 6, 'MyApp', '[\"user\"]', 0, '2019-10-20 03:19:01', '2019-10-20 03:19:01', '2020-10-20 06:19:01'),
 ('9ee6b999d57783e84f6fd12acaad23667f6dfbcf9e36c0fdfbddec47f0d43c52d53776243c7688b7', NULL, 3, NULL, '[]', 0, '2019-10-03 19:08:32', '2019-10-03 19:08:32', '2020-10-03 22:08:32'),
+('a4528979c3399996db08b6dfdef0866aa04c750b51175b7a8942c75a818e24050d41a3863d573683', 23, 6, 'MyApp', '[\"*\"]', 0, '2019-10-20 03:58:38', '2019-10-20 03:58:38', '2020-10-20 06:58:38'),
 ('a503c77e2a942ba7729f58036c26ea85bb16230f4416151eae20d37895ceab501ec1d73d3462324d', 33, 6, 'MyApp', '[\"user\"]', 0, '2019-10-09 15:49:39', '2019-10-09 15:49:39', '2020-10-09 18:49:39'),
 ('a5d143928cea086989720fcdbca41502e61931defa05b3b0f974584ddfc0eeb4f00cdabab60e8acb', 35, 6, 'MyApp', '[\"user\"]', 0, '2019-10-11 04:11:19', '2019-10-11 04:11:19', '2020-10-11 07:11:19'),
 ('a62bc8fba67bbd2feac49d4fbc05eeb08e26424bc079e0b8e6151a0d99a2cb852ef9efdf8010de2f', 26, 6, 'MyApp', '[\"employeer\"]', 0, '2019-10-05 07:32:08', '2019-10-05 07:32:08', '2020-10-05 10:32:08'),
+('a8df639f7ff5a2287ce7037208044b08ca4d4e0e55bcbd1b81913cc5c9fc299d88789eec8eb42da3', 24, 6, 'MyApp', '[\"*\"]', 0, '2019-10-20 03:59:18', '2019-10-20 03:59:18', '2020-10-20 06:59:18'),
 ('aa67740f26b4a8db2abd7675424b601809cbea4bfa06a3f4837048c4e25431be3fc883851fff4811', 36, 6, 'MyApp', '[\"user\"]', 0, '2019-10-11 07:31:23', '2019-10-11 07:31:23', '2020-10-11 10:31:23'),
 ('aa8dfb2ac0f4572ac851c7e6d88bd52214b8caee89cde4f27b0631eb03aa875ba0e18ecd6e2bee90', 1, 6, 'MyApp', '[\"employeer\"]', 0, '2019-10-11 17:11:24', '2019-10-11 17:11:24', '2020-10-11 20:11:24'),
+('b176489e14284e160e9e35c134390b87ada7c7b59d448a0427330e49812c831e808f7765da7b5394', 4, 6, 'MyApp', '[\"user\"]', 0, '2019-10-19 05:37:35', '2019-10-19 05:37:35', '2020-10-19 08:37:35'),
 ('b335dced797ca4f9317198aba2aa2be11512a18c6ba81d5462be423a12c91fe387d1dfe7f397eaef', NULL, 3, NULL, '[]', 0, '2019-10-04 04:41:10', '2019-10-04 04:41:10', '2020-10-04 07:41:10'),
 ('bd598e3fd446adb60dd2394513c33c503790c0fb1dd54b603fb836a84938d5e665f82326af9e628f', 1, 6, 'MyApp', '[\"employeer\"]', 0, '2019-10-11 17:33:36', '2019-10-11 17:33:36', '2020-10-11 20:33:36'),
 ('bf17adfe3b1bd9b57dc2d73bc4a3b5ab1993e37b2d9be29cbfb4547510b953b25170550c351f49bc', 1, 6, 'MyApp', '[\"employeer\"]', 0, '2019-10-11 16:09:36', '2019-10-11 16:09:36', '2020-10-11 19:09:36'),
+('c5c492b3de0c74b96407e2c0ca28e075a2601dc8f0091d2a03aba77df6fd7af5edd65129cc7d80d6', 7, 6, 'MyApp', '[\"employeer\"]', 0, '2019-10-19 09:18:27', '2019-10-19 09:18:27', '2020-10-19 12:18:27'),
 ('c67ddb30780d20326fbce53bbe4fae55f10a3f50ee28495f7047b6b1011f3c7a1e97537bf096ef8b', 24, 6, 'MyApp', '[]', 0, '2019-10-05 03:58:18', '2019-10-05 03:58:18', '2020-10-05 06:58:18'),
 ('c82adc43c15f259c574f1780a87f79f9441b44ef135cf7ccdfe52f3b21d516c91e982b99b7c4f1bc', NULL, 3, NULL, '[]', 0, '2019-10-03 06:21:21', '2019-10-03 06:21:21', '2020-10-03 09:21:21'),
 ('d0f61f57bceb68847b1fcc189c0ffd79a2f2fd95617641f102f7f8a29802379a674964ba79eee30b', 2, 6, 'MyApp', '[\"user\"]', 0, '2019-10-15 15:52:31', '2019-10-15 15:52:31', '2020-10-15 18:52:31'),
+('d91dc0635643303faf33714bcc11101d735f5338f5fbe83066ff05860b3a62f4d86eae5289576b44', 7, 6, 'MyApp', '[\"user\"]', 0, '2019-10-19 09:18:55', '2019-10-19 09:18:55', '2020-10-19 12:18:55'),
 ('dad9a33af290784b78fe4c185f58051c2726d61bd17585ce6e80b9098575ab34b3d82fc97f7d58c7', 25, 6, 'MyApp', '[\"*\"]', 0, '2019-10-05 04:51:58', '2019-10-05 04:51:58', '2020-10-05 07:51:58'),
 ('db1a32ed65752e417b553da4eed74fda7afb8bb105240e73e4df31dd64c5457dab8ba170a06e238f', 1, 6, 'MyApp', '[\"employeer\"]', 0, '2019-10-11 17:34:32', '2019-10-11 17:34:32', '2020-10-11 20:34:32'),
 ('efcc0af00d598fe628911997468018f7bc8d5e9ffdc47df948e5f32b7116b6e0733d7f2c18c319a2', 30, 6, 'MyApp', '[\"user\"]', 0, '2019-10-09 04:17:16', '2019-10-09 04:17:16', '2020-10-09 07:17:16'),
@@ -4574,6 +4596,53 @@ INSERT INTO `resumes` (`id`, `user_id`, `created_at`, `updated_at`, `name`, `act
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `description`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'admin', NULL, NULL),
+(2, 'employeer', 'employeer', NULL, NULL),
+(3, 'user', 'user', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `role_user`
+--
+
+CREATE TABLE `role_user` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `role_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `role_user`
+--
+
+INSERT INTO `role_user` (`id`, `role_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 3, 7, '2019-10-19 08:59:21', '2019-10-19 08:59:21'),
+(2, 1, 26, '2019-10-20 04:01:14', '2019-10-20 04:01:14'),
+(3, 3, 27, '2019-10-20 04:03:05', '2019-10-20 04:03:05'),
+(4, 1, 28, '2019-10-20 05:00:10', '2019-10-20 05:00:10');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `social_media`
 --
 
@@ -4740,7 +4809,25 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `provider_name`, `provider_id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `verified`, `verification_token`, `created_at`, `updated_at`, `avatar`) VALUES
 (1, NULL, NULL, '11111', '11111@gg.com', NULL, '$2y$10$IOQ36X88oxMY04KXe85OguOGFozj9oiq0zS3PJmH2jn.6ZrX5V2DW', NULL, '0', NULL, '2019-10-11 15:53:00', '2019-10-11 15:53:00', NULL),
-(2, NULL, NULL, 'yaser', 'yaser@yaser.yas', NULL, '$2y$10$P.7usJoHgjHMMrNjZukga.QuE0u5y9.S9uIvNCrR0Z5fFBuq2EOwS', NULL, '0', NULL, '2019-10-15 15:52:31', '2019-10-15 15:52:31', NULL);
+(2, NULL, NULL, 'yaser', 'yaser@yaser.yas', NULL, '$2y$10$P.7usJoHgjHMMrNjZukga.QuE0u5y9.S9uIvNCrR0Z5fFBuq2EOwS', NULL, '0', NULL, '2019-10-15 15:52:31', '2019-10-15 15:52:31', NULL),
+(3, NULL, NULL, 'yaser1', 'yase1r@yaser.yas', NULL, '$2y$10$iL5GusS9DkWgeLpZpSrUwuTrf6aPR8zCli6ey1AmZ2rVuzvh1boxm', NULL, '0', NULL, '2019-10-17 06:40:27', '2019-10-17 06:40:27', NULL),
+(4, NULL, NULL, 'yaser', 'yaser@ee.com', NULL, '$2y$10$6VCI1LB9.3G4VEo3xS3gP.Lj6t5qgq3AjUs4HDfOpJHk2mwPPDySW', NULL, '0', NULL, '2019-10-19 05:37:35', '2019-10-19 05:37:35', NULL),
+(6, NULL, NULL, 'yaser1', 'yaser1@ee.com', NULL, '$2y$10$7Gdt2fxDsDJ8hFqwaECabOVqQTaXrMCtXCh9a2CftttbgMHWHwwoi', NULL, '0', NULL, '2019-10-19 08:52:06', '2019-10-19 08:52:06', NULL),
+(7, NULL, NULL, 'yaser13', 'yaser31@ee.com', NULL, '$2y$10$.7e7ba/Mb3p150mKAhuvLeTtKT3R.FEiOZ7cBm.fAomHBCLV1Zm7m', NULL, '0', NULL, '2019-10-19 08:59:21', '2019-10-19 08:59:21', NULL),
+(8, NULL, NULL, 'yaseradmin', 'yaseradmin@ee.com', NULL, '$2y$10$drlJu1IFIIGqKTbmQJtryePT6sXjVR7iMOObaL0oXTcYBJ0UB2ote', NULL, '0', NULL, '2019-10-20 03:46:56', '2019-10-20 03:46:56', NULL),
+(16, NULL, NULL, 'yaseradmin1', 'yaseradmin1@ee.com', NULL, '$2y$10$gf0GskTnptNlo09Hyf6cN.2Pi2p9isV54GBxeo3NDoOBgPzASf23S', NULL, '0', NULL, '2019-10-20 03:53:11', '2019-10-20 03:53:11', NULL),
+(17, NULL, NULL, 'yaseradmin1', 'yaseradmin11@ee.com', NULL, '$2y$10$vb1GIY6KY/IAuvZ/55yLoODFX5WTLvZ5BE.QHsGpkyxs9T9H5xAye', NULL, '0', NULL, '2019-10-20 03:53:29', '2019-10-20 03:53:29', NULL),
+(18, NULL, NULL, 'yaseradmin1', 'yaseradmin121@ee.com', NULL, '$2y$10$nesJEnIB1Rm5Vwjl2JkE/uALKXeNS8NJqmAtDvcgv9MVcpQ6p7cBO', NULL, '0', NULL, '2019-10-20 03:54:38', '2019-10-20 03:54:38', NULL),
+(19, NULL, NULL, 'yaseradmin1', 'yaseradmin2121@ee.com', NULL, '$2y$10$EbcdrqS2V..O136baA4mh.IXPaNPcwURw.UyNinZ50FS3h463pXYe', NULL, '0', NULL, '2019-10-20 03:55:01', '2019-10-20 03:55:01', NULL),
+(20, NULL, NULL, 'yaseradmin1', 'yaseradminw2121@ee.com', NULL, '$2y$10$jQg9xTR4IvHJvwBNFifWueVuKUa2IPzivf0mJn325dVNPBPxZv7tm', NULL, '0', NULL, '2019-10-20 03:55:32', '2019-10-20 03:55:32', NULL),
+(21, NULL, NULL, 'yaseradmin1', 'yaseradmindw2121@ee.com', NULL, '$2y$10$O.X.WGjem9rL6fdbxLXBHuQk5Ct1KxiNpUPTWLHAJGZZnTHOdEyUK', NULL, '0', NULL, '2019-10-20 03:55:48', '2019-10-20 03:55:48', NULL),
+(22, NULL, NULL, 'yaseradmin1', 'yaseradmiendw2121@ee.com', NULL, '$2y$10$nKzb9ZBENUQY5GQjVQeO9efG4dh.4gi69e.bFiXBSDYLIc8VY1G.W', NULL, '0', NULL, '2019-10-20 03:57:21', '2019-10-20 03:57:21', NULL),
+(23, NULL, NULL, 'yaseradmin1', 'yaseradmidendw2121@ee.com', NULL, '$2y$10$A3R7pdrxmlJpBSt6vYmr7ueqixwrVeQcLWdocw7VUDtscdteFL0w.', NULL, '0', NULL, '2019-10-20 03:58:38', '2019-10-20 03:58:38', NULL),
+(24, NULL, NULL, 'yaseradmin1', 'yaseraddmidendw2121@ee.com', NULL, '$2y$10$LsSK0F9rBiKqXFIy7qf02ee/vLj8wxWlAA4uA7g7f/tuDsRMruZRS', NULL, '0', NULL, '2019-10-20 03:59:18', '2019-10-20 03:59:18', NULL),
+(25, NULL, NULL, 'yaseradmin1', 'yasedraddmidendw2121@ee.com', NULL, '$2y$10$dOpnwT2UFXNHq4aiiCiRv.dDP.JR9Dhk8gdwgbodt9/c5eUTbt7tO', NULL, '0', NULL, '2019-10-20 04:00:27', '2019-10-20 04:00:27', NULL),
+(26, NULL, NULL, 'yaseradmin1', 'yasedradddmidendw2121@ee.com', NULL, '$2y$10$8VB1aMALUZv1iwaUp9xubepNv7mD70O1h2u.BU/3BzYjm5b.w5G6W', NULL, '0', NULL, '2019-10-20 04:01:13', '2019-10-20 04:01:13', NULL),
+(27, NULL, NULL, 'yaseradmin1', 'yasesdradddmidendw2121@ee.com', NULL, '$2y$10$FPwwCm5m.kV59K.2NHU31ewlkFQ7vfAACzIyMwfH1VVjU.3UkariK', NULL, '0', NULL, '2019-10-20 04:03:05', '2019-10-20 04:03:05', NULL),
+(28, NULL, NULL, 'yaseradmin1', 'yaser_admin@ee.com', NULL, '$2y$10$.LE8vVvtsEQvY8vUi4ithuHIwme/ywjJMXD69AThD8jIM2kizojC6', NULL, '0', NULL, '2019-10-20 05:00:09', '2019-10-20 05:00:09', NULL);
 
 -- --------------------------------------------------------
 
@@ -5260,6 +5347,20 @@ ALTER TABLE `resumes`
   ADD KEY `resumes_translated_languages_id_foreign` (`translated_languages_id`);
 
 --
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `role_user`
+--
+ALTER TABLE `role_user`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `role_user_user_id_foreign` (`user_id`),
+  ADD KEY `role_user_role_id_foreign` (`role_id`);
+
+--
 -- Indexes for table `social_media`
 --
 ALTER TABLE `social_media`
@@ -5581,7 +5682,7 @@ ALTER TABLE `marital_status_translations`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=238;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=241;
 
 --
 -- AUTO_INCREMENT for table `minors`
@@ -5656,6 +5757,18 @@ ALTER TABLE `resumes`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `role_user`
+--
+ALTER TABLE `role_user`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `social_media`
 --
 ALTER TABLE `social_media`
@@ -5683,7 +5796,7 @@ ALTER TABLE `translated_languages`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `work_experiences`
@@ -5958,6 +6071,13 @@ ALTER TABLE `phone_type_translations`
 --
 ALTER TABLE `resumes`
   ADD CONSTRAINT `resumes_translated_languages_id_foreign` FOREIGN KEY (`translated_languages_id`) REFERENCES `translated_languages` (`id`);
+
+--
+-- Constraints for table `role_user`
+--
+ALTER TABLE `role_user`
+  ADD CONSTRAINT `role_user_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`),
+  ADD CONSTRAINT `role_user_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `specialty`
