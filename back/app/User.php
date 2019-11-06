@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Models\ContactForm\PreDefinedEmail;
+use App\Models\ContactForm\RecievedEmail;
 use App\Models\UserRole\Role;
 use App\Models\UserRole\RoleUser;
 use Illuminate\Notifications\Notifiable;
@@ -87,5 +89,13 @@ class User extends Authenticatable // implements    JWTSubject
                 'role_id' => $Role->id
             ]);
         }
+    }
+    public function recievedEmail ()
+    {
+        return $this->hasMany(RecievedEmail ::class);
+    }
+    public function preDefinedEmail()
+    {
+        return $this->hasMany(PreDefinedEmail::class);
     }
 }

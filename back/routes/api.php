@@ -125,3 +125,7 @@ Route::get('show_company_verfication_logs_4_admin/{company_id}', 'Company\Compan
 
 Route::get('show_company_info_4_admin/{company_id}', 'Company\CompanyProfileController@show_company_info_4_admin')->middleware(['auth:api', 'scope:admin']);
 
+////////////////////////////////////////// Contact Form use case///////////////////////////////////
+
+Route::get('get_data_for_send_message', 'ContactForm\ContactFormController@get_data_for_send_message');//->middleware(['auth:api', 'scope:admin']);
+Route::Post('save_message', 'ContactForm\ContactFormController@save_message');

@@ -15,7 +15,7 @@ class EditRecievedEmailsTable extends Migration
     {
         Schema::table('recieved_emails', function (Blueprint $table)
         {
-
+//->nullable();
             $table->foreign('last_admin_comment_id')->references('id')->on('contact_main_catagories');
             $table->foreign('last_admin_restore_email_log_id')->references('id')->on('contact_sub_categories');
             $table->foreign('last_admin_done_email_log_id')->references('id')->on('users');
