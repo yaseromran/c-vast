@@ -68,7 +68,7 @@ $messages=RecievedEmail::with(array('contactSubCategory.cSCTranslation' => funct
     -> with(array('user' => function ($query)  {
     // $query->where('translated_languages_id', $main_language_id);
     }))
-    ->get();
+    ->get( ); // ['recieved_emails.last_admin_comment_id AS iscommented','recieved_emails.last_admin_done_email_log_id AS isDone']
 
         $filters= ContactMainCatagory::with(array('cMCTranslation' => function ($query)  {
             // $query->where('translated_languages_id', $main_language_id);
@@ -77,7 +77,7 @@ $messages=RecievedEmail::with(array('contactSubCategory.cSCTranslation' => funct
                 // $query->where('translated_languages_id', $main_language_id);
             }))
 
-            ->get();
+            ->get( );
         return response()->json(['messages'=>$messages  ,
             'filters' => $filters ], 200);
 
