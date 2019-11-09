@@ -20,4 +20,8 @@ class ContactMainCatagory extends Model
     {
         return $this->hasMany(ContactSubCategory::class);
     }
+    public function cMCTranslation()
+    {
+        return $this->hasMany(CMCTranslation::class);
+    }
 }

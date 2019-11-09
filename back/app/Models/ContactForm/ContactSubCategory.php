@@ -20,4 +20,8 @@ class ContactSubCategory extends Model
     {
         return $this->belongsTo(ContactMainCatagory::class);
     }
+    public function cSCTranslation()
+    {
+        return $this->hasMany(CSCTranslation::class);
+    }
 }

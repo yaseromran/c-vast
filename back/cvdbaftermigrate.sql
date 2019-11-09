@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2019 at 08:07 AM
+-- Generation Time: Nov 09, 2019 at 12:56 PM
 -- Server version: 10.1.40-MariaDB
 -- PHP Version: 7.3.5
 
@@ -21,6 +21,95 @@ SET time_zone = "+00:00";
 --
 -- Database: `cvdbaftermigrate`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_comments`
+--
+
+CREATE TABLE `admin_comments` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `comment` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `recieved_email_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_done_email_logs`
+--
+
+CREATE TABLE `admin_done_email_logs` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `recieved_email_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_email_assign_logs`
+--
+
+CREATE TABLE `admin_email_assign_logs` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `recieved_email_id` int(10) UNSIGNED NOT NULL,
+  `from_assigned_admin_user_id` int(10) UNSIGNED NOT NULL,
+  `to_assigned_admin_user_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_open_logs`
+--
+
+CREATE TABLE `admin_open_logs` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `recieved_email_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_replied_emails`
+--
+
+CREATE TABLE `admin_replied_emails` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `replyed_email_body` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `replyed_email_title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cc` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `recieved_email_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_restore_email_logs`
+--
+
+CREATE TABLE `admin_restore_email_logs` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `recieved_email_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1166,6 +1255,28 @@ INSERT INTO `contact_informations` (`id`, `resume_id`, `created_at`, `updated_at
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `contact_main_catagories`
+--
+
+CREATE TABLE `contact_main_catagories` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `contact_main_catagories`
+--
+
+INSERT INTO `contact_main_catagories` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'account', NULL, NULL),
+(2, 'complain', NULL, NULL),
+(3, 'recommendation/ request', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `contact_numbers`
 --
 
@@ -1186,6 +1297,38 @@ CREATE TABLE `contact_numbers` (
 INSERT INTO `contact_numbers` (`id`, `phone_number`, `contact_information_id`, `created_at`, `updated_at`, `phone_type_id`, `country_id`) VALUES
 (45, '526565630', 18, '2019-06-16 06:15:00', '2019-06-16 06:15:00', 1, 1),
 (48, '91546526', 17, '2019-07-06 08:34:25', '2019-07-06 08:34:25', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contact_sub_categories`
+--
+
+CREATE TABLE `contact_sub_categories` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contact_main_catagory_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `contact_sub_categories`
+--
+
+INSERT INTO `contact_sub_categories` (`id`, `name`, `contact_main_catagory_id`, `created_at`, `updated_at`) VALUES
+(1, 'hacked ', 1, NULL, NULL),
+(2, 'need to activated', 1, NULL, NULL),
+(3, 'how to deactivated', 1, NULL, NULL),
+(4, 'Privacy ', 1, NULL, NULL),
+(5, 'cannot log in ', 1, NULL, NULL),
+(6, 'control visibility ', 1, NULL, NULL),
+(7, 'how to delete my account', 1, NULL, NULL),
+(8, 'other', 1, NULL, NULL),
+(9, ' complain  Option 1', 2, NULL, NULL),
+(10, ' complain  Option 2', 2, NULL, NULL),
+(11, ' recommendation/ request 1', 3, NULL, NULL),
+(12, ' recommendation/ request 2', 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1255,6 +1398,62 @@ CREATE TABLE `current_locations` (
 INSERT INTO `current_locations` (`id`, `personal_information_id`, `country`, `city`, `postal_code`, `street_address`, `latitude`, `longitude`, `created_at`, `updated_at`) VALUES
 (19, 2, 'سوريا', 'منطقة اللاذقية', NULL, 'سوريا', '35.520050600000000', '35.789027600000054', '2019-06-24 17:40:26', '2019-06-24 17:40:26'),
 (22, 4, NULL, NULL, NULL, NULL, NULL, NULL, '2019-07-09 03:43:17', '2019-07-09 03:43:17');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `c_m_c_translations`
+--
+
+CREATE TABLE `c_m_c_translations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `contact_main_catagory_id` int(10) UNSIGNED NOT NULL,
+  `translated_languages_id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `c_m_c_translations`
+--
+
+INSERT INTO `c_m_c_translations` (`id`, `contact_main_catagory_id`, `translated_languages_id`, `name`) VALUES
+(1, 1, 2, 'حساب'),
+(2, 1, 1, 'account'),
+(3, 2, 2, 'شكوى'),
+(4, 2, 1, 'complain'),
+(5, 3, 2, 'توصية / طلب'),
+(6, 3, 1, 'recommendation/ request');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `c_s_c_translations`
+--
+
+CREATE TABLE `c_s_c_translations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `contact_sub_category_id` int(10) UNSIGNED NOT NULL,
+  `translated_languages_id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `c_s_c_translations`
+--
+
+INSERT INTO `c_s_c_translations` (`id`, `contact_sub_category_id`, `translated_languages_id`, `name`) VALUES
+(1, 5, 2, 'لا يمكن تسجيل الدخول'),
+(2, 5, 1, 'cannot log in '),
+(3, 6, 2, 'لايمكن التحكم بالمظهر'),
+(4, 6, 1, 'control visibility '),
+(5, 7, 2, 'كيفية حذف حسابي'),
+(6, 7, 1, 'how to delete my account'),
+(7, 4, 2, 'خصوصية'),
+(8, 4, 1, 'Privacy '),
+(9, 3, 2, 'كيفية التعطيل'),
+(10, 3, 1, 'how to deactivated'),
+(11, 2, 2, 'نحتاج الى التفعيل'),
+(12, 2, 1, 'need to activated');
 
 -- --------------------------------------------------------
 
@@ -2663,7 +2862,21 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (236, '2011_09_18_195935_rename_admins_logs_table', 103),
 (237, '2011_09_18_195935_edit_company_admins_logs_table', 104),
 (239, '2011_09_30_065201_create_roles_table', 105),
-(240, '2011_09_30_065958_create_role_user_table', 106);
+(240, '2011_09_30_065958_create_role_user_table', 106),
+(241, '2011_09_30_065958_create_contact_main_catagories_table', 107),
+(242, '2011_09_30_065968_create_contact_sub_categories_table', 108),
+(243, '2011_09_30_066958_create_recieved_emails_table', 108),
+(244, '2011_09_30_066988_create_pre_defined_emails_table', 108),
+(245, '2011_09_30_067958_create_admin_comments_table', 108),
+(246, '2011_09_30_068958_create_admin_open_logs_table', 108),
+(247, '2011_09_30_069958_create_admin_replied_emails_table', 108),
+(248, '2011_09_30_070958_create_admin_email_assign_logs_table', 108),
+(249, '2011_09_30_071958_create_admin_done_email_logs_table', 108),
+(250, '2011_09_30_072958_create_admin_restore_email_logs_table', 108),
+(251, '2011_09_30_073958_edit_recieved_emails_table', 108),
+(252, '2011_09_30_074958_edit_column_recieved_emails_table', 109),
+(253, '2010_09_30_075958_create_c_m_c_translations_table', 110),
+(254, '2010_09_30_075958_create_c_s_c_translations_table', 110);
 
 -- --------------------------------------------------------
 
@@ -4571,6 +4784,56 @@ INSERT INTO `place_of_births` (`id`, `personal_information_id`, `country`, `city
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pre_defined_emails`
+--
+
+CREATE TABLE `pre_defined_emails` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `contact_main_catagory_id` int(10) UNSIGNED NOT NULL,
+  `contact_sub_category_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `message` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `recieved_emails`
+--
+
+CREATE TABLE `recieved_emails` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `contact_main_catagory_id` int(10) UNSIGNED NOT NULL,
+  `contact_sub_category_id` int(10) UNSIGNED NOT NULL,
+  `delete_by_admin_user_id` int(10) UNSIGNED DEFAULT NULL,
+  `last_admin_comment_id` int(10) UNSIGNED DEFAULT NULL,
+  `last_admin_done_email_log_id` int(10) UNSIGNED DEFAULT NULL,
+  `last_admin_open_log_id` int(10) UNSIGNED DEFAULT NULL,
+  `last_admin_replied_email_id` int(10) UNSIGNED DEFAULT NULL,
+  `last_admin_restore_email_log_id` int(10) UNSIGNED DEFAULT NULL,
+  `translated_languages_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `message` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
+  `deleted_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `recieved_emails`
+--
+
+INSERT INTO `recieved_emails` (`id`, `contact_main_catagory_id`, `contact_sub_category_id`, `delete_by_admin_user_id`, `last_admin_comment_id`, `last_admin_done_email_log_id`, `last_admin_open_log_id`, `last_admin_replied_email_id`, `last_admin_restore_email_log_id`, `translated_languages_id`, `user_id`, `message`, `email`, `is_deleted`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(2, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, 'problem in …..', 'sss@gmail.com', 0, '2019-11-06 07:36:27', '2019-11-06 05:36:27', '2019-11-06 05:36:27');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `resumes`
 --
 
@@ -4892,6 +5155,55 @@ INSERT INTO `work_exp_companies` (`id`, `work_experience_id`, `name`, `country`,
 --
 
 --
+-- Indexes for table `admin_comments`
+--
+ALTER TABLE `admin_comments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `admin_comments_user_id_foreign` (`user_id`),
+  ADD KEY `admin_comments_recieved_email_id_foreign` (`recieved_email_id`);
+
+--
+-- Indexes for table `admin_done_email_logs`
+--
+ALTER TABLE `admin_done_email_logs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `admin_done_email_logs_user_id_foreign` (`user_id`),
+  ADD KEY `admin_done_email_logs_recieved_email_id_foreign` (`recieved_email_id`);
+
+--
+-- Indexes for table `admin_email_assign_logs`
+--
+ALTER TABLE `admin_email_assign_logs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `admin_email_assign_logs_to_assigned_admin_user_id_foreign` (`to_assigned_admin_user_id`),
+  ADD KEY `admin_email_assign_logs_from_assigned_admin_user_id_foreign` (`from_assigned_admin_user_id`),
+  ADD KEY `admin_email_assign_logs_recieved_email_id_foreign` (`recieved_email_id`);
+
+--
+-- Indexes for table `admin_open_logs`
+--
+ALTER TABLE `admin_open_logs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `admin_open_logs_user_id_foreign` (`user_id`),
+  ADD KEY `admin_open_logs_recieved_email_id_foreign` (`recieved_email_id`);
+
+--
+-- Indexes for table `admin_replied_emails`
+--
+ALTER TABLE `admin_replied_emails`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `admin_replied_emails_user_id_foreign` (`user_id`),
+  ADD KEY `admin_replied_emails_recieved_email_id_foreign` (`recieved_email_id`);
+
+--
+-- Indexes for table `admin_restore_email_logs`
+--
+ALTER TABLE `admin_restore_email_logs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `admin_restore_email_logs_user_id_foreign` (`user_id`),
+  ADD KEY `admin_restore_email_logs_recieved_email_id_foreign` (`recieved_email_id`);
+
+--
 -- Indexes for table `companies`
 --
 ALTER TABLE `companies`
@@ -5036,6 +5348,12 @@ ALTER TABLE `contact_informations`
   ADD KEY `contact_informations_resume_id_foreign` (`resume_id`);
 
 --
+-- Indexes for table `contact_main_catagories`
+--
+ALTER TABLE `contact_main_catagories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `contact_numbers`
 --
 ALTER TABLE `contact_numbers`
@@ -5043,6 +5361,13 @@ ALTER TABLE `contact_numbers`
   ADD KEY `contact_numbers_contact_information_id_foreign` (`contact_information_id`),
   ADD KEY `contact_numbers_phone_types_id_foreign` (`phone_type_id`),
   ADD KEY `contact_numbers_country_id_foreign` (`country_id`);
+
+--
+-- Indexes for table `contact_sub_categories`
+--
+ALTER TABLE `contact_sub_categories`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `contact_sub_categories_contact_main_catagory_id_foreign` (`contact_main_catagory_id`);
 
 --
 -- Indexes for table `countries`
@@ -5064,6 +5389,22 @@ ALTER TABLE `country_translations`
 ALTER TABLE `current_locations`
   ADD PRIMARY KEY (`id`),
   ADD KEY `current_locations_personal_information_id_foreign` (`personal_information_id`);
+
+--
+-- Indexes for table `c_m_c_translations`
+--
+ALTER TABLE `c_m_c_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `c_m_c_translations_contact_main_category_id_foreign` (`contact_main_catagory_id`),
+  ADD KEY `c_m_c_translations_translated_languages_id_foreign` (`translated_languages_id`);
+
+--
+-- Indexes for table `c_s_c_translations`
+--
+ALTER TABLE `c_s_c_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `c_s_c_translations_contact_sub_category_id_foreign` (`contact_sub_category_id`),
+  ADD KEY `c_s_c_translations_translated_languages_id_foreign` (`translated_languages_id`);
 
 --
 -- Indexes for table `degree_levels`
@@ -5339,6 +5680,31 @@ ALTER TABLE `place_of_births`
   ADD KEY `place_of_births_personal_information_id_foreign` (`personal_information_id`);
 
 --
+-- Indexes for table `pre_defined_emails`
+--
+ALTER TABLE `pre_defined_emails`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `pre_defined_emails_email_title_unique` (`email_title`),
+  ADD KEY `pre_defined_emails_contact_main_catagory_id_foreign` (`contact_main_catagory_id`),
+  ADD KEY `pre_defined_emails_contact_sub_category_id_foreign` (`contact_sub_category_id`),
+  ADD KEY `pre_defined_emails_user_id_foreign` (`user_id`);
+
+--
+-- Indexes for table `recieved_emails`
+--
+ALTER TABLE `recieved_emails`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `recieved_emails_email_unique` (`email`),
+  ADD KEY `recieved_emails_contact_main_catagory_id_foreign` (`contact_main_catagory_id`),
+  ADD KEY `recieved_emails_contact_sub_category_id_foreign` (`contact_sub_category_id`),
+  ADD KEY `recieved_emails_user_id_foreign` (`user_id`),
+  ADD KEY `recieved_emails_translated_languages_id_foreign` (`translated_languages_id`),
+  ADD KEY `recieved_emails_last_admin_comment_id_foreign` (`last_admin_comment_id`),
+  ADD KEY `recieved_emails_last_admin_restore_email_log_id_foreign` (`last_admin_restore_email_log_id`),
+  ADD KEY `recieved_emails_last_admin_done_email_log_id_foreign` (`last_admin_done_email_log_id`),
+  ADD KEY `recieved_emails_last_admin_replied_email_id_foreign` (`last_admin_replied_email_id`);
+
+--
 -- Indexes for table `resumes`
 --
 ALTER TABLE `resumes`
@@ -5413,6 +5779,42 @@ ALTER TABLE `work_exp_companies`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `admin_comments`
+--
+ALTER TABLE `admin_comments`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `admin_done_email_logs`
+--
+ALTER TABLE `admin_done_email_logs`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `admin_email_assign_logs`
+--
+ALTER TABLE `admin_email_assign_logs`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `admin_open_logs`
+--
+ALTER TABLE `admin_open_logs`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `admin_replied_emails`
+--
+ALTER TABLE `admin_replied_emails`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `admin_restore_email_logs`
+--
+ALTER TABLE `admin_restore_email_logs`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `companies`
@@ -5529,10 +5931,22 @@ ALTER TABLE `contact_informations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
+-- AUTO_INCREMENT for table `contact_main_catagories`
+--
+ALTER TABLE `contact_main_catagories`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `contact_numbers`
 --
 ALTER TABLE `contact_numbers`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+
+--
+-- AUTO_INCREMENT for table `contact_sub_categories`
+--
+ALTER TABLE `contact_sub_categories`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `countries`
@@ -5551,6 +5965,18 @@ ALTER TABLE `country_translations`
 --
 ALTER TABLE `current_locations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `c_m_c_translations`
+--
+ALTER TABLE `c_m_c_translations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `c_s_c_translations`
+--
+ALTER TABLE `c_s_c_translations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `degree_levels`
@@ -5682,7 +6108,7 @@ ALTER TABLE `marital_status_translations`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=241;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=255;
 
 --
 -- AUTO_INCREMENT for table `minors`
@@ -5751,6 +6177,18 @@ ALTER TABLE `place_of_births`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
+-- AUTO_INCREMENT for table `pre_defined_emails`
+--
+ALTER TABLE `pre_defined_emails`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `recieved_emails`
+--
+ALTER TABLE `recieved_emails`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `resumes`
 --
 ALTER TABLE `resumes`
@@ -5813,6 +6251,49 @@ ALTER TABLE `work_exp_companies`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `admin_comments`
+--
+ALTER TABLE `admin_comments`
+  ADD CONSTRAINT `admin_comments_recieved_email_id_foreign` FOREIGN KEY (`recieved_email_id`) REFERENCES `recieved_emails` (`id`),
+  ADD CONSTRAINT `admin_comments_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `admin_done_email_logs`
+--
+ALTER TABLE `admin_done_email_logs`
+  ADD CONSTRAINT `admin_done_email_logs_recieved_email_id_foreign` FOREIGN KEY (`recieved_email_id`) REFERENCES `recieved_emails` (`id`),
+  ADD CONSTRAINT `admin_done_email_logs_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `admin_email_assign_logs`
+--
+ALTER TABLE `admin_email_assign_logs`
+  ADD CONSTRAINT `admin_email_assign_logs_from_assigned_admin_user_id_foreign` FOREIGN KEY (`from_assigned_admin_user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `admin_email_assign_logs_recieved_email_id_foreign` FOREIGN KEY (`recieved_email_id`) REFERENCES `recieved_emails` (`id`),
+  ADD CONSTRAINT `admin_email_assign_logs_to_assigned_admin_user_id_foreign` FOREIGN KEY (`to_assigned_admin_user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `admin_open_logs`
+--
+ALTER TABLE `admin_open_logs`
+  ADD CONSTRAINT `admin_open_logs_recieved_email_id_foreign` FOREIGN KEY (`recieved_email_id`) REFERENCES `recieved_emails` (`id`),
+  ADD CONSTRAINT `admin_open_logs_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `admin_replied_emails`
+--
+ALTER TABLE `admin_replied_emails`
+  ADD CONSTRAINT `admin_replied_emails_recieved_email_id_foreign` FOREIGN KEY (`recieved_email_id`) REFERENCES `recieved_emails` (`id`),
+  ADD CONSTRAINT `admin_replied_emails_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `admin_restore_email_logs`
+--
+ALTER TABLE `admin_restore_email_logs`
+  ADD CONSTRAINT `admin_restore_email_logs_recieved_email_id_foreign` FOREIGN KEY (`recieved_email_id`) REFERENCES `recieved_emails` (`id`),
+  ADD CONSTRAINT `admin_restore_email_logs_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `companies`
@@ -5923,6 +6404,12 @@ ALTER TABLE `contact_numbers`
   ADD CONSTRAINT `contact_numbers_phone_types_id_foreign` FOREIGN KEY (`phone_type_id`) REFERENCES `phone_types` (`id`);
 
 --
+-- Constraints for table `contact_sub_categories`
+--
+ALTER TABLE `contact_sub_categories`
+  ADD CONSTRAINT `contact_sub_categories_contact_main_catagory_id_foreign` FOREIGN KEY (`contact_main_catagory_id`) REFERENCES `contact_main_catagories` (`id`);
+
+--
 -- Constraints for table `country_translations`
 --
 ALTER TABLE `country_translations`
@@ -5934,6 +6421,20 @@ ALTER TABLE `country_translations`
 --
 ALTER TABLE `current_locations`
   ADD CONSTRAINT `current_locations_personal_information_id_foreign` FOREIGN KEY (`personal_information_id`) REFERENCES `personal_informations` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `c_m_c_translations`
+--
+ALTER TABLE `c_m_c_translations`
+  ADD CONSTRAINT `c_m_c_translations_contact_main_category_id_foreign` FOREIGN KEY (`contact_main_catagory_id`) REFERENCES `contact_main_catagories` (`id`),
+  ADD CONSTRAINT `c_m_c_translations_translated_languages_id_foreign` FOREIGN KEY (`translated_languages_id`) REFERENCES `translated_languages` (`id`);
+
+--
+-- Constraints for table `c_s_c_translations`
+--
+ALTER TABLE `c_s_c_translations`
+  ADD CONSTRAINT `c_s_c_translations_contact_sub_category_id_foreign` FOREIGN KEY (`contact_sub_category_id`) REFERENCES `contact_sub_categories` (`id`),
+  ADD CONSTRAINT `c_s_c_translations_translated_languages_id_foreign` FOREIGN KEY (`translated_languages_id`) REFERENCES `translated_languages` (`id`);
 
 --
 -- Constraints for table `degree_level_translations`
@@ -6065,6 +6566,27 @@ ALTER TABLE `personal_links`
 ALTER TABLE `phone_type_translations`
   ADD CONSTRAINT `phone_types_translations_phone_types_id_foreign` FOREIGN KEY (`phone_type_id`) REFERENCES `phone_types` (`id`),
   ADD CONSTRAINT `phone_types_translations_translated_languages_id_foreign` FOREIGN KEY (`translated_languages_id`) REFERENCES `translated_languages` (`id`);
+
+--
+-- Constraints for table `pre_defined_emails`
+--
+ALTER TABLE `pre_defined_emails`
+  ADD CONSTRAINT `pre_defined_emails_contact_main_catagory_id_foreign` FOREIGN KEY (`contact_main_catagory_id`) REFERENCES `contact_main_catagories` (`id`),
+  ADD CONSTRAINT `pre_defined_emails_contact_sub_category_id_foreign` FOREIGN KEY (`contact_sub_category_id`) REFERENCES `contact_sub_categories` (`id`),
+  ADD CONSTRAINT `pre_defined_emails_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `recieved_emails`
+--
+ALTER TABLE `recieved_emails`
+  ADD CONSTRAINT `recieved_emails_contact_main_catagory_id_foreign` FOREIGN KEY (`contact_main_catagory_id`) REFERENCES `contact_main_catagories` (`id`),
+  ADD CONSTRAINT `recieved_emails_contact_sub_category_id_foreign` FOREIGN KEY (`contact_sub_category_id`) REFERENCES `contact_sub_categories` (`id`),
+  ADD CONSTRAINT `recieved_emails_last_admin_comment_id_foreign` FOREIGN KEY (`last_admin_comment_id`) REFERENCES `contact_main_catagories` (`id`),
+  ADD CONSTRAINT `recieved_emails_last_admin_done_email_log_id_foreign` FOREIGN KEY (`last_admin_done_email_log_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `recieved_emails_last_admin_replied_email_id_foreign` FOREIGN KEY (`last_admin_replied_email_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `recieved_emails_last_admin_restore_email_log_id_foreign` FOREIGN KEY (`last_admin_restore_email_log_id`) REFERENCES `contact_sub_categories` (`id`),
+  ADD CONSTRAINT `recieved_emails_translated_languages_id_foreign` FOREIGN KEY (`translated_languages_id`) REFERENCES `translated_languages` (`id`),
+  ADD CONSTRAINT `recieved_emails_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `resumes`
