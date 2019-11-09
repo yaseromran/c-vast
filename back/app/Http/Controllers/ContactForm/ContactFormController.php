@@ -60,16 +60,27 @@ class ContactFormController extends Controller
     }
     public function get_data_for_browse_messages()
     {
+$messages=RecievedEmail::with(array('contactSubCategory.cSCTranslation' => function ($query)  {
+    // $query->where('translated_languages_id', $main_language_id);
+})) -> with(array('contactMainCatagory.cMCTranslation' => function ($query)  {
+        // $query->where('translated_languages_id', $main_language_id);
+    }))
+    -> with(array('user' => function ($query)  {
+    // $query->where('translated_languages_id', $main_language_id);
+    }))
+    ->get();
 
-        $result= ContactMainCatagory::with(array('contactSubCategory' => function ($query)  {
+        $filters= ContactMainCatagory::with(array('cMCTranslation' => function ($query)  {
             // $query->where('translated_languages_id', $main_language_id);
-        }))->get();
-        return response()->json([
-            'data' => $result
+        }))
+            ->with(array('contactSubCategory.cSCTranslation' => function ($query)  {
+                // $query->where('translated_languages_id', $main_language_id);
+            }))
 
+            ->get();
+        return response()->json(['messages'=>$messages  ,
+            'filters' => $filters ], 200);
 
-
-        ], 200);
 
     }
     /**

@@ -3,6 +3,7 @@
 namespace App\Models\ContactForm;
 
 use App\Models\TranslatedLanguages\TranslatedLanguages;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class RecievedEmail extends Model
