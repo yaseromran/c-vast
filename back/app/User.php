@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\ContactForm\AdminOpenLog;
 use App\Models\ContactForm\PreDefinedEmail;
 use App\Models\ContactForm\RecievedEmail;
 use App\Models\UserRole\Role;
@@ -93,6 +94,10 @@ class User extends Authenticatable // implements    JWTSubject
     public function recievedEmail ()
     {
         return $this->hasMany(RecievedEmail ::class);
+    }
+    public function adminOpenLog ()
+    {
+        return $this->hasMany(AdminOpenLog::class);
     }
     public function preDefinedEmail()
     {

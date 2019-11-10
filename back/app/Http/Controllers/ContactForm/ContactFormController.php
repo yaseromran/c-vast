@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\ContactForm;
 
+use App\Models\ContactForm\AdminOpenLog;
 use App\Models\ContactForm\ContactMainCatagory;
 use App\Models\ContactForm\RecievedEmail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class ContactFormController extends Controller
 {
@@ -14,9 +16,48 @@ class ContactFormController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function get_data_for_one_message($recieved_email_id)
     {
-        //
+        return DB::transaction(function () use ($recieved_email_id)
+        {
+        $adminOpenLog=new AdminOpenLog();
+        $adminOpenLog->recieved_email_id=$recieved_email_id;
+            $adminOpenLog->user_id=1;
+        $adminOpenLog->save();
+
+        $resultRecievedEmail=RecievedEmail            ::where('id',$recieved_email_id)
+            ->            with(array('contactSubCategory.cSCTranslation' => function ($query)  {
+                // $query->where('translated_languages_id', $main_language_id);
+            })) -> with(array('contactMainCatagory.cMCTranslation' => function ($query)  {
+                // $query->where('translated_languages_id', $main_language_id);
+            }))
+                -> with(array('translatedLanguages' => function ($query)  {
+                    // $query->where('translated_languages_id', $main_language_id);
+                }))
+                -> with(array('adminComment.user' => function ($query)  {
+                    $query->orderBy('id', 'desc');
+                }))
+                -> with(array('adminRepliedEmail.user' => function ($query)  {
+                    $query->orderBy('id', 'desc');
+                }))
+                -> with(array('adminRepliedEmail.user' => function ($query)  {
+                    $query->orderBy('id', 'desc');
+                }))
+                -> with(array('user' => function ($query)  {
+                    // $query->where('translated_languages_id', $main_language_id);
+                }))
+                ->first( );
+            $resultRecievedEmail->last_admin_open_log_id=$adminOpenLog->id;
+            $resultRecievedEmail->save();
+        return response()->json([
+            'data' => $resultRecievedEmail
+
+
+
+        ], 200);
+        }
+        );
     }
     public function get_data_for_send_message()
     {

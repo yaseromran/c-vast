@@ -2,6 +2,7 @@
 
 namespace App\Models\ContactForm;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class AdminRestoreEmailLog extends Model
@@ -12,5 +13,8 @@ class AdminRestoreEmailLog extends Model
     {
         return $this->belongsTo(RecievedEmail::class);
     }
-
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
