@@ -65,6 +65,18 @@ $messages=RecievedEmail::with(array('contactSubCategory.cSCTranslation' => funct
 })) -> with(array('contactMainCatagory.cMCTranslation' => function ($query)  {
         // $query->where('translated_languages_id', $main_language_id);
     }))
+    -> with(array('translatedLanguages' => function ($query)  {
+        // $query->where('translated_languages_id', $main_language_id);
+    }))
+    -> with(array('adminComment' => function ($query)  {
+          $query->orderBy('id', 'desc')->take(1);
+    }))
+    -> with(array('adminRepliedEmail' => function ($query)  {
+        $query->orderBy('id', 'desc')->take(1);
+    }))
+    -> with(array('adminRepliedEmail' => function ($query)  {
+        $query->orderBy('id', 'desc')->take(1);
+    }))
     -> with(array('user' => function ($query)  {
     // $query->where('translated_languages_id', $main_language_id);
     }))
