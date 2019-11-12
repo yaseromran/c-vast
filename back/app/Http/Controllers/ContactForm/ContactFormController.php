@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\ContactForm;
 
 use App\Models\ContactForm\AdminOpenLog;
+use App\Models\ContactForm\AdminRepliedEmail;
 use App\Models\ContactForm\ContactMainCatagory;
 use App\Models\ContactForm\RecievedEmail;
 use Illuminate\Http\Request;
@@ -58,6 +59,39 @@ class ContactFormController extends Controller
         ], 200);
         }
         );
+    }
+    public function  save_replay_message(Request $request)
+    {
+        $rules = [
+              'recieved_email_Id'   => 'required|integer'
+            , 'replyed_email_title' => 'required|string|max:255'
+            , 'replyed_email_body'  => 'required|string'
+            , 'cc'                  => 'string|email|max:255'
+
+        ];
+        $this->validate($request, $rules);
+        $resultRecievedEmail=RecievedEmail            ::where('id', $request->recieved_email_Id)->first();
+
+        if(!$resultRecievedEmail)
+        {
+            return response()->json([
+                'data' => 'no email found'
+            ], 403);
+        }
+        $adminRepliedEmail                      = new AdminRepliedEmail();
+        $adminRepliedEmail->user_id                  = 1;
+        $adminRepliedEmail->cc                  = $request->cc;
+        $adminRepliedEmail->replyed_email_title = $request->replyed_email_title;
+        $adminRepliedEmail->replyed_email_body  = $request->replyed_email_body;
+        $adminRepliedEmail->recieved_email_Id   = $request->recieved_email_Id;
+        $adminRepliedEmail->save();
+        return response()->json([
+            'data' => $adminRepliedEmail
+
+
+
+        ], 200);
+
     }
     public function get_data_for_send_message()
     {

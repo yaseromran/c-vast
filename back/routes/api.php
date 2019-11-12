@@ -131,5 +131,5 @@ Route::get('get_data_for_send_message', 'ContactForm\ContactFormController@get_d
 Route::Post('save_message', 'ContactForm\ContactFormController@save_message');
 Route::get('get_data_for_browse_messages', 'ContactForm\ContactFormController@get_data_for_browse_messages');
 Route::get('get_data_for_one_message/{recieved_email_id}', 'ContactForm\ContactFormController@get_data_for_one_message');
-
+Route::Post('save_replay_message', 'ContactForm\ContactFormController@save_replay_message');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
