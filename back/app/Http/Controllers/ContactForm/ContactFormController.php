@@ -25,7 +25,8 @@ class ContactFormController extends Controller
         {
         $adminOpenLog=new AdminOpenLog();
         $adminOpenLog->recieved_email_id=$recieved_email_id;
-            $adminOpenLog->user_id=1;
+
+            $adminOpenLog->user_id== auth()->user()->id;
         $adminOpenLog->save();
 
         $resultRecievedEmail=RecievedEmail            ::where('id',$recieved_email_id)
@@ -84,7 +85,7 @@ class ContactFormController extends Controller
         return DB::transaction(function () use ($resultRecievedEmail,$request)
         {
             $adminRepliedEmail                      = new AdminRepliedEmail();
-            $adminRepliedEmail->user_id                  = 1;
+            $adminRepliedEmail->user_id                   = auth()->user()->id;
             $adminRepliedEmail->cc                  = $request->cc;
             $adminRepliedEmail->replyed_email_title = $request->replyed_email_title;
             $adminRepliedEmail->replyed_email_body  = $request->replyed_email_body;
@@ -121,7 +122,7 @@ class ContactFormController extends Controller
        ];
        $this->validate($request, $rules);
        $adminEmailAssignLog =new AdminEmailAssignLog();
-       $adminEmailAssignLog->user_id=1;
+       $adminEmailAssignLog->user_id= auth()->user()->id;;
        $adminEmailAssignLog->recieved_email_id=$request-> recieved_email_id;
        $adminEmailAssignLog-> to_assigned_admin_user_id=$request-> to_assigned_admin_user_id;
        $adminEmailAssignLog->save();
