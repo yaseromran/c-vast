@@ -95,6 +95,10 @@ class User extends Authenticatable // implements    JWTSubject
     {
         return $this->hasMany(RecievedEmail ::class);
     }
+    public function adminEmailAssignLog ()
+    {
+        return $this->hasMany(AdminEmailAssignLog ::class);
+    }
     public function adminOpenLog ()
     {
         return $this->hasMany(AdminOpenLog::class);

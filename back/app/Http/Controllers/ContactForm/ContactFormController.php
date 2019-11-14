@@ -6,6 +6,7 @@ use App\Models\ContactForm\AdminOpenLog;
 use App\Models\ContactForm\AdminRepliedEmail;
 use App\Models\ContactForm\ContactMainCatagory;
 use App\Models\ContactForm\RecievedEmail;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -52,6 +53,7 @@ class ContactFormController extends Controller
             $resultRecievedEmail->last_admin_open_log_id=$adminOpenLog->id;
             $resultRecievedEmail->save();
         return response()->json([
+            'success' => 'true',
             'data' => $resultRecievedEmail
 
 
@@ -75,24 +77,61 @@ class ContactFormController extends Controller
         if(!$resultRecievedEmail)
         {
             return response()->json([
+                'success' => 'false',
                 'data' => 'no email found'
             ], 403);
         }
-        $adminRepliedEmail                      = new AdminRepliedEmail();
-        $adminRepliedEmail->user_id                  = 1;
-        $adminRepliedEmail->cc                  = $request->cc;
-        $adminRepliedEmail->replyed_email_title = $request->replyed_email_title;
-        $adminRepliedEmail->replyed_email_body  = $request->replyed_email_body;
-        $adminRepliedEmail->recieved_email_Id   = $request->recieved_email_Id;
-        $adminRepliedEmail->save();
-        return response()->json([
-            'data' => $adminRepliedEmail
+        return DB::transaction(function () use ($resultRecievedEmail,$request)
+        {
+            $adminRepliedEmail                      = new AdminRepliedEmail();
+            $adminRepliedEmail->user_id                  = 1;
+            $adminRepliedEmail->cc                  = $request->cc;
+            $adminRepliedEmail->replyed_email_title = $request->replyed_email_title;
+            $adminRepliedEmail->replyed_email_body  = $request->replyed_email_body;
+            $adminRepliedEmail->recieved_email_Id   = $request->recieved_email_Id;
+            $adminRepliedEmail->save();
+            $resultRecievedEmail->last_admin_replied_email_id=$adminRepliedEmail->id;
+            $resultRecievedEmail->save();
+            return response()->json(
+                [
+                'success' => 'true',
+                'data' => $adminRepliedEmail
+            ], 200);
+          }
+          );
+    }
+    public function  get_data_for_assign_view()
+    {
+        $user=User::get();
+        return response()->json(
+            [
+                'success' => 'true',
+                'data' => $user
+            ], 200);
 
-
-
-        ], 200);
 
     }
+   public function  save_assign(Request $request)
+   {
+       $rules = [
+           'to_assigned_admin_user_id' => 'required|integer' ,
+           'recieved_email_id'=>'required|integer'
+
+
+       ];
+       $this->validate($request, $rules);
+       $adminEmailAssignLog =new AdminEmailAssignLog();
+       $adminEmailAssignLog->user_id=1;
+       $adminEmailAssignLog->recieved_email_id=$request-> recieved_email_id;
+       $adminEmailAssignLog-> to_assigned_admin_user_id=$request-> to_assigned_admin_user_id;
+       $adminEmailAssignLog->save();
+       return response()->json(
+           [
+               'success' => 'true',
+               'admins' => $adminEmailAssignLog
+           ], 200);
+
+   }
     public function get_data_for_send_message()
     {
 
@@ -103,19 +142,16 @@ class ContactFormController extends Controller
             // $query->where('translated_languages_id', $main_language_id);
         }))->get();
         return response()->json([
+            'success' => 'true',
             'data' => $result
-
-
-
         ], 200);
-
     }
     public function save_message(Request $request)
     {
         $rules = [
             'contact_main_catagory_id' => 'required|integer'
             , 'contact_sub_category_id' => 'required|integer'
-            , 'email' => 'required|string'
+            , 'email' => 'string'
             , 'message' => 'required|string'
             , 'site_lang' => 'required|integer'
 
@@ -123,10 +159,24 @@ class ContactFormController extends Controller
         $this->validate($request, $rules);
 
            $recievedEmail = new RecievedEmail();
-        $recievedEmail->user_id = 1;
+           if(  auth()->user()) {
+               $recievedEmail->user_id = auth()->user()->id;
+           }
+           else{
+
+               if($request->email)
+               {
+                   $recievedEmail->email = $request->email;
+
+               }
+               else{
+                   return response()->json(['error' => ['email'=>' The email field is required..'],'code'=>422], 422);
+               }
+           }
+
         $recievedEmail->contact_main_catagory_id=$request->contact_main_catagory_id;
         $recievedEmail->contact_sub_category_id=$request->contact_sub_category_id;
-        $recievedEmail->email = $request->email;
+
         $recievedEmail->message = $request->message;
         $recievedEmail->translated_languages_id = $request->site_lang;
         $recievedEmail->save();
@@ -165,7 +215,9 @@ $messages=RecievedEmail::with(array('contactSubCategory.cSCTranslation' => funct
             }))
 
             ->get( );
-        return response()->json(['messages'=>$messages  ,
+        return response()->json([
+            'success' => 'true',
+            'messages'=>$messages  ,
             'filters' => $filters ], 200);
 
 

@@ -61,7 +61,7 @@ protected  $companyAdminRepository;
     }
     public function  getAllCompanyData4Admin(Request $request)
     {
-
+return  request()->user()."-r";
         return response()->json([
             'company_status' =>  $this->companyAdminRepository-> getAllCompanyStatus() ,
             'company_industries'=>$this->companyAdminRepository-> getAllCompanyIndustries(),

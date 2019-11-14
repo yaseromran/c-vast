@@ -23,7 +23,7 @@ Route::post('login', 'AuthController@login');
 Route::post('login_user', 'AuthController@loginUser');
 Route::post('register_user', 'AuthController@registerUser');
 // Route for admin permissions
-Route::prefix('admin')->group(function() {
+    Route::prefix('admin')->group(function() {
     Route::post('login', 'AuthController@loginAdmin');
     Route::post('register', 'AuthController@adminRegister');
 });
@@ -132,4 +132,6 @@ Route::Post('save_message', 'ContactForm\ContactFormController@save_message');
 Route::get('get_data_for_browse_messages', 'ContactForm\ContactFormController@get_data_for_browse_messages');
 Route::get('get_data_for_one_message/{recieved_email_id}', 'ContactForm\ContactFormController@get_data_for_one_message');
 Route::Post('save_replay_message', 'ContactForm\ContactFormController@save_replay_message');
+Route::get('get_data_for_assign_view', 'ContactForm\ContactFormController@get_data_for_assign_view');
+Route::Post('assign_to', 'ContactForm\ContactFormController@save_assign');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
