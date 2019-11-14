@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ContactForm;
 
+use App\Models\ContactForm\AdminEmailAssignLog;
 use App\Models\ContactForm\AdminOpenLog;
 use App\Models\ContactForm\AdminRepliedEmail;
 use App\Models\ContactForm\ContactMainCatagory;
@@ -114,13 +115,22 @@ class ContactFormController extends Controller
     }
    public function  save_assign(Request $request)
    {
-       $rules = [
+           $rules = [
            'to_assigned_admin_user_id' => 'required|integer' ,
            'recieved_email_id'=>'required|integer'
 
 
        ];
        $this->validate($request, $rules);
+       $resultRecievedEmail=RecievedEmail            ::where('id', $request->recieved_email_id)->first();
+
+       if(!$resultRecievedEmail)
+       {
+           return response()->json([
+               'success' => 'false',
+               'data' => 'no email found'
+           ], 403);
+       }
        $adminEmailAssignLog =new AdminEmailAssignLog();
        $adminEmailAssignLog->user_id= auth()->user()->id;;
        $adminEmailAssignLog->recieved_email_id=$request-> recieved_email_id;
