@@ -7,6 +7,7 @@ use App\Models\ContactForm\AdminEmailAssignLog;
 use App\Models\ContactForm\AdminOpenLog;
 use App\Models\ContactForm\AdminRepliedEmail;
 use App\Models\ContactForm\ContactMainCatagory;
+use App\Models\ContactForm\PreDefinedEmail;
 use App\Models\ContactForm\RecievedEmail;
 use App\User;
 use Illuminate\Http\Request;
@@ -151,6 +152,20 @@ class ContactFormController extends Controller
     {
 
         $result= ContactMainCatagory::with(array('cMCTranslation' => function ($query)  {
+            // $query->where('translated_languages_id', $main_language_id);
+        }))
+            ->with(array('contactSubCategory.cSCTranslation' => function ($query)  {
+                // $query->where('translated_languages_id', $main_language_id);
+            }))->get();
+        return response()->json([
+            'success' => 'true',
+            'data' => $result
+        ], 200);
+    }
+    public function get_data_for_template_message_view()
+    {
+
+        $result= ContactMainCatagory::with(array('cMCTranslation' => function ($query)  {
            // $query->where('translated_languages_id', $main_language_id);
         }))
             ->with(array('contactSubCategory.cSCTranslation' => function ($query)  {
@@ -160,6 +175,39 @@ class ContactFormController extends Controller
             'success' => 'true',
             'data' => $result
         ], 200);
+    }
+    public function save_template_message(Request $request)
+    {
+
+        $rules = [
+            'contact_main_catagory_id' => 'required|integer'
+            , 'contact_sub_category_id' => 'required|integer'
+            , 'template_title' => 'required|string'
+            , 'email_title' => 'required|string'
+            , 'message' => 'required|string'
+
+        ];
+        $this->validate($request, $rules);
+        $resultpreDefinedEmail=PreDefinedEmail            ::where('template_title', $request->template_title)->first();
+
+        if($resultpreDefinedEmail)
+        {
+            return response()->json([
+                'success' => 'false',
+                'data' => 'template_title already found'
+            ], 403);
+        }
+        $preDefinedEmail=new PreDefinedEmail();
+        $preDefinedEmail->user_id= auth()->user()->id;;
+        $preDefinedEmail->contact_main_catagory_id=$request->contact_main_catagory_id;
+        $preDefinedEmail->contact_sub_category_id=$request->contact_sub_category_id;
+
+        $preDefinedEmail->message = $request->message;
+        $preDefinedEmail->email_title = $request->email_title;
+        $preDefinedEmail->template_title = $request->template_title;
+        $preDefinedEmail->save();
+        return response()->json(['success' => 'true','data'=>$preDefinedEmail], 200);
+
     }
     public function save_comment(Request $request)
     {
