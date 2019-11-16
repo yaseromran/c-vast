@@ -129,12 +129,14 @@ Route::get('show_company_info_4_admin/{company_id}', 'Company\CompanyProfileCont
 
 Route::get('get_data_for_send_message', 'ContactForm\ContactFormController@get_data_for_send_message');//->middleware(['auth:api', 'scope:admin']);
 Route::Post('save_message', 'ContactForm\ContactFormController@save_message');
-Route::get('get_data_for_browse_messages', 'ContactForm\ContactFormController@get_data_for_browse_messages');
-Route::get('get_data_for_one_message/{recieved_email_id}', 'ContactForm\ContactFormController@get_data_for_one_message');
-Route::Post('save_replay_message', 'ContactForm\ContactFormController@save_replay_message');
-Route::get('get_data_for_assign_view', 'ContactForm\ContactFormController@get_data_for_assign_view');
-Route::Post('assign_to', 'ContactForm\ContactFormController@save_assign');
+Route::get('get_data_for_browse_messages', 'ContactForm\ContactFormController@get_data_for_browse_messages')->middleware(['auth:api', 'scope:admin']);
+Route::get('get_data_for_one_message/{recieved_email_id}', 'ContactForm\ContactFormController@get_data_for_one_message')->middleware(['auth:api', 'scope:admin']);
+Route::Post('save_replay_message', 'ContactForm\ContactFormController@save_replay_message')->middleware(['auth:api', 'scope:admin']);
+Route::get('get_data_for_assign_view', 'ContactForm\ContactFormController@get_data_for_assign_view')->middleware(['auth:api', 'scope:admin']);
+Route::Post('assign_to', 'ContactForm\ContactFormController@save_assign')->middleware(['auth:api', 'scope:admin']);
 
-Route::get('get_data_for_comment_view', 'ContactForm\ContactFormController@get_data_for_comment_view');
+Route::get('get_data_for_comment_view', 'ContactForm\ContactFormController@get_data_for_comment_view')->middleware(['auth:api', 'scope:admin']);
+Route::Post('save_comment', 'ContactForm\ContactFormController@save_comment')->middleware(['auth:api', 'scope:admin']);
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

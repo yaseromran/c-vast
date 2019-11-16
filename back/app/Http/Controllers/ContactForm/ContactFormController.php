@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ContactForm;
 
+use App\Models\ContactForm\AdminComment;
 use App\Models\ContactForm\AdminEmailAssignLog;
 use App\Models\ContactForm\AdminOpenLog;
 use App\Models\ContactForm\AdminRepliedEmail;
@@ -14,11 +15,7 @@ use Illuminate\Support\Facades\DB;
 
 class ContactFormController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
 
     public function get_data_for_one_message($recieved_email_id)
     {
@@ -120,7 +117,7 @@ class ContactFormController extends Controller
 
 
     }
-   public function  save_assign(Request $request)
+    public function  save_assign(Request $request)
    {
            $rules = [
            'to_assigned_admin_user_id' => 'required|integer' ,
@@ -164,10 +161,32 @@ class ContactFormController extends Controller
             'data' => $result
         ], 200);
     }
-    public function get_data_for_comment_view(Request $request)
+    public function save_comment(Request $request)
     {
+        $rules = [
+            'recieved_email_id' => 'required|integer'
 
 
+            , 'comment' => 'required|string'
+
+
+        ];
+        $this->validate($request, $rules);
+        $resultRecievedEmail=RecievedEmail            ::where('id', $request->recieved_email_id)->first();
+
+        if(!$resultRecievedEmail)
+        {
+            return response()->json([
+                'success' => 'false',
+                'data' => 'no email found'
+            ], 403);
+        }
+        $adminComment=new AdminComment();
+        $adminComment->user_id= auth()->user()->id;;
+        $adminComment->recieved_email_id=$request-> recieved_email_id;
+        $adminComment->comment=$request-> comment;
+        $adminComment->save();
+        return response()->json(['success' => 'true','email'=>$adminComment], 200);
     }
 
     public function save_message(Request $request)
