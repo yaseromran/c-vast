@@ -104,7 +104,14 @@ class ContactFormController extends Controller
     }
     public function  get_data_for_assign_view()
     {
-        $user=User::get();
+        $user=User
+
+            ::join('role_user', 'role_user.user_id', '=', 'users.id')
+            ->join('roles', 'role_user.role_id', '=', 'roles.id')
+            -> where('roles.name',  'admin')
+
+            ->get( );
+
         return response()->json(
             [
                 'success' => 'true',
@@ -157,6 +164,12 @@ class ContactFormController extends Controller
             'data' => $result
         ], 200);
     }
+    public function get_data_for_comment_view(Request $request)
+    {
+
+
+    }
+
     public function save_message(Request $request)
     {
         $rules = [

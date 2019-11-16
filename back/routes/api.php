@@ -134,4 +134,7 @@ Route::get('get_data_for_one_message/{recieved_email_id}', 'ContactForm\ContactF
 Route::Post('save_replay_message', 'ContactForm\ContactFormController@save_replay_message');
 Route::get('get_data_for_assign_view', 'ContactForm\ContactFormController@get_data_for_assign_view');
 Route::Post('assign_to', 'ContactForm\ContactFormController@save_assign');
+
+Route::get('get_data_for_comment_view', 'ContactForm\ContactFormController@get_data_for_comment_view');
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
