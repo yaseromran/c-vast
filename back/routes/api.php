@@ -141,5 +141,6 @@ Route::Post('save_comment', 'ContactForm\ContactFormController@save_comment')->m
 Route::get('get_data_for_template_message_view', 'ContactForm\ContactFormController@get_data_for_template_message_view')->middleware(['auth:api', 'scope:admin']);
 Route::Post('save_template_message', 'ContactForm\ContactFormController@save_template_message')->middleware(['auth:api', 'scope:admin']);
 
+Route::get('show_all_template', 'ContactForm\ContactFormController@show_all_template')->middleware(['auth:api', 'scope:admin']);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

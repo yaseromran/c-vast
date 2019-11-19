@@ -209,15 +209,33 @@ class ContactFormController extends Controller
         return response()->json(['success' => 'true','data'=>$preDefinedEmail], 200);
 
     }
+    public function show_all_template()
+    {
+$preDefinedEmail=PreDefinedEmail::with(array('contactSubCategory.cSCTranslation' => function ($query)  {
+      $query->where('translated_languages_id', 1);
+})) -> with(array('contactMainCatagory.cMCTranslation' => function ($query)  {
+      $query->where('translated_languages_id', 1);
+}))->get( );
+
+        $filters= ContactMainCatagory::with(array('cMCTranslation' => function ($query)  {
+            // $query->where('translated_languages_id', $main_language_id);
+        }))
+            ->with(array('contactSubCategory.cSCTranslation' => function ($query)  {
+                // $query->where('translated_languages_id', $main_language_id);
+            }))
+
+            ->get( );
+        return response()->json([
+            'success' => 'true',
+            'data'=>$preDefinedEmail  ,
+            'filters' => $filters ], 200);
+    }
     public function save_comment(Request $request)
     {
-        $rules = [
+        $rules =
+        [
             'recieved_email_id' => 'required|integer'
-
-
             , 'comment' => 'required|string'
-
-
         ];
         $this->validate($request, $rules);
         $resultRecievedEmail=RecievedEmail            ::where('id', $request->recieved_email_id)->first();
