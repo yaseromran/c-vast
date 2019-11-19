@@ -209,7 +209,12 @@ class ContactFormController extends Controller
         return response()->json(['success' => 'true','data'=>$preDefinedEmail], 200);
 
     }
-    public function show_all_template()
+    public  function delete_template($template_id)
+    {
+        $preDefinedEmail = PreDefinedEmail::where('id', $template_id)->delete();
+        return response()->json(['deleted ' => 'true'], 200);
+    }
+    public function show_all_templates()
     {
 $preDefinedEmail=PreDefinedEmail::with(array('contactSubCategory.cSCTranslation' => function ($query)  {
       $query->where('translated_languages_id', 1);
