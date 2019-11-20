@@ -141,13 +141,16 @@ Route::Post('assign_to', 'ContactForm\ContactFormController@save_assign')->middl
 Route::get('get_data_for_comment_view', 'ContactForm\ContactFormController@get_data_for_comment_view')->middleware(['auth:api', 'scope:admin']);
 Route::Post('save_comment', 'ContactForm\ContactFormController@save_comment')->middleware(['auth:api', 'scope:admin']);
 
-Route::get('get_data_for_template_message_view', 'ContactForm\ContactFormController@get_data_for_template_message_view')->middleware(['auth:api', 'scope:admin']);
+Route::get('get_data_for_add_new_template_message_view', 'ContactForm\ContactFormController@get_data_for_add_new_template_message_view')->middleware(['auth:api', 'scope:admin']);
 Route::Post('save_template_message', 'ContactForm\ContactFormController@save_template_message')->middleware(['auth:api', 'scope:admin']);
 
 Route::get('show_all_templates', 'ContactForm\ContactFormController@show_all_templates')->middleware(['auth:api', 'scope:admin']);
 Route::delete('delete_template/{template_id}', 'ContactForm\ContactFormController@delete_template')->middleware(['auth:api', 'scope:admin']);
 
 
-Route::delete('get_data_for_update_template_message_view/{template_id}', 'ContactForm\ContactFormController@get_data_for_update_template_message_view')->middleware(['auth:api', 'scope:admin']);
-Route::delete('update_template_message/{template_id}', 'ContactForm\ContactFormController@update_template_message')->middleware(['auth:api', 'scope:admin']);
+Route::get('get_data_for_update_template_message_view/{template_id}', 'ContactForm\ContactFormController@get_data_for_update_template_message_view')->middleware(['auth:api', 'scope:admin']);
+ Route::get('get_all_deleted_message_archive', 'ContactForm\ContactFormController@update_template_message')->middleware(['auth:api', 'scope:admin']);
+ Route::put('restore_deleted_message_from_archive/{template_id}', 'ContactForm\ContactFormController@update_template_message')->middleware(['auth:api', 'scope:admin']);
+ Route::delete('permanent delete_for_deleted_message_from_archive/{template_id}', 'ContactForm\ContactFormController@update_template_message')->middleware(['auth:api', 'scope:admin']);
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
