@@ -130,6 +130,9 @@ Route::get('show_company_info_4_admin/{company_id}', 'Company\CompanyProfileCont
 Route::get('get_data_for_send_message', 'ContactForm\ContactFormController@get_data_for_send_message');//->middleware(['auth:api', 'scope:admin']);
 Route::Post('save_message', 'ContactForm\ContactFormController@save_message');
 Route::get('get_data_for_browse_messages', 'ContactForm\ContactFormController@get_data_for_browse_messages')->middleware(['auth:api', 'scope:admin']);
+
+Route::delete('delete_recieved_message/{recieved_email_id}', 'ContactForm\ContactFormController@delete_recieved_message')->middleware(['auth:api', 'scope:admin']);
+
 Route::get('get_data_for_one_message/{recieved_email_id}', 'ContactForm\ContactFormController@get_data_for_one_message')->middleware(['auth:api', 'scope:admin']);
 Route::Post('save_replay_message', 'ContactForm\ContactFormController@save_replay_message')->middleware(['auth:api', 'scope:admin']);
 Route::get('get_data_for_assign_view', 'ContactForm\ContactFormController@get_data_for_assign_view')->middleware(['auth:api', 'scope:admin']);
@@ -144,4 +147,7 @@ Route::Post('save_template_message', 'ContactForm\ContactFormController@save_tem
 Route::get('show_all_templates', 'ContactForm\ContactFormController@show_all_templates')->middleware(['auth:api', 'scope:admin']);
 Route::delete('delete_template/{template_id}', 'ContactForm\ContactFormController@delete_template')->middleware(['auth:api', 'scope:admin']);
 
+
+Route::delete('get_data_for_update_template_message_view/{template_id}', 'ContactForm\ContactFormController@get_data_for_update_template_message_view')->middleware(['auth:api', 'scope:admin']);
+Route::delete('update_template_message/{template_id}', 'ContactForm\ContactFormController@update_template_message')->middleware(['auth:api', 'scope:admin']);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
