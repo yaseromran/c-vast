@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\ContactForm;
 
 use App\Models\ContactForm\AdminComment;
+use App\Models\ContactForm\AdminDoneEmailLog;
 use App\Models\ContactForm\AdminEmailAssignLog;
 use App\Models\ContactForm\AdminOpenLog;
 use App\Models\ContactForm\AdminRepliedEmail;
+use App\Models\ContactForm\AdminRestoreEmailLog;
 use App\Models\ContactForm\ContactMainCatagory;
 use App\Models\ContactForm\PreDefinedEmail;
 use App\Models\ContactForm\RecievedEmail;
@@ -16,6 +18,25 @@ use Illuminate\Support\Facades\DB;
 
 class ContactFormController extends Controller
 {
+    public  function permanent_delete_for_deleted_message_from_archive($recieved_email_id)
+    {
+        return DB::transaction(function () use ($recieved_email_id)
+        {
+            $recievedEmail        = RecievedEmail::where('id', $recieved_email_id)->get();
+            $adminComment         = AdminComment::where('recieved_email_id', $recieved_email_id)->delete();
+            $adminDoneEmailLog    = AdminDoneEmailLog::where('recieved_email_id', $recieved_email_id)->delete();
+            $adminEmailAssignLog  = AdminEmailAssignLog::where('recieved_email_id', $recieved_email_id)->delete();
+            $adminEmailAssignLog  = AdminOpenLog::where('recieved_email_id', $recieved_email_id)->delete();
+            $adminRepliedEmail    = AdminRepliedEmail::where('recieved_email_id', $recieved_email_id)->delete();
+            $adminRepliedEmail    = AdminRepliedEmail::where('recieved_email_id', $recieved_email_id)->delete();
+            $adminRepliedEmail    = AdminRepliedEmail::where('recieved_email_id', $recieved_email_id)->delete();
+            $adminRestoreEmailLog = AdminRestoreEmailLog::where('recieved_email_id', $recieved_email_id)->delete();
+            $recievedEmail2        = RecievedEmail::where('id', $recieved_email_id)->delete();
+            return response()->json([
+                'permanent delete  success' => 'true',
+                'message that deleted' => $recievedEmail], 200);
+        });
+    }
 public function restore_deleted_message_from_archive($recieved_email_id)
 {
 
