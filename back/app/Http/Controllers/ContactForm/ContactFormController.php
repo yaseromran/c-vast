@@ -17,7 +17,46 @@ use Illuminate\Support\Facades\DB;
 class ContactFormController extends Controller
 {
 
+    public function  get_all_deleted_message_in_archive()
+    {
 
+        $messages=RecievedEmail::where('is_deleted', 1)->
+        with(array('contactSubCategory.cSCTranslation' => function ($query)  {
+            // $query->where('translated_languages_id', $main_language_id);
+        })) -> with(array('contactMainCatagory.cMCTranslation' => function ($query)  {
+            // $query->where('translated_languages_id', $main_language_id);
+        }))
+            -> with(array('translatedLanguages' => function ($query)  {
+                // $query->where('translated_languages_id', $main_language_id);
+            }))
+            -> with(array('adminComment' => function ($query)  {
+                $query->orderBy('id', 'desc')->take(1);
+            }))
+            -> with(array('adminRepliedEmail' => function ($query)  {
+                $query->orderBy('id', 'desc')->take(1);
+            }))
+            -> with(array('adminRepliedEmail' => function ($query)  {
+                $query->orderBy('id', 'desc')->take(1);
+            }))
+            -> with(array('user' => function ($query)  {
+                // $query->where('translated_languages_id', $main_language_id);
+            }))
+            ->get( ); // ['recieved_emails.last_admin_comment_id AS iscommented','recieved_emails.last_admin_done_email_log_id AS isDone']
+
+        $filters= ContactMainCatagory::with(array('cMCTranslation' => function ($query)  {
+            // $query->where('translated_languages_id', $main_language_id);
+        }))
+            ->with(array('contactSubCategory.cSCTranslation' => function ($query)  {
+                // $query->where('translated_languages_id', $main_language_id);
+            }))
+
+            ->get( );
+        return response()->json([
+            'success' => 'true',
+            'messages'=>$messages  ,
+            'filters' => $filters ], 200);
+
+    }
     public function  get_data_for_one_message($recieved_email_id)
     {
         return DB::transaction(function () use ($recieved_email_id)
@@ -195,6 +234,14 @@ class ContactFormController extends Controller
                 'data' => 'template_title already found'
             ], 403);
         }
+        $resultpreDefinedEmail=PreDefinedEmail            ::where('email_title', $request->email_title)->first();
+        if($resultpreDefinedEmail)
+        {
+            return response()->json([
+                'success' => 'false',
+                'data' => 'email_title already found'
+            ], 403);
+        }
         $preDefinedEmail=new PreDefinedEmail();
         $preDefinedEmail->user_id= auth()->user()->id;;
         $preDefinedEmail->contact_main_catagory_id=$request->contact_main_catagory_id;
@@ -208,7 +255,27 @@ class ContactFormController extends Controller
     public function delete_template($template_id)
     {
         $preDefinedEmail = PreDefinedEmail::where('id', $template_id)->delete();
-        return response()->json(['deleted ' => 'true'], 200);
+
+        $preDefinedEmail=PreDefinedEmail::with(array('contactSubCategory.cSCTranslation' => function ($query)  {
+            $query->where('translated_languages_id', 1);
+        })) -> with(array('contactMainCatagory.cMCTranslation' => function ($query)  {
+            $query->where('translated_languages_id', 1);
+        }))->get( );
+
+        $filters= ContactMainCatagory::with(array('cMCTranslation' => function ($query)  {
+            // $query->where('translated_languages_id', $main_language_id);
+        }))
+            ->with(array('contactSubCategory.cSCTranslation' => function ($query)  {
+                // $query->where('translated_languages_id', $main_language_id);
+            }))
+
+            ->get( );
+
+        return response()->json([
+            'deleted' => 'true',
+            'data'=>$preDefinedEmail  ,
+            'filters' => $filters ], 200);
+
     }
     public function show_all_templates()
     {
