@@ -16,7 +16,49 @@ use Illuminate\Support\Facades\DB;
 
 class ContactFormController extends Controller
 {
+public function restore_deleted_message_from_archive($recieved_email_id)
+{
 
+    return DB::transaction(function () use ($recieved_email_id) {
+        $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->update(['is_deleted' => 0]);
+
+        $messages=RecievedEmail::where('is_deleted', 1)->
+        with(array('contactSubCategory.cSCTranslation' => function ($query)  {
+            // $query->where('translated_languages_id', $main_language_id);
+        })) -> with(array('contactMainCatagory.cMCTranslation' => function ($query)  {
+            // $query->where('translated_languages_id', $main_language_id);
+        }))
+            -> with(array('translatedLanguages' => function ($query)  {
+                // $query->where('translated_languages_id', $main_language_id);
+            }))
+            -> with(array('adminComment' => function ($query)  {
+                $query->orderBy('id', 'desc')->take(1);
+            }))
+            -> with(array('adminRepliedEmail' => function ($query)  {
+                $query->orderBy('id', 'desc')->take(1);
+            }))
+            -> with(array('adminRepliedEmail' => function ($query)  {
+                $query->orderBy('id', 'desc')->take(1);
+            }))
+            -> with(array('user' => function ($query)  {
+                // $query->where('translated_languages_id', $main_language_id);
+            }))
+            ->get( ); // ['recieved_emails.last_admin_comment_id AS iscommented','recieved_emails.last_admin_done_email_log_id AS isDone']
+
+        $filters= ContactMainCatagory::with(array('cMCTranslation' => function ($query)  {
+            // $query->where('translated_languages_id', $main_language_id);
+        }))
+            ->with(array('contactSubCategory.cSCTranslation' => function ($query)  {
+                // $query->where('translated_languages_id', $main_language_id);
+            }))
+
+            ->get( );
+        return response()->json([
+            'restore success' => 'true',
+            'remind message in archive ' => $messages,
+            'filters' => $filters], 200);
+    });
+}
     public function  get_all_deleted_message_in_archive()
     {
 
