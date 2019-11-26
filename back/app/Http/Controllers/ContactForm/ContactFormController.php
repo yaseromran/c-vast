@@ -15,9 +15,74 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-
+use Schema;
 class ContactFormController extends Controller
 {
+    public function recieved_email_activity_log($recieved_email_id)
+    {
+
+
+      //  try {
+     return     DB::transaction(function () use ($recieved_email_id)
+          {
+                Schema::connection('mysql')->create('recieved_email_activity_log'.$recieved_email_id, function ($table)
+              {
+                $table->increments('id');
+                $table->integer('action_id');
+                $table->string('action');
+                $table->string('admin')->nullable();
+                $table->string('admin_id');
+                $table->string('details');
+                $table->timestamps();
+              });
+
+
+              $select =AdminComment::where('recieved_email_id', $recieved_email_id)
+
+                  ->select(array('id','comment','user_id','created_at','updated_at' ) ) ->selectSub(function ($query)
+                  {
+                      $query->selectRaw(" ( select 'Comment' ) ");
+                  }, 'active')->get( );
+              $select =AdminComment::where('recieved_email_id', $recieved_email_id)
+
+                  ->select(array('id','comment','user_id','created_at','updated_at' ) ) ->selectSub(function ($query)
+                  {
+                      $query->selectRaw(" ( select 'Comment' ) ");
+                  }, 'action')->get( );
+              foreach ($select as $onSelect)
+              {
+                  DB::table('recieved_email_activity_log'.$recieved_email_id)->insert(
+                      [
+
+                          'action_id' => $onSelect->id,
+
+                          'action' => $onSelect->action,
+
+                          'admin' => $onSelect->admin,
+
+                          'admin_id' => $onSelect->user_id,
+
+                          'details' => $onSelect->comment
+
+                      ]
+                  );
+              };
+
+
+
+              $recieved_email_activity_log_table  =  DB::select(' SELECT * FROM  recieved_email_activity_log'.$recieved_email_id);
+
+
+
+              Schema::connection('mysql')->drop('recieved_email_activity_log'.$recieved_email_id);
+              return $recieved_email_activity_log_table;
+
+        });
+       /* } catch (\Exception $e) {
+            DB::rollback();
+           return "error";
+        }*/
+    }
     public  function permanent_delete_for_deleted_message_from_archive($recieved_email_id)
     {
         return DB::transaction(function () use ($recieved_email_id)
@@ -192,7 +257,7 @@ public function restore_deleted_message_from_archive($recieved_email_id)
             $adminRepliedEmail->replyed_email_body  = $request->replyed_email_body;
             $adminRepliedEmail->recieved_email_Id   = $request->recieved_email_Id;
             $adminRepliedEmail->save();
-            $resultRecievedEmail->last_admin_replied_email_id=$adminRepliedEmail->id;
+            $resultRecievedEmail->last_admin_replied_email_id=$adminRepliedEmail->user_id;
             $resultRecievedEmail->save();
             return response()->json(
                 [

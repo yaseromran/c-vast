@@ -153,4 +153,7 @@ Route::get('get_data_for_update_template_message_view/{template_id}', 'ContactFo
  Route::put('restore_deleted_message_from_archive/{recieved_email_id}', 'ContactForm\ContactFormController@restore_deleted_message_from_archive')->middleware(['auth:api', 'scope:admin']);
  Route::delete('permanent_delete_for_deleted_message_from_archive/{recieved_email_id}', 'ContactForm\ContactFormController@permanent_delete_for_deleted_message_from_archive')->middleware(['auth:api', 'scope:admin']);
 
+ Route::get('recieved_email_activity_log/{recieved_email_id}', 'ContactForm\ContactFormController@recieved_email_activity_log')->middleware(['auth:api', 'scope:admin']);
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
