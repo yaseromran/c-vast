@@ -22,9 +22,11 @@ class ContactFormController extends Controller
     {
 
 
+
       //  try {
      return     DB::transaction(function () use ($recieved_email_id)
           {
+//////////////// create temporay table 4 logs
                 Schema::connection('mysql')->create('recieved_email_activity_log'.$recieved_email_id, function ($table)
               {
                 $table->increments('id');
@@ -37,18 +39,15 @@ class ContactFormController extends Controller
               });
 
 
+////////////// select logs from admin_comments
               $select =AdminComment::where('recieved_email_id', $recieved_email_id)
+                  ->join('users', 'users.id', '=','admin_comments.user_id' )
 
-                  ->select(array('id','comment','user_id','created_at','updated_at' ) ) ->selectSub(function ($query)
-                  {
-                      $query->selectRaw(" ( select 'Comment' ) ");
-                  }, 'active')->get( );
-              $select =AdminComment::where('recieved_email_id', $recieved_email_id)
-
-                  ->select(array('id','comment','user_id','created_at','updated_at' ) ) ->selectSub(function ($query)
+                  ->select(array('admin_comments.id','comment','user_id','name','admin_comments.created_at','admin_comments.updated_at' ) ) ->selectSub(function ($query)
                   {
                       $query->selectRaw(" ( select 'Comment' ) ");
                   }, 'action')->get( );
+//////////////////// insert   admin_comments in temporay table
               foreach ($select as $onSelect)
               {
                   DB::table('recieved_email_activity_log'.$recieved_email_id)->insert(
@@ -58,23 +57,98 @@ class ContactFormController extends Controller
 
                           'action' => $onSelect->action,
 
-                          'admin' => $onSelect->admin,
+                          'admin' => $onSelect->name,
 
                           'admin_id' => $onSelect->user_id,
+                          
+                          'created_at' => $onSelect->created_at,
+
+                          'updated_at' => $onSelect->updated_at,
+
 
                           'details' => $onSelect->comment
+
 
                       ]
                   );
               };
 
+////////////// select logs from admin_replied_emails
+         $select =AdminRepliedEmail::where('recieved_email_id', $recieved_email_id)
+             ->join('users', 'users.id', '=','admin_replied_emails.user_id' )
+
+             ->select(array('admin_replied_emails.id','replyed_email_title','replyed_email_body','user_id','name','admin_replied_emails.created_at','admin_replied_emails.updated_at' ) ) ->selectSub(function ($query)
+             {
+                 $query->selectRaw(" ( select 'replay' ) ");
+             }, 'action')->get( );
+//////////////////// insert   admin_replied_emails in temporay table
+         foreach ($select as $onSelect)
+         {
+             DB::table('recieved_email_activity_log'.$recieved_email_id)->insert(
+                 [
+
+                     'action_id' => $onSelect->id,
+
+                     'action' => $onSelect->action,
+
+                     'admin' => $onSelect->name,
+
+                     'admin_id' => $onSelect->user_id,
+
+                     'created_at' => $onSelect->created_at,
+
+                     'updated_at' => $onSelect->updated_at,
 
 
-              $recieved_email_activity_log_table  =  DB::select(' SELECT * FROM  recieved_email_activity_log'.$recieved_email_id);
+                     'details' => $onSelect->replyed_email_title . " ". $onSelect->replyed_email_body
 
 
+                 ]
+             );
+         };
+////////////// select logs from admin_email_assign_logs
+         $select =AdminEmailAssignLog::where('recieved_email_id', $recieved_email_id)
+             ->join('users', 'users.id', '=','admin_email_assign_logs.user_id' )
 
+             ->select(array('admin_email_assign_logs.id','to_assigned_admin_user_id', 'user_id','name','admin_email_assign_logs.created_at','admin_email_assign_logs.updated_at' ) ) ->selectSub(function ($query)
+             {
+                 $query->selectRaw(" ( select 'Assigned' ) ");
+             }, 'action')
+             ->get( );
+//////////////////// insert   admin_email_assign_logs in temporay table
+         foreach ($select as $onSelect)
+         {
+             DB::table('recieved_email_activity_log'.$recieved_email_id)->insert(
+                 [
+
+                     'action_id' => $onSelect->id,
+
+                     'action' => $onSelect->action,
+
+                     'admin' => $onSelect->name,
+
+                     'admin_id' => $onSelect->user_id,
+
+                     'created_at' => $onSelect->created_at,
+
+                     'updated_at' => $onSelect->updated_at,
+
+
+                     'details' =>  " assign to admin  ". $onSelect->to_assigned_admin_user_id
+
+
+                 ]
+             );
+         };
+
+/////////////////////// select all row from temporay table befor delete if
+
+              $recieved_email_activity_log_table  =  DB::select(' SELECT * FROM  recieved_email_activity_log'.$recieved_email_id.' ORDER BY created_at ');
+
+
+///////////////////////delete   temporay table
               Schema::connection('mysql')->drop('recieved_email_activity_log'.$recieved_email_id);
+              //////////////////////// return logs data
               return $recieved_email_activity_log_table;
 
         });
