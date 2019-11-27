@@ -26,6 +26,7 @@ class ContactFormController extends Controller
       //  try {
      return     DB::transaction(function () use ($recieved_email_id)
           {
+
 //////////////// create temporay table 4 logs
                 Schema::connection('mysql')->create('recieved_email_activity_log'.$recieved_email_id, function ($table)
               {
@@ -74,7 +75,8 @@ class ContactFormController extends Controller
               };
 
 ////////////// select logs from admin_replied_emails
-         $select =AdminRepliedEmail::where('recieved_email_id', $recieved_email_id)
+
+         $select =    AdminRepliedEmail::where('recieved_email_id', $recieved_email_id)
              ->join('users', 'users.id', '=','admin_replied_emails.user_id' )
 
              ->select(array('admin_replied_emails.id','replyed_email_title','replyed_email_body','user_id','name','admin_replied_emails.created_at','admin_replied_emails.updated_at' ) ) ->selectSub(function ($query)
@@ -107,14 +109,35 @@ class ContactFormController extends Controller
              );
          };
 ////////////// select logs from admin_email_assign_logs
-         $select =AdminEmailAssignLog::where('recieved_email_id', $recieved_email_id)
-             ->join('users', 'users.id', '=','admin_email_assign_logs.user_id' )
+         $select    = DB::select(DB::raw(" 
+            SELECT * FROM
+            (
+                select  `recieved_email_id` as `a_recieved_email_id`
+                , admin_email_assign_logs.id as `a_id`
+                , `admin_email_assign_logs`.`to_assigned_admin_user_id`
+                , `name` as `to_assigned_admin_name` 
+                from `admin_email_assign_logs`
+                 inner join `users` 
+                 on `users`.`id` = `admin_email_assign_logs`.`to_assigned_admin_user_id` 
+                 where (`recieved_email_id` = ".$recieved_email_id.")
+            )  as a
+            ,
+            (
+                 select  `recieved_email_id` as `b_recieved_email_id`
+                 ,         admin_email_assign_logs.id as `b_id`,
+                  `admin_email_assign_logs`.`id`,
+                  `user_id` as `from_assigned_admin_id` ,
+                  `name` as `from_assigned_admin_name`,
+                   `admin_email_assign_logs`.`created_at`,
+                   `admin_email_assign_logs`.`updated_at`,
+                   (select ( select 'Assigned' )) as `action` from `admin_email_assign_logs` inner join `users` on `users`.`id` = `admin_email_assign_logs`.`user_id` 
+                   where (`recieved_email_id` = ".$recieved_email_id.")
+            )   as b
+            where   (`a_id`=`b_id`)     ") );
 
-             ->select(array('admin_email_assign_logs.id','to_assigned_admin_user_id', 'user_id','name','admin_email_assign_logs.created_at','admin_email_assign_logs.updated_at' ) ) ->selectSub(function ($query)
-             {
-                 $query->selectRaw(" ( select 'Assigned' ) ");
-             }, 'action')
-             ->get( );
+
+
+
 //////////////////// insert   admin_email_assign_logs in temporay table
          foreach ($select as $onSelect)
          {
@@ -125,16 +148,16 @@ class ContactFormController extends Controller
 
                      'action' => $onSelect->action,
 
-                     'admin' => $onSelect->name,
+                     'admin' => $onSelect->from_assigned_admin_name,
 
-                     'admin_id' => $onSelect->user_id,
+                     'admin_id' => $onSelect->from_assigned_admin_id,
 
                      'created_at' => $onSelect->created_at,
 
                      'updated_at' => $onSelect->updated_at,
 
 
-                     'details' =>  " assign to admin  ". $onSelect->to_assigned_admin_user_id
+                     'details' =>  " assign to admin : ". $onSelect->to_assigned_admin_name ."/". $onSelect->to_assigned_admin_user_id." , from admin : ". $onSelect->from_assigned_admin_name."/".$onSelect->from_assigned_admin_id
 
 
                  ]
