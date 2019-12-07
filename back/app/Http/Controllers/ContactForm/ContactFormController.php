@@ -394,6 +394,7 @@ class ContactFormController extends Controller
     }
     public function  save_replay_message(Request $request)
     {
+
         $rules = [
               'recieved_email_Id'   => 'required|integer'
             , 'replyed_email_title' => 'required|string|max:255'
@@ -402,7 +403,7 @@ class ContactFormController extends Controller
 
         ];
         $this->validate($request, $rules);
-        $resultRecievedEmail=RecievedEmail            ::where('id', $request->recieved_email_Id)->first();
+        $resultRecievedEmail=RecievedEmail  ::where('id', $request->recieved_email_Id)->first();
 
         if(!$resultRecievedEmail)
         {
