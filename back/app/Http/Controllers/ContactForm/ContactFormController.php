@@ -66,9 +66,7 @@ class ContactFormController extends Controller
 
                           'updated_at' => $onSelect->updated_at,
 
-
                           'details' => $onSelect->comment
-
 
                       ]
                   );
@@ -199,7 +197,7 @@ class ContactFormController extends Controller
                 'message that deleted' => $recievedEmail], 200);
         });
     }
-public function restore_deleted_message_from_archive($recieved_email_id)
+    public function restore_deleted_message_from_archive($recieved_email_id)
 {
 
     return DB::transaction(function () use ($recieved_email_id) {

@@ -155,5 +155,8 @@ Route::get('get_data_for_update_template_message_view/{template_id}', 'ContactFo
 
  Route::get('recieved_email_activity_log/{recieved_email_id}', 'ContactForm\ContactFormController@recieved_email_activity_log')->middleware(['auth:api', 'scope:admin']);
 
+Route::Post('set_message_as_open/{recieved_email_id}', 'ContactForm\ContactFormController@set_message_as_open')->middleware(['auth:api', 'scope:admin']);
+Route::Post('set_message_as_done/{recieved_email_id}', 'ContactForm\ContactFormController@set_message_as_done')->middleware(['auth:api', 'scope:admin']);
+Route::Post('set_message_as_not_done/{recieved_email_id}', 'ContactForm\ContactFormController@set_message_as_not_done')->middleware(['auth:api', 'scope:admin']);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
