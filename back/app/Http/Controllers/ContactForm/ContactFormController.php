@@ -18,12 +18,80 @@ use Illuminate\Support\Facades\DB;
 use Schema;
 class ContactFormController extends Controller
 {
+    public function set_message_as_open($recieved_email_id)
+    {
+        try{
+        return     DB::transaction(function () use ($recieved_email_id)
+        {
+        $adminOpenLog=new AdminOpenLog();
+        $adminOpenLog->recieved_email_id=$recieved_email_id;
+
+        $adminOpenLog->user_id== auth()->user()->id;
+        $adminOpenLog->save();
+        $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->update(['last_admin_open_log_id' => $adminOpenLog->id]); // make message open
+
+        return response()->json([
+            'success' => 'true',
+            'data' => $adminOpenLog
+            ], 200);
+        });
+            } catch (\Exception $e) {
+        DB::rollback();
+        return "error";
+        }
+
+}
+    public function set_message_as_done($recieved_email_id)
+    {
+        try{
+            return     DB::transaction(function () use ($recieved_email_id)
+            {
+       $adminDoneEmailLog=new AdminDoneEmailLog();
+        $adminDoneEmailLog->recieved_email_id=$recieved_email_id;
+
+        $adminDoneEmailLog->user_id== auth()->user()->id;
+        $adminDoneEmailLog->save();
+        $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->update(['last_admin_note_done_email_log_id' => $adminDoneEmailLog->id]);
+        $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->update(['last_admin_note_done_email_log_id' => -1]);
+        return response()->json([
+            'success' => 'true',
+            'data' => $adminDoneEmailLog
+        ], 200);
+            });
+        } catch ( Exception $e) {
+            DB::rollback();
+            return "error";
+        }
+
+    }
+    public function set_message_as_not_done($recieved_email_id)
+    {
+        try{
+            return     DB::transaction(function () use ($recieved_email_id)
+            {
+                $adminNoteDoneEmailLogs=new AdminNoteDoneEmailLogs();
+                $adminNoteDoneEmailLogs->recieved_email_id=$recieved_email_id;
+                $adminNoteDoneEmailLogs->user_id== auth()->user()->id;
+                $adminNoteDoneEmailLogs->save();
+                $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->update(['last_admin_note_done_email_log_id' => -1]);
+                $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->update(['last_admin_note_done_email_log_id' => $adminNoteDoneEmailLogs->id]);
+                return response()->json([
+                    'success' => 'true',
+                    'data' => $adminNoteDoneEmailLogs
+                ], 200);
+                });
+            } catch ( Exception $e) {
+                    DB::rollback();
+                    return "error";
+            }
+
+    }
     public function recieved_email_activity_log($recieved_email_id)
     {
 
 
 
-      //  try {
+       try {
      return     DB::transaction(function () use ($recieved_email_id)
           {
 
@@ -173,10 +241,10 @@ class ContactFormController extends Controller
               return $recieved_email_activity_log_table;
 
         });
-       /* } catch (\Exception $e) {
+         } catch (\Exception $e) {
             DB::rollback();
            return "error";
-        }*/
+        }
     }
     public  function permanent_delete_for_deleted_message_from_archive($recieved_email_id)
     {
@@ -289,7 +357,7 @@ class ContactFormController extends Controller
 
             $adminOpenLog->user_id== auth()->user()->id;
         $adminOpenLog->save();
-
+            $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->update(['last_admin_open_log_id' => $adminOpenLog->id]); // make message open
         $resultRecievedEmail=RecievedEmail            ::where('id',$recieved_email_id)
             ->            with(array('contactSubCategory.cSCTranslation' => function ($query)  {
                 // $query->where('translated_languages_id', $main_language_id);
