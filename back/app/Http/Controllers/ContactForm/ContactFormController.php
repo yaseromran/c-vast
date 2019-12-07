@@ -422,6 +422,8 @@ class ContactFormController extends Controller
             $adminRepliedEmail->save();
             $resultRecievedEmail->last_admin_replied_email_id=$adminRepliedEmail->user_id;
             $resultRecievedEmail->save();
+            $recievedEmail = RecievedEmail::where('id',  $request->recieved_email_id)->update(['last_admin_replied_email_id' => $adminRepliedEmail->id]); // make message open
+
             return response()->json(
                 [
                 'success' => 'true',
@@ -471,6 +473,7 @@ class ContactFormController extends Controller
        $adminEmailAssignLog->recieved_email_id=$request-> recieved_email_id;
        $adminEmailAssignLog-> to_assigned_admin_user_id=$request-> to_assigned_admin_user_id;
        $adminEmailAssignLog->save();
+
        return response()->json(
            [
                'success' => 'true',
@@ -636,6 +639,9 @@ $preDefinedEmail=PreDefinedEmail::with(array('contactSubCategory.cSCTranslation'
         $adminComment->recieved_email_id=$request-> recieved_email_id;
         $adminComment->comment=$request-> comment;
         $adminComment->save();
+
+        $recievedEmail = RecievedEmail::where('id',  $request->recieved_email_id)->update(['last_admin_comment_id' => $adminComment->id]); // make message open
+
         return response()->json(['success' => 'true','email'=>$adminComment], 200);
     }
 
@@ -643,6 +649,7 @@ $preDefinedEmail=PreDefinedEmail::with(array('contactSubCategory.cSCTranslation'
     {
         return DB::transaction(function () use ($recieved_email_id) {
             $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->update(['is_deleted' => 1]);
+
             $messages = RecievedEmail::where('is_deleted', 0)->
             with(array('contactSubCategory.cSCTranslation' => function ($query) {
                 // $query->where('translated_languages_id', $main_language_id);
