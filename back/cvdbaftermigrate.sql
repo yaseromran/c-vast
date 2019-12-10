@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2019 at 12:56 PM
--- Server version: 10.1.40-MariaDB
+-- Generation Time: 10 ديسمبر 2019 الساعة 12:49
+-- إصدار الخادم: 10.1.40-MariaDB
 -- PHP Version: 7.3.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin_comments`
+-- بنية الجدول `admin_comments`
 --
 
 CREATE TABLE `admin_comments` (
@@ -37,10 +37,20 @@ CREATE TABLE `admin_comments` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- إرجاع أو استيراد بيانات الجدول `admin_comments`
+--
+
+INSERT INTO `admin_comments` (`id`, `comment`, `recieved_email_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 'xxx', 13, 31, '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
+(2, 'comment xxx', 13, 31, '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
+(3, 'comment xxx', 14, 31, '2019-11-25 06:23:18', '2019-11-25 06:23:18'),
+(4, 'comment xxx5', 14, 31, '2019-11-25 06:23:24', '2019-11-25 06:23:24');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin_done_email_logs`
+-- بنية الجدول `admin_done_email_logs`
 --
 
 CREATE TABLE `admin_done_email_logs` (
@@ -51,25 +61,64 @@ CREATE TABLE `admin_done_email_logs` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- إرجاع أو استيراد بيانات الجدول `admin_done_email_logs`
+--
+
+INSERT INTO `admin_done_email_logs` (`id`, `recieved_email_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(4, 13, 33, '2019-12-10 09:25:06', '2019-12-10 09:25:06'),
+(7, 13, 33, '2019-12-10 09:26:58', '2019-12-10 09:26:58');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin_email_assign_logs`
+-- بنية الجدول `admin_email_assign_logs`
 --
 
 CREATE TABLE `admin_email_assign_logs` (
   `id` int(10) UNSIGNED NOT NULL,
   `recieved_email_id` int(10) UNSIGNED NOT NULL,
-  `from_assigned_admin_user_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
   `to_assigned_admin_user_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- إرجاع أو استيراد بيانات الجدول `admin_email_assign_logs`
+--
+
+INSERT INTO `admin_email_assign_logs` (`id`, `recieved_email_id`, `user_id`, `to_assigned_admin_user_id`, `created_at`, `updated_at`) VALUES
+(1, 13, 31, 1, '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
+(2, 14, 31, 1, '2019-11-23 07:39:37', '2019-11-23 07:39:37'),
+(3, 14, 31, 2, '2019-11-23 07:39:45', '2019-11-23 07:39:45'),
+(4, 13, 31, 2, '2019-11-23 07:39:50', '2019-11-23 07:39:50');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin_open_logs`
+-- بنية الجدول `admin_note_done_email_logs`
+--
+
+CREATE TABLE `admin_note_done_email_logs` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `recieved_email_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- إرجاع أو استيراد بيانات الجدول `admin_note_done_email_logs`
+--
+
+INSERT INTO `admin_note_done_email_logs` (`id`, `recieved_email_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 13, 33, '2019-12-10 09:28:17', '2019-12-10 09:28:17');
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `admin_open_logs`
 --
 
 CREATE TABLE `admin_open_logs` (
@@ -80,10 +129,18 @@ CREATE TABLE `admin_open_logs` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- إرجاع أو استيراد بيانات الجدول `admin_open_logs`
+--
+
+INSERT INTO `admin_open_logs` (`id`, `recieved_email_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(20, 13, 33, '2019-12-10 09:14:32', '2019-12-10 09:14:32'),
+(21, 13, 33, '2019-12-10 09:18:39', '2019-12-10 09:18:39');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin_replied_emails`
+-- بنية الجدول `admin_replied_emails`
 --
 
 CREATE TABLE `admin_replied_emails` (
@@ -97,10 +154,18 @@ CREATE TABLE `admin_replied_emails` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- إرجاع أو استيراد بيانات الجدول `admin_replied_emails`
+--
+
+INSERT INTO `admin_replied_emails` (`id`, `replyed_email_body`, `replyed_email_title`, `cc`, `recieved_email_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 'xxxx', 'xxxx', 'xxxx@yy.zz', 13, 31, '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
+(2, 'xxxx', 'xxxx', 'xxxx@yy.zz', 14, 31, '2019-11-23 07:44:56', '2019-11-23 07:44:56');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin_restore_email_logs`
+-- بنية الجدول `admin_restore_email_logs`
 --
 
 CREATE TABLE `admin_restore_email_logs` (
@@ -114,7 +179,7 @@ CREATE TABLE `admin_restore_email_logs` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `companies`
+-- بنية الجدول `companies`
 --
 
 CREATE TABLE `companies` (
@@ -133,7 +198,7 @@ CREATE TABLE `companies` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `companies`
+-- إرجاع أو استيراد بيانات الجدول `companies`
 --
 
 INSERT INTO `companies` (`id`, `main_language_id`, `created_at`, `updated_at`, `is_verified`, `company_status_id`, `company_method_verfication_id`, `admin_description`, `email`, `contact_numner`, `admin_user_id`, `user_id`) VALUES
@@ -143,7 +208,7 @@ INSERT INTO `companies` (`id`, `main_language_id`, `created_at`, `updated_at`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `company_admins_logs`
+-- بنية الجدول `company_admins_logs`
 --
 
 CREATE TABLE `company_admins_logs` (
@@ -158,7 +223,7 @@ CREATE TABLE `company_admins_logs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `company_admins_logs`
+-- إرجاع أو استيراد بيانات الجدول `company_admins_logs`
 --
 
 INSERT INTO `company_admins_logs` (`id`, `company_status_id`, `company_method_verfication_id`, `admin_description`, `created_at`, `updated_at`, `company_id`, `user_id`) VALUES
@@ -175,7 +240,7 @@ INSERT INTO `company_admins_logs` (`id`, `company_status_id`, `company_method_ve
 -- --------------------------------------------------------
 
 --
--- Table structure for table `company_industries`
+-- بنية الجدول `company_industries`
 --
 
 CREATE TABLE `company_industries` (
@@ -187,7 +252,7 @@ CREATE TABLE `company_industries` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `company_industries`
+-- إرجاع أو استيراد بيانات الجدول `company_industries`
 --
 
 INSERT INTO `company_industries` (`id`, `verified`, `created_at`, `updated_at`, `company_industry_parent_id`) VALUES
@@ -524,7 +589,7 @@ INSERT INTO `company_industries` (`id`, `verified`, `created_at`, `updated_at`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `company_industries_for_companies`
+-- بنية الجدول `company_industries_for_companies`
 --
 
 CREATE TABLE `company_industries_for_companies` (
@@ -536,7 +601,7 @@ CREATE TABLE `company_industries_for_companies` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `company_industries_for_companies`
+-- إرجاع أو استيراد بيانات الجدول `company_industries_for_companies`
 --
 
 INSERT INTO `company_industries_for_companies` (`id`, `company_profile_id`, `company_industry_id`, `created_at`, `updated_at`) VALUES
@@ -546,7 +611,7 @@ INSERT INTO `company_industries_for_companies` (`id`, `company_profile_id`, `com
 -- --------------------------------------------------------
 
 --
--- Table structure for table `company_industry_parents`
+-- بنية الجدول `company_industry_parents`
 --
 
 CREATE TABLE `company_industry_parents` (
@@ -556,7 +621,7 @@ CREATE TABLE `company_industry_parents` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `company_industry_parents`
+-- إرجاع أو استيراد بيانات الجدول `company_industry_parents`
 --
 
 INSERT INTO `company_industry_parents` (`id`, `created_at`, `updated_at`) VALUES
@@ -565,7 +630,7 @@ INSERT INTO `company_industry_parents` (`id`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `company_industry_parent_trans`
+-- بنية الجدول `company_industry_parent_trans`
 --
 
 CREATE TABLE `company_industry_parent_trans` (
@@ -578,7 +643,7 @@ CREATE TABLE `company_industry_parent_trans` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `company_industry_parent_trans`
+-- إرجاع أو استيراد بيانات الجدول `company_industry_parent_trans`
 --
 
 INSERT INTO `company_industry_parent_trans` (`id`, `company_industry_parent_id`, `translated_languages_id`, `name`, `created_at`, `updated_at`) VALUES
@@ -587,7 +652,7 @@ INSERT INTO `company_industry_parent_trans` (`id`, `company_industry_parent_id`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `company_industry_translations`
+-- بنية الجدول `company_industry_translations`
 --
 
 CREATE TABLE `company_industry_translations` (
@@ -600,7 +665,7 @@ CREATE TABLE `company_industry_translations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `company_industry_translations`
+-- إرجاع أو استيراد بيانات الجدول `company_industry_translations`
 --
 
 INSERT INTO `company_industry_translations` (`id`, `company_industry_id`, `translated_languages_id`, `name`, `created_at`, `updated_at`) VALUES
@@ -961,7 +1026,7 @@ INSERT INTO `company_industry_translations` (`id`, `company_industry_id`, `trans
 -- --------------------------------------------------------
 
 --
--- Table structure for table `company_locations`
+-- بنية الجدول `company_locations`
 --
 
 CREATE TABLE `company_locations` (
@@ -981,7 +1046,7 @@ CREATE TABLE `company_locations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `company_locations`
+-- إرجاع أو استيراد بيانات الجدول `company_locations`
 --
 
 INSERT INTO `company_locations` (`id`, `is_main_office`, `city`, `country`, `name`, `postal_code`, `street_address`, `latitude`, `longitude`, `company_profile_id`, `created_at`, `updated_at`, `verified_by_google`) VALUES
@@ -991,7 +1056,7 @@ INSERT INTO `company_locations` (`id`, `is_main_office`, `city`, `country`, `nam
 -- --------------------------------------------------------
 
 --
--- Table structure for table `company_method_verfications`
+-- بنية الجدول `company_method_verfications`
 --
 
 CREATE TABLE `company_method_verfications` (
@@ -1002,7 +1067,7 @@ CREATE TABLE `company_method_verfications` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `company_method_verfications`
+-- إرجاع أو استيراد بيانات الجدول `company_method_verfications`
 --
 
 INSERT INTO `company_method_verfications` (`id`, `created_at`, `updated_at`, `method_verfication_name`) VALUES
@@ -1012,7 +1077,7 @@ INSERT INTO `company_method_verfications` (`id`, `created_at`, `updated_at`, `me
 -- --------------------------------------------------------
 
 --
--- Table structure for table `company_profiles`
+-- بنية الجدول `company_profiles`
 --
 
 CREATE TABLE `company_profiles` (
@@ -1030,7 +1095,7 @@ CREATE TABLE `company_profiles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `company_profiles`
+-- إرجاع أو استيراد بيانات الجدول `company_profiles`
 --
 
 INSERT INTO `company_profiles` (`id`, `company_id`, `company_websit`, `company_size_id`, `company_type_id`, `is_month`, `founded`, `path_company_imagelogo`, `created_at`, `updated_at`, `workinghours`) VALUES
@@ -1040,7 +1105,7 @@ INSERT INTO `company_profiles` (`id`, `company_id`, `company_websit`, `company_s
 -- --------------------------------------------------------
 
 --
--- Table structure for table `company_profile_translations`
+-- بنية الجدول `company_profile_translations`
 --
 
 CREATE TABLE `company_profile_translations` (
@@ -1054,7 +1119,7 @@ CREATE TABLE `company_profile_translations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `company_profile_translations`
+-- إرجاع أو استيراد بيانات الجدول `company_profile_translations`
 --
 
 INSERT INTO `company_profile_translations` (`id`, `company_description`, `name`, `company_profile_id`, `translated_languages_id`, `created_at`, `updated_at`) VALUES
@@ -1066,7 +1131,7 @@ INSERT INTO `company_profile_translations` (`id`, `company_description`, `name`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `company_sizes`
+-- بنية الجدول `company_sizes`
 --
 
 CREATE TABLE `company_sizes` (
@@ -1076,7 +1141,7 @@ CREATE TABLE `company_sizes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `company_sizes`
+-- إرجاع أو استيراد بيانات الجدول `company_sizes`
 --
 
 INSERT INTO `company_sizes` (`id`, `created_at`, `updated_at`) VALUES
@@ -1089,7 +1154,7 @@ INSERT INTO `company_sizes` (`id`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `company_size_translations`
+-- بنية الجدول `company_size_translations`
 --
 
 CREATE TABLE `company_size_translations` (
@@ -1102,7 +1167,7 @@ CREATE TABLE `company_size_translations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `company_size_translations`
+-- إرجاع أو استيراد بيانات الجدول `company_size_translations`
 --
 
 INSERT INTO `company_size_translations` (`id`, `company_size_id`, `translated_languages_id`, `name`, `created_at`, `updated_at`) VALUES
@@ -1120,7 +1185,7 @@ INSERT INTO `company_size_translations` (`id`, `company_size_id`, `translated_la
 -- --------------------------------------------------------
 
 --
--- Table structure for table `company_social_medias`
+-- بنية الجدول `company_social_medias`
 --
 
 CREATE TABLE `company_social_medias` (
@@ -1133,7 +1198,7 @@ CREATE TABLE `company_social_medias` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `company_social_medias`
+-- إرجاع أو استيراد بيانات الجدول `company_social_medias`
 --
 
 INSERT INTO `company_social_medias` (`id`, `company_profile_id`, `company_social_media_info`, `social_media_id`, `created_at`, `updated_at`) VALUES
@@ -1143,7 +1208,7 @@ INSERT INTO `company_social_medias` (`id`, `company_profile_id`, `company_social
 -- --------------------------------------------------------
 
 --
--- Table structure for table `company_specialties_for_companies`
+-- بنية الجدول `company_specialties_for_companies`
 --
 
 CREATE TABLE `company_specialties_for_companies` (
@@ -1155,7 +1220,7 @@ CREATE TABLE `company_specialties_for_companies` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `company_specialties_for_companies`
+-- إرجاع أو استيراد بيانات الجدول `company_specialties_for_companies`
 --
 
 INSERT INTO `company_specialties_for_companies` (`id`, `company_profile_id`, `specialty_id`, `created_at`, `updated_at`) VALUES
@@ -1165,7 +1230,7 @@ INSERT INTO `company_specialties_for_companies` (`id`, `company_profile_id`, `sp
 -- --------------------------------------------------------
 
 --
--- Table structure for table `company_statuses`
+-- بنية الجدول `company_statuses`
 --
 
 CREATE TABLE `company_statuses` (
@@ -1176,7 +1241,7 @@ CREATE TABLE `company_statuses` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `company_statuses`
+-- إرجاع أو استيراد بيانات الجدول `company_statuses`
 --
 
 INSERT INTO `company_statuses` (`id`, `created_at`, `updated_at`, `title`) VALUES
@@ -1189,7 +1254,7 @@ INSERT INTO `company_statuses` (`id`, `created_at`, `updated_at`, `title`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `company_types`
+-- بنية الجدول `company_types`
 --
 
 CREATE TABLE `company_types` (
@@ -1199,7 +1264,7 @@ CREATE TABLE `company_types` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `company_types`
+-- إرجاع أو استيراد بيانات الجدول `company_types`
 --
 
 INSERT INTO `company_types` (`id`, `created_at`, `updated_at`) VALUES
@@ -1209,7 +1274,7 @@ INSERT INTO `company_types` (`id`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `company_type_translations`
+-- بنية الجدول `company_type_translations`
 --
 
 CREATE TABLE `company_type_translations` (
@@ -1222,7 +1287,7 @@ CREATE TABLE `company_type_translations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `company_type_translations`
+-- إرجاع أو استيراد بيانات الجدول `company_type_translations`
 --
 
 INSERT INTO `company_type_translations` (`id`, `translated_languages_id`, `company_type_id`, `company_type_name`, `created_at`, `updated_at`) VALUES
@@ -1234,7 +1299,7 @@ INSERT INTO `company_type_translations` (`id`, `translated_languages_id`, `compa
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contact_informations`
+-- بنية الجدول `contact_informations`
 --
 
 CREATE TABLE `contact_informations` (
@@ -1245,7 +1310,7 @@ CREATE TABLE `contact_informations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `contact_informations`
+-- إرجاع أو استيراد بيانات الجدول `contact_informations`
 --
 
 INSERT INTO `contact_informations` (`id`, `resume_id`, `created_at`, `updated_at`) VALUES
@@ -1255,7 +1320,7 @@ INSERT INTO `contact_informations` (`id`, `resume_id`, `created_at`, `updated_at
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contact_main_catagories`
+-- بنية الجدول `contact_main_catagories`
 --
 
 CREATE TABLE `contact_main_catagories` (
@@ -1266,7 +1331,7 @@ CREATE TABLE `contact_main_catagories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `contact_main_catagories`
+-- إرجاع أو استيراد بيانات الجدول `contact_main_catagories`
 --
 
 INSERT INTO `contact_main_catagories` (`id`, `name`, `created_at`, `updated_at`) VALUES
@@ -1277,7 +1342,7 @@ INSERT INTO `contact_main_catagories` (`id`, `name`, `created_at`, `updated_at`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contact_numbers`
+-- بنية الجدول `contact_numbers`
 --
 
 CREATE TABLE `contact_numbers` (
@@ -1291,7 +1356,7 @@ CREATE TABLE `contact_numbers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `contact_numbers`
+-- إرجاع أو استيراد بيانات الجدول `contact_numbers`
 --
 
 INSERT INTO `contact_numbers` (`id`, `phone_number`, `contact_information_id`, `created_at`, `updated_at`, `phone_type_id`, `country_id`) VALUES
@@ -1301,7 +1366,7 @@ INSERT INTO `contact_numbers` (`id`, `phone_number`, `contact_information_id`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contact_sub_categories`
+-- بنية الجدول `contact_sub_categories`
 --
 
 CREATE TABLE `contact_sub_categories` (
@@ -1313,7 +1378,7 @@ CREATE TABLE `contact_sub_categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `contact_sub_categories`
+-- إرجاع أو استيراد بيانات الجدول `contact_sub_categories`
 --
 
 INSERT INTO `contact_sub_categories` (`id`, `name`, `contact_main_catagory_id`, `created_at`, `updated_at`) VALUES
@@ -1333,7 +1398,7 @@ INSERT INTO `contact_sub_categories` (`id`, `name`, `contact_main_catagory_id`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `countries`
+-- بنية الجدول `countries`
 --
 
 CREATE TABLE `countries` (
@@ -1342,7 +1407,7 @@ CREATE TABLE `countries` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `countries`
+-- إرجاع أو استيراد بيانات الجدول `countries`
 --
 
 INSERT INTO `countries` (`id`, `code`) VALUES
@@ -1352,7 +1417,7 @@ INSERT INTO `countries` (`id`, `code`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `country_translations`
+-- بنية الجدول `country_translations`
 --
 
 CREATE TABLE `country_translations` (
@@ -1363,7 +1428,7 @@ CREATE TABLE `country_translations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `country_translations`
+-- إرجاع أو استيراد بيانات الجدول `country_translations`
 --
 
 INSERT INTO `country_translations` (`id`, `country_id`, `translated_languages_id`, `name`) VALUES
@@ -1375,7 +1440,7 @@ INSERT INTO `country_translations` (`id`, `country_id`, `translated_languages_id
 -- --------------------------------------------------------
 
 --
--- Table structure for table `current_locations`
+-- بنية الجدول `current_locations`
 --
 
 CREATE TABLE `current_locations` (
@@ -1392,7 +1457,7 @@ CREATE TABLE `current_locations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `current_locations`
+-- إرجاع أو استيراد بيانات الجدول `current_locations`
 --
 
 INSERT INTO `current_locations` (`id`, `personal_information_id`, `country`, `city`, `postal_code`, `street_address`, `latitude`, `longitude`, `created_at`, `updated_at`) VALUES
@@ -1402,7 +1467,7 @@ INSERT INTO `current_locations` (`id`, `personal_information_id`, `country`, `ci
 -- --------------------------------------------------------
 
 --
--- Table structure for table `c_m_c_translations`
+-- بنية الجدول `c_m_c_translations`
 --
 
 CREATE TABLE `c_m_c_translations` (
@@ -1413,7 +1478,7 @@ CREATE TABLE `c_m_c_translations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `c_m_c_translations`
+-- إرجاع أو استيراد بيانات الجدول `c_m_c_translations`
 --
 
 INSERT INTO `c_m_c_translations` (`id`, `contact_main_catagory_id`, `translated_languages_id`, `name`) VALUES
@@ -1427,7 +1492,7 @@ INSERT INTO `c_m_c_translations` (`id`, `contact_main_catagory_id`, `translated_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `c_s_c_translations`
+-- بنية الجدول `c_s_c_translations`
 --
 
 CREATE TABLE `c_s_c_translations` (
@@ -1438,7 +1503,7 @@ CREATE TABLE `c_s_c_translations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `c_s_c_translations`
+-- إرجاع أو استيراد بيانات الجدول `c_s_c_translations`
 --
 
 INSERT INTO `c_s_c_translations` (`id`, `contact_sub_category_id`, `translated_languages_id`, `name`) VALUES
@@ -1458,7 +1523,7 @@ INSERT INTO `c_s_c_translations` (`id`, `contact_sub_category_id`, `translated_l
 -- --------------------------------------------------------
 
 --
--- Table structure for table `degree_levels`
+-- بنية الجدول `degree_levels`
 --
 
 CREATE TABLE `degree_levels` (
@@ -1466,7 +1531,7 @@ CREATE TABLE `degree_levels` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `degree_levels`
+-- إرجاع أو استيراد بيانات الجدول `degree_levels`
 --
 
 INSERT INTO `degree_levels` (`id`) VALUES
@@ -1482,7 +1547,7 @@ INSERT INTO `degree_levels` (`id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `degree_level_translations`
+-- بنية الجدول `degree_level_translations`
 --
 
 CREATE TABLE `degree_level_translations` (
@@ -1493,7 +1558,7 @@ CREATE TABLE `degree_level_translations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `degree_level_translations`
+-- إرجاع أو استيراد بيانات الجدول `degree_level_translations`
 --
 
 INSERT INTO `degree_level_translations` (`id`, `degree_level_id`, `translated_languages_id`, `name`) VALUES
@@ -1517,7 +1582,7 @@ INSERT INTO `degree_level_translations` (`id`, `degree_level_id`, `translated_la
 -- --------------------------------------------------------
 
 --
--- Table structure for table `education`
+-- بنية الجدول `education`
 --
 
 CREATE TABLE `education` (
@@ -1541,7 +1606,7 @@ CREATE TABLE `education` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `education`
+-- إرجاع أو استيراد بيانات الجدول `education`
 --
 
 INSERT INTO `education` (`id`, `resume_id`, `major_id`, `minor_id`, `to`, `isPresent`, `order`, `created_at`, `updated_at`, `description`, `from`, `isFromMonthPresent`, `isToMonthPresent`, `grade`, `full_grade`, `degree_level_id`, `institution_id`) VALUES
@@ -1551,7 +1616,7 @@ INSERT INTO `education` (`id`, `resume_id`, `major_id`, `minor_id`, `to`, `isPre
 -- --------------------------------------------------------
 
 --
--- Table structure for table `education_projects`
+-- بنية الجدول `education_projects`
 --
 
 CREATE TABLE `education_projects` (
@@ -1566,7 +1631,7 @@ CREATE TABLE `education_projects` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `emails`
+-- بنية الجدول `emails`
 --
 
 CREATE TABLE `emails` (
@@ -1578,7 +1643,7 @@ CREATE TABLE `emails` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `emails`
+-- إرجاع أو استيراد بيانات الجدول `emails`
 --
 
 INSERT INTO `emails` (`id`, `email_address`, `contact_information_id`, `created_at`, `updated_at`) VALUES
@@ -1589,7 +1654,7 @@ INSERT INTO `emails` (`id`, `email_address`, `contact_information_id`, `created_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `employment_types`
+-- بنية الجدول `employment_types`
 --
 
 CREATE TABLE `employment_types` (
@@ -1601,7 +1666,7 @@ CREATE TABLE `employment_types` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `employment_types`
+-- إرجاع أو استيراد بيانات الجدول `employment_types`
 --
 
 INSERT INTO `employment_types` (`id`, `employment_type_parent_id`, `work_experience_id`, `created_at`, `updated_at`) VALUES
@@ -1613,7 +1678,7 @@ INSERT INTO `employment_types` (`id`, `employment_type_parent_id`, `work_experie
 -- --------------------------------------------------------
 
 --
--- Table structure for table `employment_type_parents`
+-- بنية الجدول `employment_type_parents`
 --
 
 CREATE TABLE `employment_type_parents` (
@@ -1624,7 +1689,7 @@ CREATE TABLE `employment_type_parents` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `employment_type_parents`
+-- إرجاع أو استيراد بيانات الجدول `employment_type_parents`
 --
 
 INSERT INTO `employment_type_parents` (`id`, `parent_id`, `created_at`, `updated_at`) VALUES
@@ -1651,7 +1716,7 @@ INSERT INTO `employment_type_parents` (`id`, `parent_id`, `created_at`, `updated
 -- --------------------------------------------------------
 
 --
--- Table structure for table `emp_type_parent_translations`
+-- بنية الجدول `emp_type_parent_translations`
 --
 
 CREATE TABLE `emp_type_parent_translations` (
@@ -1662,7 +1727,7 @@ CREATE TABLE `emp_type_parent_translations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `emp_type_parent_translations`
+-- إرجاع أو استيراد بيانات الجدول `emp_type_parent_translations`
 --
 
 INSERT INTO `emp_type_parent_translations` (`id`, `employment_type_parent_id`, `translated_languages_id`, `name`) VALUES
@@ -1708,7 +1773,7 @@ INSERT INTO `emp_type_parent_translations` (`id`, `employment_type_parent_id`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `institutions`
+-- بنية الجدول `institutions`
 --
 
 CREATE TABLE `institutions` (
@@ -1724,7 +1789,7 @@ CREATE TABLE `institutions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `institutions`
+-- إرجاع أو استيراد بيانات الجدول `institutions`
 --
 
 INSERT INTO `institutions` (`id`, `url`, `country`, `city`, `street_address`, `verified`, `created_at`, `updated_at`, `institution_type_id`) VALUES
@@ -1760,7 +1825,7 @@ INSERT INTO `institutions` (`id`, `url`, `country`, `city`, `street_address`, `v
 -- --------------------------------------------------------
 
 --
--- Table structure for table `institution_translations`
+-- بنية الجدول `institution_translations`
 --
 
 CREATE TABLE `institution_translations` (
@@ -1773,7 +1838,7 @@ CREATE TABLE `institution_translations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `institution_translations`
+-- إرجاع أو استيراد بيانات الجدول `institution_translations`
 --
 
 INSERT INTO `institution_translations` (`id`, `institution_id`, `translated_languages_id`, `name`, `created_at`, `updated_at`) VALUES
@@ -1834,7 +1899,7 @@ INSERT INTO `institution_translations` (`id`, `institution_id`, `translated_lang
 -- --------------------------------------------------------
 
 --
--- Table structure for table `institution_types`
+-- بنية الجدول `institution_types`
 --
 
 CREATE TABLE `institution_types` (
@@ -1845,7 +1910,7 @@ CREATE TABLE `institution_types` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `institution_types`
+-- إرجاع أو استيراد بيانات الجدول `institution_types`
 --
 
 INSERT INTO `institution_types` (`id`, `type`, `created_at`, `updated_at`) VALUES
@@ -1855,7 +1920,7 @@ INSERT INTO `institution_types` (`id`, `type`, `created_at`, `updated_at`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `international_languages`
+-- بنية الجدول `international_languages`
 --
 
 CREATE TABLE `international_languages` (
@@ -1865,7 +1930,7 @@ CREATE TABLE `international_languages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `international_languages`
+-- إرجاع أو استيراد بيانات الجدول `international_languages`
 --
 
 INSERT INTO `international_languages` (`id`, `created_at`, `updated_at`) VALUES
@@ -1976,7 +2041,7 @@ INSERT INTO `international_languages` (`id`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `international_language_trans`
+-- بنية الجدول `international_language_trans`
 --
 
 CREATE TABLE `international_language_trans` (
@@ -1989,7 +2054,7 @@ CREATE TABLE `international_language_trans` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `international_language_trans`
+-- إرجاع أو استيراد بيانات الجدول `international_language_trans`
 --
 
 INSERT INTO `international_language_trans` (`id`, `international_language_id`, `translated_languages_id`, `name`, `created_at`, `updated_at`) VALUES
@@ -2100,7 +2165,7 @@ INSERT INTO `international_language_trans` (`id`, `international_language_id`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `internet_communications`
+-- بنية الجدول `internet_communications`
 --
 
 CREATE TABLE `internet_communications` (
@@ -2113,7 +2178,7 @@ CREATE TABLE `internet_communications` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `internet_communications`
+-- إرجاع أو استيراد بيانات الجدول `internet_communications`
 --
 
 INSERT INTO `internet_communications` (`id`, `address`, `contact_information_id`, `created_at`, `updated_at`, `internet_communication_type_id`) VALUES
@@ -2123,7 +2188,7 @@ INSERT INTO `internet_communications` (`id`, `address`, `contact_information_id`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `internet_communication_types`
+-- بنية الجدول `internet_communication_types`
 --
 
 CREATE TABLE `internet_communication_types` (
@@ -2134,7 +2199,7 @@ CREATE TABLE `internet_communication_types` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `internet_communication_types`
+-- إرجاع أو استيراد بيانات الجدول `internet_communication_types`
 --
 
 INSERT INTO `internet_communication_types` (`id`, `name`, `created_at`, `updated_at`) VALUES
@@ -2154,7 +2219,7 @@ INSERT INTO `internet_communication_types` (`id`, `name`, `created_at`, `updated
 -- --------------------------------------------------------
 
 --
--- Table structure for table `majors`
+-- بنية الجدول `majors`
 --
 
 CREATE TABLE `majors` (
@@ -2167,7 +2232,7 @@ CREATE TABLE `majors` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `majors`
+-- إرجاع أو استيراد بيانات الجدول `majors`
 --
 
 INSERT INTO `majors` (`id`, `created_at`, `updated_at`, `verified`, `major_parent_id`, `institution_type_id`) VALUES
@@ -2326,7 +2391,7 @@ INSERT INTO `majors` (`id`, `created_at`, `updated_at`, `verified`, `major_paren
 -- --------------------------------------------------------
 
 --
--- Table structure for table `major_parents`
+-- بنية الجدول `major_parents`
 --
 
 CREATE TABLE `major_parents` (
@@ -2336,7 +2401,7 @@ CREATE TABLE `major_parents` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `major_parents`
+-- إرجاع أو استيراد بيانات الجدول `major_parents`
 --
 
 INSERT INTO `major_parents` (`id`, `created_at`, `updated_at`) VALUES
@@ -2345,7 +2410,7 @@ INSERT INTO `major_parents` (`id`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `major_parent_translations`
+-- بنية الجدول `major_parent_translations`
 --
 
 CREATE TABLE `major_parent_translations` (
@@ -2358,7 +2423,7 @@ CREATE TABLE `major_parent_translations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `major_parent_translations`
+-- إرجاع أو استيراد بيانات الجدول `major_parent_translations`
 --
 
 INSERT INTO `major_parent_translations` (`id`, `major_parent_id`, `translated_languages_id`, `name`, `created_at`, `updated_at`) VALUES
@@ -2367,7 +2432,7 @@ INSERT INTO `major_parent_translations` (`id`, `major_parent_id`, `translated_la
 -- --------------------------------------------------------
 
 --
--- Table structure for table `major_translations`
+-- بنية الجدول `major_translations`
 --
 
 CREATE TABLE `major_translations` (
@@ -2380,7 +2445,7 @@ CREATE TABLE `major_translations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `major_translations`
+-- إرجاع أو استيراد بيانات الجدول `major_translations`
 --
 
 INSERT INTO `major_translations` (`id`, `major_id`, `translated_languages_id`, `name`, `created_at`, `updated_at`) VALUES
@@ -2567,7 +2632,7 @@ INSERT INTO `major_translations` (`id`, `major_id`, `translated_languages_id`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `marital_statuses`
+-- بنية الجدول `marital_statuses`
 --
 
 CREATE TABLE `marital_statuses` (
@@ -2575,7 +2640,7 @@ CREATE TABLE `marital_statuses` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `marital_statuses`
+-- إرجاع أو استيراد بيانات الجدول `marital_statuses`
 --
 
 INSERT INTO `marital_statuses` (`id`) VALUES
@@ -2589,7 +2654,7 @@ INSERT INTO `marital_statuses` (`id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `marital_status_translations`
+-- بنية الجدول `marital_status_translations`
 --
 
 CREATE TABLE `marital_status_translations` (
@@ -2600,7 +2665,7 @@ CREATE TABLE `marital_status_translations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `marital_status_translations`
+-- إرجاع أو استيراد بيانات الجدول `marital_status_translations`
 --
 
 INSERT INTO `marital_status_translations` (`id`, `marital_status_id`, `translated_languages_id`, `name`) VALUES
@@ -2620,7 +2685,7 @@ INSERT INTO `marital_status_translations` (`id`, `marital_status_id`, `translate
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migrations`
+-- بنية الجدول `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -2630,7 +2695,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `migrations`
+-- إرجاع أو استيراد بيانات الجدول `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -2876,12 +2941,19 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (251, '2011_09_30_073958_edit_recieved_emails_table', 108),
 (252, '2011_09_30_074958_edit_column_recieved_emails_table', 109),
 (253, '2010_09_30_075958_create_c_m_c_translations_table', 110),
-(254, '2010_09_30_075958_create_c_s_c_translations_table', 110);
+(254, '2010_09_30_075958_create_c_s_c_translations_table', 110),
+(255, '2011_09_30_076058_rename_column_in_admin_email_assign_logs_table', 111),
+(256, '2011_09_30_076158_edit_email_column_recieved_emails_table', 112),
+(257, '2011_09_30_076168_edit_user_id_column_recieved_emails_table', 113),
+(258, '2011_09_30_076268_drop_unique_email_column_recieved_emails_table', 114),
+(260, '2011_09_30_076358_edit_pre_defined_emails_table', 115),
+(261, '2011_09_30_071958_create_admin_not_done_email_logs_table', 116),
+(262, '2011_09_30_073958_add_recieved_emails_table', 117);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `minors`
+-- بنية الجدول `minors`
 --
 
 CREATE TABLE `minors` (
@@ -2893,7 +2965,7 @@ CREATE TABLE `minors` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `minors`
+-- إرجاع أو استيراد بيانات الجدول `minors`
 --
 
 INSERT INTO `minors` (`id`, `major_id`, `created_at`, `updated_at`, `verified`) VALUES
@@ -3353,7 +3425,7 @@ INSERT INTO `minors` (`id`, `major_id`, `created_at`, `updated_at`, `verified`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `minor_translations`
+-- بنية الجدول `minor_translations`
 --
 
 CREATE TABLE `minor_translations` (
@@ -3366,7 +3438,7 @@ CREATE TABLE `minor_translations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `minor_translations`
+-- إرجاع أو استيراد بيانات الجدول `minor_translations`
 --
 
 INSERT INTO `minor_translations` (`id`, `minor_id`, `translated_languages_id`, `name`, `created_at`, `updated_at`) VALUES
@@ -3826,7 +3898,19 @@ INSERT INTO `minor_translations` (`id`, `minor_id`, `translated_languages_id`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `nationalities`
+-- بنية الجدول `mytable_11`
+--
+
+CREATE TABLE `mytable_11` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `nationalities`
 --
 
 CREATE TABLE `nationalities` (
@@ -3836,7 +3920,7 @@ CREATE TABLE `nationalities` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `nationalities`
+-- إرجاع أو استيراد بيانات الجدول `nationalities`
 --
 
 INSERT INTO `nationalities` (`id`, `created_at`, `updated_at`) VALUES
@@ -4093,7 +4177,7 @@ INSERT INTO `nationalities` (`id`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `nationality_personal_information`
+-- بنية الجدول `nationality_personal_information`
 --
 
 CREATE TABLE `nationality_personal_information` (
@@ -4104,7 +4188,7 @@ CREATE TABLE `nationality_personal_information` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `nationality_personal_information`
+-- إرجاع أو استيراد بيانات الجدول `nationality_personal_information`
 --
 
 INSERT INTO `nationality_personal_information` (`nationality_id`, `personal_information_id`, `created_at`, `updated_at`) VALUES
@@ -4126,7 +4210,7 @@ INSERT INTO `nationality_personal_information` (`nationality_id`, `personal_info
 -- --------------------------------------------------------
 
 --
--- Table structure for table `nationality_translations`
+-- بنية الجدول `nationality_translations`
 --
 
 CREATE TABLE `nationality_translations` (
@@ -4137,7 +4221,7 @@ CREATE TABLE `nationality_translations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `nationality_translations`
+-- إرجاع أو استيراد بيانات الجدول `nationality_translations`
 --
 
 INSERT INTO `nationality_translations` (`id`, `nationality_id`, `translated_languages_id`, `name`) VALUES
@@ -4501,7 +4585,7 @@ INSERT INTO `nationality_translations` (`id`, `nationality_id`, `translated_lang
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oauth_access_tokens`
+-- بنية الجدول `oauth_access_tokens`
 --
 
 CREATE TABLE `oauth_access_tokens` (
@@ -4517,11 +4601,12 @@ CREATE TABLE `oauth_access_tokens` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `oauth_access_tokens`
+-- إرجاع أو استيراد بيانات الجدول `oauth_access_tokens`
 --
 
 INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes`, `revoked`, `created_at`, `updated_at`, `expires_at`) VALUES
 ('08ee2cdc690816dab6a0e50a8ffc8970921262598e7b28b697051ecf5458ffd186c20d52bcd32b2e', NULL, 3, NULL, '[]', 0, '2019-10-03 06:11:50', '2019-10-03 06:11:50', '2020-10-03 09:11:50'),
+('181dc780ab3452242fc7a6cc5d3e124318313230b5088081c555c81069165a33a98eecf8da93bd7c', 32, 6, 'MyApp', '[\"*\"]', 0, '2019-11-26 05:36:21', '2019-11-26 05:36:21', '2020-11-26 07:36:21'),
 ('20175197ac1c97549d89b13a44707cb81ec65cf708b87a177c553328218b85986c3d59da0745a981', 32, 6, 'MyApp', '[\"user\"]', 0, '2019-10-09 15:43:43', '2019-10-09 15:43:43', '2020-10-09 18:43:43'),
 ('211a134d205df022abb3ebccd504b62831cf44647d72da538ecd1c8c4c3ed8b02f6055bbef191b93', 7, 6, 'MyApp', '[\"employeer\"]', 0, '2019-10-19 09:13:24', '2019-10-19 09:13:24', '2020-10-19 12:13:24'),
 ('22f156fea2b529ceae55a625f64f0d66b03ed7ae65a8fb7d7e915458a511a0e46160487d453336c6', 7, 6, 'MyApp', '[\"employeer\"]', 0, '2019-10-19 09:15:34', '2019-10-19 09:15:34', '2020-10-19 12:15:34'),
@@ -4529,6 +4614,7 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('292edc07b97517c8f325b2d13f957d72542fe91bb9dbbd48761d2fa51686808585a63332dcc1a11c', 25, 6, 'MyApp', '[\"*\"]', 0, '2019-10-20 04:00:27', '2019-10-20 04:00:27', '2020-10-20 07:00:27'),
 ('2e43cd375cd85e06a0ac5006258bd6d5eada89caf5433d5f7606b3de9451a039502cb4b9f5f45dc5', 22, 6, 'MyApp', '[\"*\"]', 0, '2019-10-20 03:57:22', '2019-10-20 03:57:22', '2020-10-20 06:57:22'),
 ('31ff12c0020191378126d544b429479d7aa8e0c3fce952c1347cdc167ef4c440ce745ac5fa3db37e', 28, 6, 'MyApp', '[\"*\"]', 0, '2019-10-20 05:00:10', '2019-10-20 05:00:10', '2020-10-20 08:00:10'),
+('32e0870ea8d0bc53ebcb8aedc5bf72e2887ebe24a4e4f61a8f9511fa6a30c1a5d8cf58e59a1f8449', 33, 6, 'MyApp', '[\"*\"]', 0, '2019-12-10 08:37:27', '2019-12-10 08:37:27', '2020-12-10 10:37:27'),
 ('37cd13755d5fc21d9b5e29ea33d90d6324489f1c522cd44a7b5f84f468f75ed6112ae8282130e01c', 8, 6, 'MyApp', '[\"*\"]', 0, '2019-10-20 03:46:56', '2019-10-20 03:46:56', '2020-10-20 06:46:56'),
 ('3b04b311a30cdc85c2f19e1dca1232cce73790073927ced209e4521a36468778bd2c5647c256e3fc', 3, 6, 'MyApp', '[\"user\"]', 0, '2019-10-17 06:40:28', '2019-10-17 06:40:28', '2020-10-17 09:40:28'),
 ('3b288c6e04ea47a6494f6a3c44ef934146abc89abb7437a5acfb84f56a21736ceb846fdf999270fa', 7, 6, 'MyApp', '[\"user\"]', 0, '2019-10-19 08:59:21', '2019-10-19 08:59:21', '2020-10-19 11:59:21'),
@@ -4541,6 +4627,7 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('6c95bba80181fde74ba59cbae9a06119240b1c25ced9e8a936c1bb165dc08e78ecc6a0c1cb5a5f54', 6, 6, 'MyApp', '[\"user\",\"employeer\"]', 0, '2019-10-19 08:52:06', '2019-10-19 08:52:06', '2020-10-19 11:52:06'),
 ('775d5e2214f5fc817529aab49be9aa7332662b606c5eecda6a20ffcca48aacfab5253c95d347a525', 1, 6, 'MyApp', '[\"user\"]', 0, '2019-10-11 16:07:59', '2019-10-11 16:07:59', '2020-10-11 19:07:59'),
 ('90a6670e89769982148ebb6a84639aef071493ae1af2496c01f5a8f41da1156825603dce50529575', 26, 6, 'MyApp', '[\"*\"]', 0, '2019-10-20 04:01:14', '2019-10-20 04:01:14', '2020-10-20 07:01:14'),
+('96dc1f4b732d1881e477066a726f1a8c38bbfaeee471c865696f22185e70323f5d9a712fa28f8feb', 29, 6, 'MyApp', '[\"*\"]', 0, '2019-11-13 07:08:49', '2019-11-13 07:08:49', '2020-11-13 09:08:49'),
 ('9daf97d13dd06efb54a6470b71c4e86d0de8947f495d1bd0c54225646cfe027b1f9c41884ccb22b4', 7, 6, 'MyApp', '[\"user\"]', 0, '2019-10-20 03:19:01', '2019-10-20 03:19:01', '2020-10-20 06:19:01'),
 ('9ee6b999d57783e84f6fd12acaad23667f6dfbcf9e36c0fdfbddec47f0d43c52d53776243c7688b7', NULL, 3, NULL, '[]', 0, '2019-10-03 19:08:32', '2019-10-03 19:08:32', '2020-10-03 22:08:32'),
 ('a4528979c3399996db08b6dfdef0866aa04c750b51175b7a8942c75a818e24050d41a3863d573683', 23, 6, 'MyApp', '[\"*\"]', 0, '2019-10-20 03:58:38', '2019-10-20 03:58:38', '2020-10-20 06:58:38'),
@@ -4558,16 +4645,18 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('c67ddb30780d20326fbce53bbe4fae55f10a3f50ee28495f7047b6b1011f3c7a1e97537bf096ef8b', 24, 6, 'MyApp', '[]', 0, '2019-10-05 03:58:18', '2019-10-05 03:58:18', '2020-10-05 06:58:18'),
 ('c82adc43c15f259c574f1780a87f79f9441b44ef135cf7ccdfe52f3b21d516c91e982b99b7c4f1bc', NULL, 3, NULL, '[]', 0, '2019-10-03 06:21:21', '2019-10-03 06:21:21', '2020-10-03 09:21:21'),
 ('d0f61f57bceb68847b1fcc189c0ffd79a2f2fd95617641f102f7f8a29802379a674964ba79eee30b', 2, 6, 'MyApp', '[\"user\"]', 0, '2019-10-15 15:52:31', '2019-10-15 15:52:31', '2020-10-15 18:52:31'),
+('d394b5743dec63bde6072b9268c13a17f7cfa40129d4671594d645e488845ef01f413fceda035bf6', 30, 6, 'MyApp', '[\"*\"]', 0, '2019-11-13 07:09:03', '2019-11-13 07:09:03', '2020-11-13 09:09:03'),
 ('d91dc0635643303faf33714bcc11101d735f5338f5fbe83066ff05860b3a62f4d86eae5289576b44', 7, 6, 'MyApp', '[\"user\"]', 0, '2019-10-19 09:18:55', '2019-10-19 09:18:55', '2020-10-19 12:18:55'),
 ('dad9a33af290784b78fe4c185f58051c2726d61bd17585ce6e80b9098575ab34b3d82fc97f7d58c7', 25, 6, 'MyApp', '[\"*\"]', 0, '2019-10-05 04:51:58', '2019-10-05 04:51:58', '2020-10-05 07:51:58'),
 ('db1a32ed65752e417b553da4eed74fda7afb8bb105240e73e4df31dd64c5457dab8ba170a06e238f', 1, 6, 'MyApp', '[\"employeer\"]', 0, '2019-10-11 17:34:32', '2019-10-11 17:34:32', '2020-10-11 20:34:32'),
 ('efcc0af00d598fe628911997468018f7bc8d5e9ffdc47df948e5f32b7116b6e0733d7f2c18c319a2', 30, 6, 'MyApp', '[\"user\"]', 0, '2019-10-09 04:17:16', '2019-10-09 04:17:16', '2020-10-09 07:17:16'),
+('f10fc844fc0cc786e7aab93f0e87543e10d4c7afa4dbffcb786a2caced58b30aa9ac8d9f20052977', 31, 6, 'MyApp', '[\"*\"]', 0, '2019-11-16 09:48:36', '2019-11-16 09:48:36', '2020-11-16 11:48:36'),
 ('f67d6ea8eff5da1a0174feae874ac0e2bd7e332d4e83e549bad096700c2eceabf005ac62cb5782c1', 1, 6, 'MyApp', '[\"employeer\"]', 0, '2019-10-11 17:34:00', '2019-10-11 17:34:00', '2020-10-11 20:34:00');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oauth_auth_codes`
+-- بنية الجدول `oauth_auth_codes`
 --
 
 CREATE TABLE `oauth_auth_codes` (
@@ -4582,7 +4671,7 @@ CREATE TABLE `oauth_auth_codes` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oauth_clients`
+-- بنية الجدول `oauth_clients`
 --
 
 CREATE TABLE `oauth_clients` (
@@ -4599,7 +4688,7 @@ CREATE TABLE `oauth_clients` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `oauth_clients`
+-- إرجاع أو استيراد بيانات الجدول `oauth_clients`
 --
 
 INSERT INTO `oauth_clients` (`id`, `user_id`, `name`, `secret`, `redirect`, `personal_access_client`, `password_client`, `revoked`, `created_at`, `updated_at`) VALUES
@@ -4615,7 +4704,7 @@ INSERT INTO `oauth_clients` (`id`, `user_id`, `name`, `secret`, `redirect`, `per
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oauth_personal_access_clients`
+-- بنية الجدول `oauth_personal_access_clients`
 --
 
 CREATE TABLE `oauth_personal_access_clients` (
@@ -4626,7 +4715,7 @@ CREATE TABLE `oauth_personal_access_clients` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `oauth_personal_access_clients`
+-- إرجاع أو استيراد بيانات الجدول `oauth_personal_access_clients`
 --
 
 INSERT INTO `oauth_personal_access_clients` (`id`, `client_id`, `created_at`, `updated_at`) VALUES
@@ -4637,7 +4726,7 @@ INSERT INTO `oauth_personal_access_clients` (`id`, `client_id`, `created_at`, `u
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oauth_refresh_tokens`
+-- بنية الجدول `oauth_refresh_tokens`
 --
 
 CREATE TABLE `oauth_refresh_tokens` (
@@ -4650,7 +4739,7 @@ CREATE TABLE `oauth_refresh_tokens` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `password_resets`
+-- بنية الجدول `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -4662,7 +4751,7 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `personal_informations`
+-- بنية الجدول `personal_informations`
 --
 
 CREATE TABLE `personal_informations` (
@@ -4681,7 +4770,7 @@ CREATE TABLE `personal_informations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `personal_informations`
+-- إرجاع أو استيراد بيانات الجدول `personal_informations`
 --
 
 INSERT INTO `personal_informations` (`id`, `first_name`, `middle_name`, `last_name`, `profile_picture`, `resume_title`, `gender`, `date_of_birth`, `resume_id`, `created_at`, `updated_at`, `marital_status_id`) VALUES
@@ -4691,7 +4780,7 @@ INSERT INTO `personal_informations` (`id`, `first_name`, `middle_name`, `last_na
 -- --------------------------------------------------------
 
 --
--- Table structure for table `personal_links`
+-- بنية الجدول `personal_links`
 --
 
 CREATE TABLE `personal_links` (
@@ -4704,7 +4793,7 @@ CREATE TABLE `personal_links` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `personal_links`
+-- إرجاع أو استيراد بيانات الجدول `personal_links`
 --
 
 INSERT INTO `personal_links` (`id`, `url`, `contact_information_id`, `created_at`, `updated_at`, `social_media_id`) VALUES
@@ -4714,7 +4803,7 @@ INSERT INTO `personal_links` (`id`, `url`, `contact_information_id`, `created_at
 -- --------------------------------------------------------
 
 --
--- Table structure for table `phone_types`
+-- بنية الجدول `phone_types`
 --
 
 CREATE TABLE `phone_types` (
@@ -4722,7 +4811,7 @@ CREATE TABLE `phone_types` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `phone_types`
+-- إرجاع أو استيراد بيانات الجدول `phone_types`
 --
 
 INSERT INTO `phone_types` (`id`) VALUES
@@ -4733,7 +4822,7 @@ INSERT INTO `phone_types` (`id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `phone_type_translations`
+-- بنية الجدول `phone_type_translations`
 --
 
 CREATE TABLE `phone_type_translations` (
@@ -4744,7 +4833,7 @@ CREATE TABLE `phone_type_translations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `phone_type_translations`
+-- إرجاع أو استيراد بيانات الجدول `phone_type_translations`
 --
 
 INSERT INTO `phone_type_translations` (`id`, `phone_type_id`, `translated_languages_id`, `name`) VALUES
@@ -4758,7 +4847,7 @@ INSERT INTO `phone_type_translations` (`id`, `phone_type_id`, `translated_langua
 -- --------------------------------------------------------
 
 --
--- Table structure for table `place_of_births`
+-- بنية الجدول `place_of_births`
 --
 
 CREATE TABLE `place_of_births` (
@@ -4773,7 +4862,7 @@ CREATE TABLE `place_of_births` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `place_of_births`
+-- إرجاع أو استيراد بيانات الجدول `place_of_births`
 --
 
 INSERT INTO `place_of_births` (`id`, `personal_information_id`, `country`, `city`, `latitude`, `longitude`, `created_at`, `updated_at`) VALUES
@@ -4784,7 +4873,7 @@ INSERT INTO `place_of_births` (`id`, `personal_information_id`, `country`, `city
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pre_defined_emails`
+-- بنية الجدول `pre_defined_emails`
 --
 
 CREATE TABLE `pre_defined_emails` (
@@ -4795,13 +4884,22 @@ CREATE TABLE `pre_defined_emails` (
   `message` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `template_title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- إرجاع أو استيراد بيانات الجدول `pre_defined_emails`
+--
+
+INSERT INTO `pre_defined_emails` (`id`, `contact_main_catagory_id`, `contact_sub_category_id`, `user_id`, `message`, `email_title`, `created_at`, `updated_at`, `template_title`) VALUES
+(6, 1, 2, 31, 'xxxxxx..', 'xxxxxxx', '2019-11-16 11:35:47', '2019-11-16 11:35:47', 'xxxxxxx'),
+(9, 1, 2, 31, 'xxxxxx..', 'xxsxdxxx', '2019-11-21 03:53:59', '2019-11-21 03:53:59', 'xxrxrxxx');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `recieved_emails`
+-- بنية الجدول `recieved_emails`
 --
 
 CREATE TABLE `recieved_emails` (
@@ -4811,13 +4909,14 @@ CREATE TABLE `recieved_emails` (
   `delete_by_admin_user_id` int(10) UNSIGNED DEFAULT NULL,
   `last_admin_comment_id` int(10) UNSIGNED DEFAULT NULL,
   `last_admin_done_email_log_id` int(10) UNSIGNED DEFAULT NULL,
+  `last_admin_note_done_email_log_id` int(10) UNSIGNED DEFAULT NULL,
   `last_admin_open_log_id` int(10) UNSIGNED DEFAULT NULL,
   `last_admin_replied_email_id` int(10) UNSIGNED DEFAULT NULL,
   `last_admin_restore_email_log_id` int(10) UNSIGNED DEFAULT NULL,
   `translated_languages_id` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED DEFAULT NULL,
   `message` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` int(10) UNSIGNED DEFAULT NULL,
   `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
   `deleted_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -4825,16 +4924,105 @@ CREATE TABLE `recieved_emails` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `recieved_emails`
+-- إرجاع أو استيراد بيانات الجدول `recieved_emails`
 --
 
-INSERT INTO `recieved_emails` (`id`, `contact_main_catagory_id`, `contact_sub_category_id`, `delete_by_admin_user_id`, `last_admin_comment_id`, `last_admin_done_email_log_id`, `last_admin_open_log_id`, `last_admin_replied_email_id`, `last_admin_restore_email_log_id`, `translated_languages_id`, `user_id`, `message`, `email`, `is_deleted`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(2, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, 'problem in …..', 'sss@gmail.com', 0, '2019-11-06 07:36:27', '2019-11-06 05:36:27', '2019-11-06 05:36:27');
+INSERT INTO `recieved_emails` (`id`, `contact_main_catagory_id`, `contact_sub_category_id`, `delete_by_admin_user_id`, `last_admin_comment_id`, `last_admin_done_email_log_id`, `last_admin_note_done_email_log_id`, `last_admin_open_log_id`, `last_admin_replied_email_id`, `last_admin_restore_email_log_id`, `translated_languages_id`, `user_id`, `message`, `email`, `is_deleted`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(13, 1, 2, NULL, NULL, NULL, 1, 21, 31, NULL, 1, NULL, 'problem in …..', 0, 0, '2019-12-10 11:28:17', '2019-11-14 08:45:53', '2019-12-10 09:28:17'),
+(14, 1, 2, NULL, NULL, NULL, NULL, NULL, 31, NULL, 1, 30, 'problem in …..', NULL, 0, '2019-11-23 09:44:56', '2019-11-14 08:46:24', '2019-11-23 07:44:56'),
+(15, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, 'problem in coyrse…..', 0, 0, '2019-11-27 08:43:11', '2019-11-27 06:43:11', '2019-11-27 06:43:11'),
+(16, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, 'problem in …..', 0, 0, '2019-11-27 08:44:15', '2019-11-27 06:44:15', '2019-11-27 06:44:15');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `resumes`
+-- بنية الجدول `recieved_email_activity_log13`
+--
+
+CREATE TABLE `recieved_email_activity_log13` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `action_id` int(11) NOT NULL,
+  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- إرجاع أو استيراد بيانات الجدول `recieved_email_activity_log13`
+--
+
+INSERT INTO `recieved_email_activity_log13` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
+(2, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
+(3, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
+(4, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
+(5, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50');
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `recieved_email_activity_log132019-12-10 11:34:05`
+--
+
+CREATE TABLE `recieved_email_activity_log132019-12-10 11:34:05` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `action_id` int(11) NOT NULL,
+  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- إرجاع أو استيراد بيانات الجدول `recieved_email_activity_log132019-12-10 11:34:05`
+--
+
+INSERT INTO `recieved_email_activity_log132019-12-10 11:34:05` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
+(2, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
+(3, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
+(4, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
+(5, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50');
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `recieved_email_activity_log132019-12-10 11:34:28`
+--
+
+CREATE TABLE `recieved_email_activity_log132019-12-10 11:34:28` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `action_id` int(11) NOT NULL,
+  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- إرجاع أو استيراد بيانات الجدول `recieved_email_activity_log132019-12-10 11:34:28`
+--
+
+INSERT INTO `recieved_email_activity_log132019-12-10 11:34:28` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
+(2, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
+(3, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
+(4, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
+(5, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50'),
+(6, 20, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:14:32', '2019-12-10 09:14:32'),
+(7, 21, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:18:39', '2019-12-10 09:18:39');
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `resumes`
 --
 
 CREATE TABLE `resumes` (
@@ -4849,7 +5037,7 @@ CREATE TABLE `resumes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `resumes`
+-- إرجاع أو استيراد بيانات الجدول `resumes`
 --
 
 INSERT INTO `resumes` (`id`, `user_id`, `created_at`, `updated_at`, `name`, `active`, `translated_languages_id`, `count_copy`) VALUES
@@ -4859,7 +5047,7 @@ INSERT INTO `resumes` (`id`, `user_id`, `created_at`, `updated_at`, `name`, `act
 -- --------------------------------------------------------
 
 --
--- Table structure for table `roles`
+-- بنية الجدول `roles`
 --
 
 CREATE TABLE `roles` (
@@ -4871,18 +5059,19 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `roles`
+-- إرجاع أو استيراد بيانات الجدول `roles`
 --
 
 INSERT INTO `roles` (`id`, `name`, `description`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin', NULL, NULL),
+(1, 'admin', 'main admin', NULL, NULL),
 (2, 'employeer', 'employeer', NULL, NULL),
-(3, 'user', 'user', NULL, NULL);
+(3, 'user', 'user', NULL, NULL),
+(4, 'sub admin', 'sub admin', NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `role_user`
+-- بنية الجدول `role_user`
 --
 
 CREATE TABLE `role_user` (
@@ -4894,19 +5083,24 @@ CREATE TABLE `role_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `role_user`
+-- إرجاع أو استيراد بيانات الجدول `role_user`
 --
 
 INSERT INTO `role_user` (`id`, `role_id`, `user_id`, `created_at`, `updated_at`) VALUES
 (1, 3, 7, '2019-10-19 08:59:21', '2019-10-19 08:59:21'),
 (2, 1, 26, '2019-10-20 04:01:14', '2019-10-20 04:01:14'),
 (3, 3, 27, '2019-10-20 04:03:05', '2019-10-20 04:03:05'),
-(4, 1, 28, '2019-10-20 05:00:10', '2019-10-20 05:00:10');
+(4, 1, 28, '2019-10-20 05:00:10', '2019-10-20 05:00:10'),
+(5, 1, 29, '2019-11-13 07:08:49', '2019-11-13 07:08:49'),
+(6, 1, 30, '2019-11-13 07:09:03', '2019-11-13 07:09:03'),
+(7, 1, 31, '2019-11-16 09:48:36', '2019-11-16 09:48:36'),
+(8, 1, 32, '2019-11-26 05:36:21', '2019-11-26 05:36:21'),
+(9, 1, 33, '2019-12-10 08:37:27', '2019-12-10 08:37:27');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `social_media`
+-- بنية الجدول `social_media`
 --
 
 CREATE TABLE `social_media` (
@@ -4917,7 +5111,7 @@ CREATE TABLE `social_media` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `social_media`
+-- إرجاع أو استيراد بيانات الجدول `social_media`
 --
 
 INSERT INTO `social_media` (`id`, `name`, `created_at`, `updated_at`) VALUES
@@ -4958,7 +5152,7 @@ INSERT INTO `social_media` (`id`, `name`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `specialty`
+-- بنية الجدول `specialty`
 --
 
 CREATE TABLE `specialty` (
@@ -4970,7 +5164,7 @@ CREATE TABLE `specialty` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `specialty`
+-- إرجاع أو استيراد بيانات الجدول `specialty`
 --
 
 INSERT INTO `specialty` (`id`, `company_industry_id`, `is_verfied`, `created_at`, `updated_at`) VALUES
@@ -4992,7 +5186,7 @@ INSERT INTO `specialty` (`id`, `company_industry_id`, `is_verfied`, `created_at`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `specialty_translations`
+-- بنية الجدول `specialty_translations`
 --
 
 CREATE TABLE `specialty_translations` (
@@ -5005,7 +5199,7 @@ CREATE TABLE `specialty_translations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `specialty_translations`
+-- إرجاع أو استيراد بيانات الجدول `specialty_translations`
 --
 
 INSERT INTO `specialty_translations` (`id`, `specialty_id`, `translated_languages_id`, `specialty_translation_name`, `created_at`, `updated_at`) VALUES
@@ -5027,7 +5221,7 @@ INSERT INTO `specialty_translations` (`id`, `specialty_id`, `translated_language
 -- --------------------------------------------------------
 
 --
--- Table structure for table `translated_languages`
+-- بنية الجدول `translated_languages`
 --
 
 CREATE TABLE `translated_languages` (
@@ -5036,7 +5230,7 @@ CREATE TABLE `translated_languages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `translated_languages`
+-- إرجاع أو استيراد بيانات الجدول `translated_languages`
 --
 
 INSERT INTO `translated_languages` (`id`, `name`) VALUES
@@ -5047,7 +5241,7 @@ INSERT INTO `translated_languages` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- بنية الجدول `users`
 --
 
 CREATE TABLE `users` (
@@ -5067,11 +5261,11 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `users`
+-- إرجاع أو استيراد بيانات الجدول `users`
 --
 
 INSERT INTO `users` (`id`, `provider_name`, `provider_id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `verified`, `verification_token`, `created_at`, `updated_at`, `avatar`) VALUES
-(1, NULL, NULL, '11111', '11111@gg.com', NULL, '$2y$10$IOQ36X88oxMY04KXe85OguOGFozj9oiq0zS3PJmH2jn.6ZrX5V2DW', NULL, '0', NULL, '2019-10-11 15:53:00', '2019-10-11 15:53:00', NULL),
+(1, NULL, NULL, 'ahmad', '11111@gg.com', NULL, '$2y$10$IOQ36X88oxMY04KXe85OguOGFozj9oiq0zS3PJmH2jn.6ZrX5V2DW', NULL, '0', NULL, '2019-10-11 15:53:00', '2019-10-11 15:53:00', NULL),
 (2, NULL, NULL, 'yaser', 'yaser@yaser.yas', NULL, '$2y$10$P.7usJoHgjHMMrNjZukga.QuE0u5y9.S9uIvNCrR0Z5fFBuq2EOwS', NULL, '0', NULL, '2019-10-15 15:52:31', '2019-10-15 15:52:31', NULL),
 (3, NULL, NULL, 'yaser1', 'yase1r@yaser.yas', NULL, '$2y$10$iL5GusS9DkWgeLpZpSrUwuTrf6aPR8zCli6ey1AmZ2rVuzvh1boxm', NULL, '0', NULL, '2019-10-17 06:40:27', '2019-10-17 06:40:27', NULL),
 (4, NULL, NULL, 'yaser', 'yaser@ee.com', NULL, '$2y$10$6VCI1LB9.3G4VEo3xS3gP.Lj6t5qgq3AjUs4HDfOpJHk2mwPPDySW', NULL, '0', NULL, '2019-10-19 05:37:35', '2019-10-19 05:37:35', NULL),
@@ -5090,12 +5284,17 @@ INSERT INTO `users` (`id`, `provider_name`, `provider_id`, `name`, `email`, `ema
 (25, NULL, NULL, 'yaseradmin1', 'yasedraddmidendw2121@ee.com', NULL, '$2y$10$dOpnwT2UFXNHq4aiiCiRv.dDP.JR9Dhk8gdwgbodt9/c5eUTbt7tO', NULL, '0', NULL, '2019-10-20 04:00:27', '2019-10-20 04:00:27', NULL),
 (26, NULL, NULL, 'yaseradmin1', 'yasedradddmidendw2121@ee.com', NULL, '$2y$10$8VB1aMALUZv1iwaUp9xubepNv7mD70O1h2u.BU/3BzYjm5b.w5G6W', NULL, '0', NULL, '2019-10-20 04:01:13', '2019-10-20 04:01:13', NULL),
 (27, NULL, NULL, 'yaseradmin1', 'yasesdradddmidendw2121@ee.com', NULL, '$2y$10$FPwwCm5m.kV59K.2NHU31ewlkFQ7vfAACzIyMwfH1VVjU.3UkariK', NULL, '0', NULL, '2019-10-20 04:03:05', '2019-10-20 04:03:05', NULL),
-(28, NULL, NULL, 'yaseradmin1', 'yaser_admin@ee.com', NULL, '$2y$10$.LE8vVvtsEQvY8vUi4ithuHIwme/ywjJMXD69AThD8jIM2kizojC6', NULL, '0', NULL, '2019-10-20 05:00:09', '2019-10-20 05:00:09', NULL);
+(28, NULL, NULL, 'yaseradmin1', 'yaser_admin@ee.com', NULL, '$2y$10$.LE8vVvtsEQvY8vUi4ithuHIwme/ywjJMXD69AThD8jIM2kizojC6', NULL, '0', NULL, '2019-10-20 05:00:09', '2019-10-20 05:00:09', NULL),
+(29, NULL, NULL, 'yaser111', 'yaser111@yaser.yas', NULL, '$2y$10$zIe/Uhn.0IzggWAbaKx7L.m2CSKfHAqXJ5Og5lxMZhLr.JFzlj/be', NULL, '0', NULL, '2019-11-13 07:08:49', '2019-11-13 07:08:49', NULL),
+(30, NULL, NULL, 'yaser111', 'yaser11551@yaser.yas', NULL, '$2y$10$5AhIOXtc0DNjHBHc3xp4tevTuckunXRQWktMC3dAfXtngiTPHObZS', NULL, '0', NULL, '2019-11-13 07:09:03', '2019-11-13 07:09:03', NULL),
+(31, NULL, NULL, 'y454', '444rr@gmail.com', NULL, '$2y$10$au5.QZh/EHC.xGxbXdnAbOc7cfvlU1Y05y5igOd/tNKNMubKw3SbG', NULL, '0', NULL, '2019-11-16 09:48:35', '2019-11-16 09:48:35', NULL),
+(32, NULL, NULL, 'yaser', 'omran@ff.com', NULL, '$2y$10$x7vYUDEKCOkbvldxO1em0OJW9ByGmI9m92pDZO5lgqTSQnb1qhPZi', NULL, '0', NULL, '2019-11-26 05:36:21', '2019-11-26 05:36:21', NULL),
+(33, NULL, NULL, 'yasss', 'ahmad12345@eee.com', NULL, '$2y$10$Z5Gts2u2OiPb2zp9TXlc1ek.0n0mi/Nc616jBniU2xRQQiY09TLPG', NULL, '0', NULL, '2019-12-10 08:37:27', '2019-12-10 08:37:27', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `work_experiences`
+-- بنية الجدول `work_experiences`
 --
 
 CREATE TABLE `work_experiences` (
@@ -5115,7 +5314,7 @@ CREATE TABLE `work_experiences` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `work_experiences`
+-- إرجاع أو استيراد بيانات الجدول `work_experiences`
 --
 
 INSERT INTO `work_experiences` (`id`, `resume_id`, `company_industry_id`, `from`, `to`, `isPresent`, `isFromMonthPresent`, `isToMonthPresent`, `job_title`, `description`, `order`, `created_at`, `updated_at`) VALUES
@@ -5125,7 +5324,7 @@ INSERT INTO `work_experiences` (`id`, `resume_id`, `company_industry_id`, `from`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `work_exp_companies`
+-- بنية الجدول `work_exp_companies`
 --
 
 CREATE TABLE `work_exp_companies` (
@@ -5143,12 +5342,252 @@ CREATE TABLE `work_exp_companies` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `work_exp_companies`
+-- إرجاع أو استيراد بيانات الجدول `work_exp_companies`
 --
 
 INSERT INTO `work_exp_companies` (`id`, `work_experience_id`, `name`, `country`, `city`, `company_website`, `company_description`, `verified_by_google`, `created_at`, `updated_at`, `company_size_id`) VALUES
 (5, 10, 'automata4', 'syria', NULL, 'automata4.com', NULL, 1, '2019-05-12 05:36:24', '2019-05-12 05:36:24', 1),
 (8, 11, 'q', 'syria', NULL, 'asasa', NULL, 1, '2019-07-11 09:22:44', '2019-07-11 09:22:44', 1);
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `[recieved_email_activity_log1318]`
+--
+
+CREATE TABLE `[recieved_email_activity_log1318]` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `action_id` int(11) NOT NULL,
+  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- إرجاع أو استيراد بيانات الجدول `[recieved_email_activity_log1318]`
+--
+
+INSERT INTO `[recieved_email_activity_log1318]` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
+(2, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
+(3, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
+(4, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
+(5, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50'),
+(6, 20, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:14:32', '2019-12-10 09:14:32'),
+(7, 21, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:18:39', '2019-12-10 09:18:39');
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `[recieved_email_activity_log132019-12-10 11:35:53]`
+--
+
+CREATE TABLE `[recieved_email_activity_log132019-12-10 11:35:53]` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `action_id` int(11) NOT NULL,
+  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- إرجاع أو استيراد بيانات الجدول `[recieved_email_activity_log132019-12-10 11:35:53]`
+--
+
+INSERT INTO `[recieved_email_activity_log132019-12-10 11:35:53]` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
+(2, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
+(3, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
+(4, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
+(5, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50'),
+(6, 20, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:14:32', '2019-12-10 09:14:32'),
+(7, 21, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:18:39', '2019-12-10 09:18:39');
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `[recieved_email_activity_log132019-12-10 11:38:40]`
+--
+
+CREATE TABLE `[recieved_email_activity_log132019-12-10 11:38:40]` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `action_id` int(11) NOT NULL,
+  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- إرجاع أو استيراد بيانات الجدول `[recieved_email_activity_log132019-12-10 11:38:40]`
+--
+
+INSERT INTO `[recieved_email_activity_log132019-12-10 11:38:40]` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
+(2, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
+(3, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
+(4, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
+(5, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50'),
+(6, 20, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:14:32', '2019-12-10 09:14:32'),
+(7, 21, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:18:39', '2019-12-10 09:18:39');
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `[recieved_email_activity_log132019-12-10 11:39:02]`
+--
+
+CREATE TABLE `[recieved_email_activity_log132019-12-10 11:39:02]` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `action_id` int(11) NOT NULL,
+  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- إرجاع أو استيراد بيانات الجدول `[recieved_email_activity_log132019-12-10 11:39:02]`
+--
+
+INSERT INTO `[recieved_email_activity_log132019-12-10 11:39:02]` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
+(2, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
+(3, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
+(4, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
+(5, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50'),
+(6, 20, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:14:32', '2019-12-10 09:14:32'),
+(7, 21, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:18:39', '2019-12-10 09:18:39');
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `[recieved_email_activity_log132019-12-10 11:39:12]`
+--
+
+CREATE TABLE `[recieved_email_activity_log132019-12-10 11:39:12]` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `action_id` int(11) NOT NULL,
+  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- إرجاع أو استيراد بيانات الجدول `[recieved_email_activity_log132019-12-10 11:39:12]`
+--
+
+INSERT INTO `[recieved_email_activity_log132019-12-10 11:39:12]` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
+(2, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
+(3, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
+(4, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
+(5, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50'),
+(6, 20, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:14:32', '2019-12-10 09:14:32'),
+(7, 21, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:18:39', '2019-12-10 09:18:39');
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `[recieved_email_activity_log132019-12-10 11:39:32]`
+--
+
+CREATE TABLE `[recieved_email_activity_log132019-12-10 11:39:32]` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `action_id` int(11) NOT NULL,
+  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- إرجاع أو استيراد بيانات الجدول `[recieved_email_activity_log132019-12-10 11:39:32]`
+--
+
+INSERT INTO `[recieved_email_activity_log132019-12-10 11:39:32]` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
+(2, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
+(3, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
+(4, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
+(5, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50'),
+(6, 20, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:14:32', '2019-12-10 09:14:32'),
+(7, 21, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:18:39', '2019-12-10 09:18:39');
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `[recieved_email_activity_log132019-12-10 11:40:01]`
+--
+
+CREATE TABLE `[recieved_email_activity_log132019-12-10 11:40:01]` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `action_id` int(11) NOT NULL,
+  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- إرجاع أو استيراد بيانات الجدول `[recieved_email_activity_log132019-12-10 11:40:01]`
+--
+
+INSERT INTO `[recieved_email_activity_log132019-12-10 11:40:01]` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
+(2, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
+(3, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
+(4, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
+(5, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50'),
+(6, 20, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:14:32', '2019-12-10 09:14:32'),
+(7, 21, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:18:39', '2019-12-10 09:18:39');
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `[recieved_email_activity_log132019-12-10 11:40:30]`
+--
+
+CREATE TABLE `[recieved_email_activity_log132019-12-10 11:40:30]` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `action_id` int(11) NOT NULL,
+  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- إرجاع أو استيراد بيانات الجدول `[recieved_email_activity_log132019-12-10 11:40:30]`
+--
+
+INSERT INTO `[recieved_email_activity_log132019-12-10 11:40:30]` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
+(2, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
+(3, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
+(4, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
+(5, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50'),
+(6, 20, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:14:32', '2019-12-10 09:14:32'),
+(7, 21, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:18:39', '2019-12-10 09:18:39');
 
 --
 -- Indexes for dumped tables
@@ -5176,8 +5615,16 @@ ALTER TABLE `admin_done_email_logs`
 ALTER TABLE `admin_email_assign_logs`
   ADD PRIMARY KEY (`id`),
   ADD KEY `admin_email_assign_logs_to_assigned_admin_user_id_foreign` (`to_assigned_admin_user_id`),
-  ADD KEY `admin_email_assign_logs_from_assigned_admin_user_id_foreign` (`from_assigned_admin_user_id`),
+  ADD KEY `admin_email_assign_logs_from_assigned_admin_user_id_foreign` (`user_id`),
   ADD KEY `admin_email_assign_logs_recieved_email_id_foreign` (`recieved_email_id`);
+
+--
+-- Indexes for table `admin_note_done_email_logs`
+--
+ALTER TABLE `admin_note_done_email_logs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `admin_note_done_email_logs_user_id_foreign` (`user_id`),
+  ADD KEY `admin_note_done_email_logs_recieved_email_id_foreign` (`recieved_email_id`);
 
 --
 -- Indexes for table `admin_open_logs`
@@ -5582,6 +6029,12 @@ ALTER TABLE `minor_translations`
   ADD KEY `minor_translations_translated_languages_id_foreign` (`translated_languages_id`);
 
 --
+-- Indexes for table `mytable_11`
+--
+ALTER TABLE `mytable_11`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `nationalities`
 --
 ALTER TABLE `nationalities`
@@ -5685,6 +6138,7 @@ ALTER TABLE `place_of_births`
 ALTER TABLE `pre_defined_emails`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `pre_defined_emails_email_title_unique` (`email_title`),
+  ADD UNIQUE KEY `pre_defined_emails_template_title_unique` (`template_title`),
   ADD KEY `pre_defined_emails_contact_main_catagory_id_foreign` (`contact_main_catagory_id`),
   ADD KEY `pre_defined_emails_contact_sub_category_id_foreign` (`contact_sub_category_id`),
   ADD KEY `pre_defined_emails_user_id_foreign` (`user_id`);
@@ -5694,7 +6148,6 @@ ALTER TABLE `pre_defined_emails`
 --
 ALTER TABLE `recieved_emails`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `recieved_emails_email_unique` (`email`),
   ADD KEY `recieved_emails_contact_main_catagory_id_foreign` (`contact_main_catagory_id`),
   ADD KEY `recieved_emails_contact_sub_category_id_foreign` (`contact_sub_category_id`),
   ADD KEY `recieved_emails_user_id_foreign` (`user_id`),
@@ -5702,7 +6155,26 @@ ALTER TABLE `recieved_emails`
   ADD KEY `recieved_emails_last_admin_comment_id_foreign` (`last_admin_comment_id`),
   ADD KEY `recieved_emails_last_admin_restore_email_log_id_foreign` (`last_admin_restore_email_log_id`),
   ADD KEY `recieved_emails_last_admin_done_email_log_id_foreign` (`last_admin_done_email_log_id`),
-  ADD KEY `recieved_emails_last_admin_replied_email_id_foreign` (`last_admin_replied_email_id`);
+  ADD KEY `recieved_emails_last_admin_replied_email_id_foreign` (`last_admin_replied_email_id`),
+  ADD KEY `recieved_emails_last_admin_note_done_email_log_id_foreign` (`last_admin_note_done_email_log_id`);
+
+--
+-- Indexes for table `recieved_email_activity_log13`
+--
+ALTER TABLE `recieved_email_activity_log13`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `recieved_email_activity_log132019-12-10 11:34:05`
+--
+ALTER TABLE `recieved_email_activity_log132019-12-10 11:34:05`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `recieved_email_activity_log132019-12-10 11:34:28`
+--
+ALTER TABLE `recieved_email_activity_log132019-12-10 11:34:28`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `resumes`
@@ -5777,6 +6249,54 @@ ALTER TABLE `work_exp_companies`
   ADD KEY `work_exp_companies_company_size_id_foreign` (`company_size_id`);
 
 --
+-- Indexes for table `[recieved_email_activity_log1318]`
+--
+ALTER TABLE `[recieved_email_activity_log1318]`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `[recieved_email_activity_log132019-12-10 11:35:53]`
+--
+ALTER TABLE `[recieved_email_activity_log132019-12-10 11:35:53]`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `[recieved_email_activity_log132019-12-10 11:38:40]`
+--
+ALTER TABLE `[recieved_email_activity_log132019-12-10 11:38:40]`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `[recieved_email_activity_log132019-12-10 11:39:02]`
+--
+ALTER TABLE `[recieved_email_activity_log132019-12-10 11:39:02]`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `[recieved_email_activity_log132019-12-10 11:39:12]`
+--
+ALTER TABLE `[recieved_email_activity_log132019-12-10 11:39:12]`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `[recieved_email_activity_log132019-12-10 11:39:32]`
+--
+ALTER TABLE `[recieved_email_activity_log132019-12-10 11:39:32]`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `[recieved_email_activity_log132019-12-10 11:40:01]`
+--
+ALTER TABLE `[recieved_email_activity_log132019-12-10 11:40:01]`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `[recieved_email_activity_log132019-12-10 11:40:30]`
+--
+ALTER TABLE `[recieved_email_activity_log132019-12-10 11:40:30]`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -5784,31 +6304,37 @@ ALTER TABLE `work_exp_companies`
 -- AUTO_INCREMENT for table `admin_comments`
 --
 ALTER TABLE `admin_comments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `admin_done_email_logs`
 --
 ALTER TABLE `admin_done_email_logs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `admin_email_assign_logs`
 --
 ALTER TABLE `admin_email_assign_logs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `admin_note_done_email_logs`
+--
+ALTER TABLE `admin_note_done_email_logs`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `admin_open_logs`
 --
 ALTER TABLE `admin_open_logs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `admin_replied_emails`
 --
 ALTER TABLE `admin_replied_emails`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `admin_restore_email_logs`
@@ -6108,7 +6634,7 @@ ALTER TABLE `marital_status_translations`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=255;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=263;
 
 --
 -- AUTO_INCREMENT for table `minors`
@@ -6121,6 +6647,12 @@ ALTER TABLE `minors`
 --
 ALTER TABLE `minor_translations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=453;
+
+--
+-- AUTO_INCREMENT for table `mytable_11`
+--
+ALTER TABLE `mytable_11`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `nationalities`
@@ -6180,13 +6712,31 @@ ALTER TABLE `place_of_births`
 -- AUTO_INCREMENT for table `pre_defined_emails`
 --
 ALTER TABLE `pre_defined_emails`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `recieved_emails`
 --
 ALTER TABLE `recieved_emails`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `recieved_email_activity_log13`
+--
+ALTER TABLE `recieved_email_activity_log13`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `recieved_email_activity_log132019-12-10 11:34:05`
+--
+ALTER TABLE `recieved_email_activity_log132019-12-10 11:34:05`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `recieved_email_activity_log132019-12-10 11:34:28`
+--
+ALTER TABLE `recieved_email_activity_log132019-12-10 11:34:28`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `resumes`
@@ -6198,13 +6748,13 @@ ALTER TABLE `resumes`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `role_user`
 --
 ALTER TABLE `role_user`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `social_media`
@@ -6234,7 +6784,7 @@ ALTER TABLE `translated_languages`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `work_experiences`
@@ -6249,54 +6799,109 @@ ALTER TABLE `work_exp_companies`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- Constraints for dumped tables
+-- AUTO_INCREMENT for table `[recieved_email_activity_log1318]`
+--
+ALTER TABLE `[recieved_email_activity_log1318]`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `[recieved_email_activity_log132019-12-10 11:35:53]`
+--
+ALTER TABLE `[recieved_email_activity_log132019-12-10 11:35:53]`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `[recieved_email_activity_log132019-12-10 11:38:40]`
+--
+ALTER TABLE `[recieved_email_activity_log132019-12-10 11:38:40]`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `[recieved_email_activity_log132019-12-10 11:39:02]`
+--
+ALTER TABLE `[recieved_email_activity_log132019-12-10 11:39:02]`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `[recieved_email_activity_log132019-12-10 11:39:12]`
+--
+ALTER TABLE `[recieved_email_activity_log132019-12-10 11:39:12]`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `[recieved_email_activity_log132019-12-10 11:39:32]`
+--
+ALTER TABLE `[recieved_email_activity_log132019-12-10 11:39:32]`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `[recieved_email_activity_log132019-12-10 11:40:01]`
+--
+ALTER TABLE `[recieved_email_activity_log132019-12-10 11:40:01]`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `[recieved_email_activity_log132019-12-10 11:40:30]`
+--
+ALTER TABLE `[recieved_email_activity_log132019-12-10 11:40:30]`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- قيود الجداول المحفوظة
 --
 
 --
--- Constraints for table `admin_comments`
+-- القيود للجدول `admin_comments`
 --
 ALTER TABLE `admin_comments`
   ADD CONSTRAINT `admin_comments_recieved_email_id_foreign` FOREIGN KEY (`recieved_email_id`) REFERENCES `recieved_emails` (`id`),
   ADD CONSTRAINT `admin_comments_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `admin_done_email_logs`
+-- القيود للجدول `admin_done_email_logs`
 --
 ALTER TABLE `admin_done_email_logs`
   ADD CONSTRAINT `admin_done_email_logs_recieved_email_id_foreign` FOREIGN KEY (`recieved_email_id`) REFERENCES `recieved_emails` (`id`),
   ADD CONSTRAINT `admin_done_email_logs_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `admin_email_assign_logs`
+-- القيود للجدول `admin_email_assign_logs`
 --
 ALTER TABLE `admin_email_assign_logs`
-  ADD CONSTRAINT `admin_email_assign_logs_from_assigned_admin_user_id_foreign` FOREIGN KEY (`from_assigned_admin_user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `admin_email_assign_logs_from_assigned_admin_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `admin_email_assign_logs_recieved_email_id_foreign` FOREIGN KEY (`recieved_email_id`) REFERENCES `recieved_emails` (`id`),
   ADD CONSTRAINT `admin_email_assign_logs_to_assigned_admin_user_id_foreign` FOREIGN KEY (`to_assigned_admin_user_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `admin_open_logs`
+-- القيود للجدول `admin_note_done_email_logs`
+--
+ALTER TABLE `admin_note_done_email_logs`
+  ADD CONSTRAINT `admin_note_done_email_logs_recieved_email_id_foreign` FOREIGN KEY (`recieved_email_id`) REFERENCES `recieved_emails` (`id`),
+  ADD CONSTRAINT `admin_note_done_email_logs_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- القيود للجدول `admin_open_logs`
 --
 ALTER TABLE `admin_open_logs`
   ADD CONSTRAINT `admin_open_logs_recieved_email_id_foreign` FOREIGN KEY (`recieved_email_id`) REFERENCES `recieved_emails` (`id`),
   ADD CONSTRAINT `admin_open_logs_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `admin_replied_emails`
+-- القيود للجدول `admin_replied_emails`
 --
 ALTER TABLE `admin_replied_emails`
   ADD CONSTRAINT `admin_replied_emails_recieved_email_id_foreign` FOREIGN KEY (`recieved_email_id`) REFERENCES `recieved_emails` (`id`),
   ADD CONSTRAINT `admin_replied_emails_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `admin_restore_email_logs`
+-- القيود للجدول `admin_restore_email_logs`
 --
 ALTER TABLE `admin_restore_email_logs`
   ADD CONSTRAINT `admin_restore_email_logs_recieved_email_id_foreign` FOREIGN KEY (`recieved_email_id`) REFERENCES `recieved_emails` (`id`),
   ADD CONSTRAINT `admin_restore_email_logs_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `companies`
+-- القيود للجدول `companies`
 --
 ALTER TABLE `companies`
   ADD CONSTRAINT `companies_admin_user_id_foreign` FOREIGN KEY (`admin_user_id`) REFERENCES `users` (`id`),
@@ -6306,7 +6911,7 @@ ALTER TABLE `companies`
   ADD CONSTRAINT `companies_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `company_admins_logs`
+-- القيود للجدول `company_admins_logs`
 --
 ALTER TABLE `company_admins_logs`
   ADD CONSTRAINT `admins_logs_companies_status_id_foreign` FOREIGN KEY (`company_status_id`) REFERENCES `company_statuses` (`id`),
@@ -6314,40 +6919,40 @@ ALTER TABLE `company_admins_logs`
   ADD CONSTRAINT `company_admins_logs_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `company_industries`
+-- القيود للجدول `company_industries`
 --
 ALTER TABLE `company_industries`
   ADD CONSTRAINT `company_industries_company_industry_parent_id_foreign` FOREIGN KEY (`company_industry_parent_id`) REFERENCES `company_industry_parents` (`id`);
 
 --
--- Constraints for table `company_industries_for_companies`
+-- القيود للجدول `company_industries_for_companies`
 --
 ALTER TABLE `company_industries_for_companies`
   ADD CONSTRAINT `company_industries_for_companies_company_industry_id_foreign` FOREIGN KEY (`company_industry_id`) REFERENCES `company_industries` (`id`),
   ADD CONSTRAINT `company_industries_for_companies_company_profile_id_foreign` FOREIGN KEY (`company_profile_id`) REFERENCES `company_profiles` (`id`);
 
 --
--- Constraints for table `company_industry_parent_trans`
+-- القيود للجدول `company_industry_parent_trans`
 --
 ALTER TABLE `company_industry_parent_trans`
   ADD CONSTRAINT `company_industry_parent_trans_company_industry_parent_id_foreign` FOREIGN KEY (`company_industry_parent_id`) REFERENCES `company_industry_parents` (`id`),
   ADD CONSTRAINT `company_industry_parent_trans_translated_languages_id_foreign` FOREIGN KEY (`translated_languages_id`) REFERENCES `translated_languages` (`id`);
 
 --
--- Constraints for table `company_industry_translations`
+-- القيود للجدول `company_industry_translations`
 --
 ALTER TABLE `company_industry_translations`
   ADD CONSTRAINT `company_industry_translations_company_industry_id_foreign` FOREIGN KEY (`company_industry_id`) REFERENCES `company_industries` (`id`),
   ADD CONSTRAINT `company_industry_translations_translated_languages_id_foreign` FOREIGN KEY (`translated_languages_id`) REFERENCES `translated_languages` (`id`);
 
 --
--- Constraints for table `company_locations`
+-- القيود للجدول `company_locations`
 --
 ALTER TABLE `company_locations`
   ADD CONSTRAINT `company_locations_company_profile_id_foreign` FOREIGN KEY (`company_profile_id`) REFERENCES `company_profiles` (`id`);
 
 --
--- Constraints for table `company_profiles`
+-- القيود للجدول `company_profiles`
 --
 ALTER TABLE `company_profiles`
   ADD CONSTRAINT `company_profiles_company_id_foreign` FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`),
@@ -6355,48 +6960,48 @@ ALTER TABLE `company_profiles`
   ADD CONSTRAINT `company_profiles_company_type_id_foreign` FOREIGN KEY (`company_type_id`) REFERENCES `company_types` (`id`);
 
 --
--- Constraints for table `company_profile_translations`
+-- القيود للجدول `company_profile_translations`
 --
 ALTER TABLE `company_profile_translations`
   ADD CONSTRAINT `company_profile_translations_company_profile_id_foreign` FOREIGN KEY (`company_profile_id`) REFERENCES `company_profiles` (`id`),
   ADD CONSTRAINT `company_profile_translations_translated_languages_id_foreign` FOREIGN KEY (`translated_languages_id`) REFERENCES `translated_languages` (`id`);
 
 --
--- Constraints for table `company_size_translations`
+-- القيود للجدول `company_size_translations`
 --
 ALTER TABLE `company_size_translations`
   ADD CONSTRAINT `company_size_translations_company_size_id_foreign` FOREIGN KEY (`company_size_id`) REFERENCES `company_sizes` (`id`),
   ADD CONSTRAINT `company_size_translations_translated_languages_id_foreign` FOREIGN KEY (`translated_languages_id`) REFERENCES `translated_languages` (`id`);
 
 --
--- Constraints for table `company_social_medias`
+-- القيود للجدول `company_social_medias`
 --
 ALTER TABLE `company_social_medias`
   ADD CONSTRAINT `company_social_medias_company_profile_id_foreign` FOREIGN KEY (`company_profile_id`) REFERENCES `company_profiles` (`id`),
   ADD CONSTRAINT `company_social_medias_social_media_id_foreign` FOREIGN KEY (`social_media_id`) REFERENCES `social_media` (`id`);
 
 --
--- Constraints for table `company_specialties_for_companies`
+-- القيود للجدول `company_specialties_for_companies`
 --
 ALTER TABLE `company_specialties_for_companies`
   ADD CONSTRAINT `company_specialties_for_companies_company_profile_id_foreign` FOREIGN KEY (`company_profile_id`) REFERENCES `company_profiles` (`id`),
   ADD CONSTRAINT `company_specialties_for_companies_specialty_id_foreign` FOREIGN KEY (`specialty_id`) REFERENCES `specialty` (`id`);
 
 --
--- Constraints for table `company_type_translations`
+-- القيود للجدول `company_type_translations`
 --
 ALTER TABLE `company_type_translations`
   ADD CONSTRAINT `company_type_translations_company_type_id_foreign` FOREIGN KEY (`company_type_id`) REFERENCES `company_types` (`id`),
   ADD CONSTRAINT `company_type_translations_translated_languages_id_foreign` FOREIGN KEY (`translated_languages_id`) REFERENCES `translated_languages` (`id`);
 
 --
--- Constraints for table `contact_informations`
+-- القيود للجدول `contact_informations`
 --
 ALTER TABLE `contact_informations`
   ADD CONSTRAINT `contact_informations_resume_id_foreign` FOREIGN KEY (`resume_id`) REFERENCES `resumes` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `contact_numbers`
+-- القيود للجدول `contact_numbers`
 --
 ALTER TABLE `contact_numbers`
   ADD CONSTRAINT `contact_numbers_contact_information_id_foreign` FOREIGN KEY (`contact_information_id`) REFERENCES `contact_informations` (`id`) ON DELETE CASCADE,
@@ -6404,47 +7009,47 @@ ALTER TABLE `contact_numbers`
   ADD CONSTRAINT `contact_numbers_phone_types_id_foreign` FOREIGN KEY (`phone_type_id`) REFERENCES `phone_types` (`id`);
 
 --
--- Constraints for table `contact_sub_categories`
+-- القيود للجدول `contact_sub_categories`
 --
 ALTER TABLE `contact_sub_categories`
   ADD CONSTRAINT `contact_sub_categories_contact_main_catagory_id_foreign` FOREIGN KEY (`contact_main_catagory_id`) REFERENCES `contact_main_catagories` (`id`);
 
 --
--- Constraints for table `country_translations`
+-- القيود للجدول `country_translations`
 --
 ALTER TABLE `country_translations`
   ADD CONSTRAINT `country_translations_country_id_foreign` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`),
   ADD CONSTRAINT `country_translations_translated_languages_id_foreign` FOREIGN KEY (`translated_languages_id`) REFERENCES `translated_languages` (`id`);
 
 --
--- Constraints for table `current_locations`
+-- القيود للجدول `current_locations`
 --
 ALTER TABLE `current_locations`
   ADD CONSTRAINT `current_locations_personal_information_id_foreign` FOREIGN KEY (`personal_information_id`) REFERENCES `personal_informations` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `c_m_c_translations`
+-- القيود للجدول `c_m_c_translations`
 --
 ALTER TABLE `c_m_c_translations`
   ADD CONSTRAINT `c_m_c_translations_contact_main_category_id_foreign` FOREIGN KEY (`contact_main_catagory_id`) REFERENCES `contact_main_catagories` (`id`),
   ADD CONSTRAINT `c_m_c_translations_translated_languages_id_foreign` FOREIGN KEY (`translated_languages_id`) REFERENCES `translated_languages` (`id`);
 
 --
--- Constraints for table `c_s_c_translations`
+-- القيود للجدول `c_s_c_translations`
 --
 ALTER TABLE `c_s_c_translations`
   ADD CONSTRAINT `c_s_c_translations_contact_sub_category_id_foreign` FOREIGN KEY (`contact_sub_category_id`) REFERENCES `contact_sub_categories` (`id`),
   ADD CONSTRAINT `c_s_c_translations_translated_languages_id_foreign` FOREIGN KEY (`translated_languages_id`) REFERENCES `translated_languages` (`id`);
 
 --
--- Constraints for table `degree_level_translations`
+-- القيود للجدول `degree_level_translations`
 --
 ALTER TABLE `degree_level_translations`
   ADD CONSTRAINT `degree_level_translations_degree_level_id_foreign` FOREIGN KEY (`degree_level_id`) REFERENCES `degree_levels` (`id`),
   ADD CONSTRAINT `degree_level_translations_translated_languages_id_foreign` FOREIGN KEY (`translated_languages_id`) REFERENCES `translated_languages` (`id`);
 
 --
--- Constraints for table `education`
+-- القيود للجدول `education`
 --
 ALTER TABLE `education`
   ADD CONSTRAINT `education_degree_level_id_foreign` FOREIGN KEY (`degree_level_id`) REFERENCES `degree_levels` (`id`),
@@ -6454,121 +7059,121 @@ ALTER TABLE `education`
   ADD CONSTRAINT `education_resume_id_foreign` FOREIGN KEY (`resume_id`) REFERENCES `resumes` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `education_projects`
+-- القيود للجدول `education_projects`
 --
 ALTER TABLE `education_projects`
   ADD CONSTRAINT `education_projects_education_id_foreign` FOREIGN KEY (`education_id`) REFERENCES `education` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `emails`
+-- القيود للجدول `emails`
 --
 ALTER TABLE `emails`
   ADD CONSTRAINT `emails_contact_information_id_foreign` FOREIGN KEY (`contact_information_id`) REFERENCES `contact_informations` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `employment_types`
+-- القيود للجدول `employment_types`
 --
 ALTER TABLE `employment_types`
   ADD CONSTRAINT `employment_types_employment_type_parent_id_foreign` FOREIGN KEY (`employment_type_parent_id`) REFERENCES `employment_type_parents` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `employment_types_work_experience_id_foreign` FOREIGN KEY (`work_experience_id`) REFERENCES `work_experiences` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `emp_type_parent_translations`
+-- القيود للجدول `emp_type_parent_translations`
 --
 ALTER TABLE `emp_type_parent_translations`
   ADD CONSTRAINT `emp_type_parent_foreign` FOREIGN KEY (`employment_type_parent_id`) REFERENCES `employment_type_parents` (`id`),
   ADD CONSTRAINT `emp_type_parent_translations_translated_languages_id_foreign` FOREIGN KEY (`translated_languages_id`) REFERENCES `translated_languages` (`id`);
 
 --
--- Constraints for table `institutions`
+-- القيود للجدول `institutions`
 --
 ALTER TABLE `institutions`
   ADD CONSTRAINT `institutions_institution_type_id_foreign` FOREIGN KEY (`institution_type_id`) REFERENCES `institution_types` (`id`);
 
 --
--- Constraints for table `institution_translations`
+-- القيود للجدول `institution_translations`
 --
 ALTER TABLE `institution_translations`
   ADD CONSTRAINT `institution_translations_institution_id_foreign` FOREIGN KEY (`institution_id`) REFERENCES `institutions` (`id`),
   ADD CONSTRAINT `institution_translations_translated_languages_id_foreign` FOREIGN KEY (`translated_languages_id`) REFERENCES `translated_languages` (`id`);
 
 --
--- Constraints for table `international_language_trans`
+-- القيود للجدول `international_language_trans`
 --
 ALTER TABLE `international_language_trans`
   ADD CONSTRAINT `international_language_trans_international_language_id_foreign` FOREIGN KEY (`international_language_id`) REFERENCES `international_languages` (`id`),
   ADD CONSTRAINT `international_language_trans_translated_languages_id_foreign` FOREIGN KEY (`translated_languages_id`) REFERENCES `translated_languages` (`id`);
 
 --
--- Constraints for table `internet_communications`
+-- القيود للجدول `internet_communications`
 --
 ALTER TABLE `internet_communications`
   ADD CONSTRAINT `internet_communications_contact_information_id_foreign` FOREIGN KEY (`contact_information_id`) REFERENCES `contact_informations` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `internet_communications_internet_communication_type_id_foreign` FOREIGN KEY (`internet_communication_type_id`) REFERENCES `internet_communication_types` (`id`);
 
 --
--- Constraints for table `majors`
+-- القيود للجدول `majors`
 --
 ALTER TABLE `majors`
   ADD CONSTRAINT `majors_institution_type_id_foreign` FOREIGN KEY (`institution_type_id`) REFERENCES `institution_types` (`id`),
   ADD CONSTRAINT `majors_major_parent_id_foreign` FOREIGN KEY (`major_parent_id`) REFERENCES `major_parents` (`id`);
 
 --
--- Constraints for table `major_parent_translations`
+-- القيود للجدول `major_parent_translations`
 --
 ALTER TABLE `major_parent_translations`
   ADD CONSTRAINT `major_parent_translations_major_parent_id_foreign` FOREIGN KEY (`major_parent_id`) REFERENCES `major_parents` (`id`),
   ADD CONSTRAINT `major_parent_translations_translated_languages_id_foreign` FOREIGN KEY (`translated_languages_id`) REFERENCES `translated_languages` (`id`);
 
 --
--- Constraints for table `major_translations`
+-- القيود للجدول `major_translations`
 --
 ALTER TABLE `major_translations`
   ADD CONSTRAINT `major_translations_major_id_foreign` FOREIGN KEY (`major_id`) REFERENCES `majors` (`id`),
   ADD CONSTRAINT `major_translations_translated_languages_id_foreign` FOREIGN KEY (`translated_languages_id`) REFERENCES `translated_languages` (`id`);
 
 --
--- Constraints for table `marital_status_translations`
+-- القيود للجدول `marital_status_translations`
 --
 ALTER TABLE `marital_status_translations`
   ADD CONSTRAINT `marital_status_translation_marital_status_id_foreign` FOREIGN KEY (`marital_status_id`) REFERENCES `marital_statuses` (`id`),
   ADD CONSTRAINT `marital_status_translation_translated_languages_id_foreign` FOREIGN KEY (`translated_languages_id`) REFERENCES `translated_languages` (`id`);
 
 --
--- Constraints for table `minor_translations`
+-- القيود للجدول `minor_translations`
 --
 ALTER TABLE `minor_translations`
   ADD CONSTRAINT `minor_translations_minor_id_foreign` FOREIGN KEY (`minor_id`) REFERENCES `minors` (`id`),
   ADD CONSTRAINT `minor_translations_translated_languages_id_foreign` FOREIGN KEY (`translated_languages_id`) REFERENCES `translated_languages` (`id`);
 
 --
--- Constraints for table `nationality_translations`
+-- القيود للجدول `nationality_translations`
 --
 ALTER TABLE `nationality_translations`
   ADD CONSTRAINT `nationality_translations_nationality_id_foreign` FOREIGN KEY (`nationality_id`) REFERENCES `nationalities` (`id`),
   ADD CONSTRAINT `nationality_translations_translated_languages_id_foreign` FOREIGN KEY (`translated_languages_id`) REFERENCES `translated_languages` (`id`);
 
 --
--- Constraints for table `personal_informations`
+-- القيود للجدول `personal_informations`
 --
 ALTER TABLE `personal_informations`
   ADD CONSTRAINT `personal_informations_marital_status_id_foreign` FOREIGN KEY (`marital_status_id`) REFERENCES `marital_statuses` (`id`);
 
 --
--- Constraints for table `personal_links`
+-- القيود للجدول `personal_links`
 --
 ALTER TABLE `personal_links`
   ADD CONSTRAINT `personal_links_social_media_id_foreign` FOREIGN KEY (`social_media_id`) REFERENCES `social_media` (`id`);
 
 --
--- Constraints for table `phone_type_translations`
+-- القيود للجدول `phone_type_translations`
 --
 ALTER TABLE `phone_type_translations`
   ADD CONSTRAINT `phone_types_translations_phone_types_id_foreign` FOREIGN KEY (`phone_type_id`) REFERENCES `phone_types` (`id`),
   ADD CONSTRAINT `phone_types_translations_translated_languages_id_foreign` FOREIGN KEY (`translated_languages_id`) REFERENCES `translated_languages` (`id`);
 
 --
--- Constraints for table `pre_defined_emails`
+-- القيود للجدول `pre_defined_emails`
 --
 ALTER TABLE `pre_defined_emails`
   ADD CONSTRAINT `pre_defined_emails_contact_main_catagory_id_foreign` FOREIGN KEY (`contact_main_catagory_id`) REFERENCES `contact_main_catagories` (`id`),
@@ -6576,46 +7181,47 @@ ALTER TABLE `pre_defined_emails`
   ADD CONSTRAINT `pre_defined_emails_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `recieved_emails`
+-- القيود للجدول `recieved_emails`
 --
 ALTER TABLE `recieved_emails`
   ADD CONSTRAINT `recieved_emails_contact_main_catagory_id_foreign` FOREIGN KEY (`contact_main_catagory_id`) REFERENCES `contact_main_catagories` (`id`),
   ADD CONSTRAINT `recieved_emails_contact_sub_category_id_foreign` FOREIGN KEY (`contact_sub_category_id`) REFERENCES `contact_sub_categories` (`id`),
   ADD CONSTRAINT `recieved_emails_last_admin_comment_id_foreign` FOREIGN KEY (`last_admin_comment_id`) REFERENCES `contact_main_catagories` (`id`),
   ADD CONSTRAINT `recieved_emails_last_admin_done_email_log_id_foreign` FOREIGN KEY (`last_admin_done_email_log_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `recieved_emails_last_admin_note_done_email_log_id_foreign` FOREIGN KEY (`last_admin_note_done_email_log_id`) REFERENCES `admin_note_done_email_logs` (`id`),
   ADD CONSTRAINT `recieved_emails_last_admin_replied_email_id_foreign` FOREIGN KEY (`last_admin_replied_email_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `recieved_emails_last_admin_restore_email_log_id_foreign` FOREIGN KEY (`last_admin_restore_email_log_id`) REFERENCES `contact_sub_categories` (`id`),
   ADD CONSTRAINT `recieved_emails_translated_languages_id_foreign` FOREIGN KEY (`translated_languages_id`) REFERENCES `translated_languages` (`id`),
   ADD CONSTRAINT `recieved_emails_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `resumes`
+-- القيود للجدول `resumes`
 --
 ALTER TABLE `resumes`
   ADD CONSTRAINT `resumes_translated_languages_id_foreign` FOREIGN KEY (`translated_languages_id`) REFERENCES `translated_languages` (`id`);
 
 --
--- Constraints for table `role_user`
+-- القيود للجدول `role_user`
 --
 ALTER TABLE `role_user`
   ADD CONSTRAINT `role_user_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`),
   ADD CONSTRAINT `role_user_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `specialty`
+-- القيود للجدول `specialty`
 --
 ALTER TABLE `specialty`
   ADD CONSTRAINT `specialty_company_industry_id_foreign` FOREIGN KEY (`company_industry_id`) REFERENCES `company_industries` (`id`);
 
 --
--- Constraints for table `specialty_translations`
+-- القيود للجدول `specialty_translations`
 --
 ALTER TABLE `specialty_translations`
   ADD CONSTRAINT `specialty_translations_specialty_id_foreign` FOREIGN KEY (`specialty_id`) REFERENCES `specialty` (`id`),
   ADD CONSTRAINT `specialty_translations_translated_languages_id_foreign` FOREIGN KEY (`translated_languages_id`) REFERENCES `translated_languages` (`id`);
 
 --
--- Constraints for table `work_exp_companies`
+-- القيود للجدول `work_exp_companies`
 --
 ALTER TABLE `work_exp_companies`
   ADD CONSTRAINT `companies_work_experience_id_foreign` FOREIGN KEY (`work_experience_id`) REFERENCES `work_experiences` (`id`) ON DELETE CASCADE,
