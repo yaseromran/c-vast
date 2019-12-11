@@ -87,6 +87,15 @@ class ContactFormController extends Controller
     }
     public function set_message_as_not_done($recieved_email_id)
     {
+
+        $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->first();
+
+        if($recievedEmail->last_admin_done_email_log_id==null)
+        {
+            return response()->json([
+                'success' => 'true',
+                'messages' => "email must be done befor delete: recieved_email_id ".$recieved_email_id], 200);
+        }
         try{
             return     DB::transaction(function () use ($recieved_email_id)
             {
@@ -427,16 +436,24 @@ class ContactFormController extends Controller
     }
     public function restore_deleted_message_from_archive($recieved_email_id)
 {
-
+    $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->first();
+    if($recievedEmail->is_deleted==0){
+        return response()->json([
+            'restore success' => 'false',
+            'message ' => 'this message not deleted befor'], 200);
+    }
     return DB::transaction(function () use ($recieved_email_id)
     {
+
         $adminRestoreEmailLog=new AdminRestoreEmailLog();
 
         $adminRestoreEmailLog->recieved_email_id=$recieved_email_id;
 
         $adminRestoreEmailLog->user_id=auth()->user()->id;
+
         $adminRestoreEmailLog->save();
-        $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->update(['is_deleted' => 0,'last_admin_restore_email_log_id'=>$adminRestoreEmailLog->id]);
+
+        $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->update(['is_deleted' => 0,'delete_by_admin_user_id'=>null,'last_admin_restore_email_log_id'=>$adminRestoreEmailLog->id]);
 
         $messages=RecievedEmail::where('is_deleted', 1)->
         with(array('contactSubCategory.cSCTranslation' => function ($query)  {
@@ -579,6 +596,20 @@ class ContactFormController extends Controller
                 'data' => 'no email found'
             ], 403);
         }
+
+
+        if($resultRecievedEmail->last_admin_done_email_log_id!=null)
+        {
+            return response()->json([
+                'success' => 'true',
+                'messages' => "this message is done, it must be redone befor replay on it: recieved_email_id ".$request->recieved_email_Id], 200);
+        }
+        if($resultRecievedEmail->last_admin_open_log_id==null)
+        {
+            return response()->json([
+                'success' => 'true',
+                'messages' => "email must be opened befor make replay: recieved_email_id ".$request->recieved_email_Id], 200);
+        }
         return DB::transaction(function () use ($resultRecievedEmail,$request)
         {
             $adminRepliedEmail                      = new AdminRepliedEmail();
@@ -635,6 +666,19 @@ class ContactFormController extends Controller
                'success' => 'false',
                'data' => 'no email found'
            ], 403);
+       }
+
+       if($resultRecievedEmail->last_admin_done_email_log_id!=null)
+       {
+           return response()->json([
+               'success' => 'true',
+               'messages' => "this message is done , this email must be  re done befor   assign it: recieved_email_id ".$request->recieved_email_Id], 200);
+       }
+       if($resultRecievedEmail->last_admin_open_log_id==null)
+       {
+           return response()->json([
+               'success' => 'true',
+               'messages' => "email must be opened befor assign it: recieved_email_id ".$request->recieved_email_Id], 200);
        }
        $adminEmailAssignLog =new AdminEmailAssignLog();
        $adminEmailAssignLog->user_id= auth()->user()->id;;
@@ -802,6 +846,18 @@ $preDefinedEmail=PreDefinedEmail::with(array('contactSubCategory.cSCTranslation'
                 'data' => 'no email found'
             ], 403);
         }
+        if($resultRecievedEmail->last_admin_done_email_log_id!=null)
+        {
+            return response()->json([
+                'success' => 'true',
+                'messages' => "email must be done befor   comment on  it: recieved_email_id ".$request->recieved_email_Id], 200);
+        }
+        if($resultRecievedEmail->last_admin_open_log_id==null)
+        {
+            return response()->json([
+                'success' => 'true',
+                'messages' => "email must be opened befor comment on it: recieved_email_id ".$request->recieved_email_Id], 200);
+        }
         $adminComment=new AdminComment();
         $adminComment->user_id= auth()->user()->id;;
         $adminComment->recieved_email_id=$request-> recieved_email_id;
@@ -815,6 +871,20 @@ $preDefinedEmail=PreDefinedEmail::with(array('contactSubCategory.cSCTranslation'
 
     public function delete_recieved_message($recieved_email_id)
     {
+        $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->update(['is_deleted' => 1,'delete_by_admin_user_id'=>auth()->user()->id,'last_admin_restore_email_log_id' => null]);
+        if($recievedEmail->last_admin_done_email_log_id==null)
+        {
+            return response()->json([
+                'success' => 'true',
+                'messages' => "email must be done befor delete: recieved_email_id ".$recieved_email_id], 200);
+        }
+
+        if($recievedEmail->last_admin_open_log_id!=null)
+        {
+            return response()->json([
+                'success' => 'true',
+                'messages' => "email must be opened befor delete it: recieved_email_id ".$recieved_email_id], 200);
+        }
         return DB::transaction(function () use ($recieved_email_id) {
 
             $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->update(['is_deleted' => 1,'delete_by_admin_user_id'=>auth()->user()->id,'last_admin_restore_email_log_id' => null]);
