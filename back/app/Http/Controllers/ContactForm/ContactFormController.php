@@ -119,14 +119,11 @@ class ContactFormController extends Controller
     public function recieved_email_activity_log($recieved_email_id)
     {
 
+        $temp_table='recieved_email_activity_log'.$recieved_email_id.rand(10,100);
+        return     DB::transaction(function () use ($recieved_email_id,$temp_table) {
 
-
- $temp_table='recieved_email_activity_log'.$recieved_email_id.rand(10,100);
-    return     DB::transaction(function () use ($recieved_email_id,$temp_table)   {
-
-//////////////// create temporay table 4 logs
-                Schema::connection('mysql')->create($temp_table, function ($table)
-              {
+            //////////////// create temporay table 4 logs
+            Schema::connection('mysql')->create($temp_table, function ($table) {
                 $table->increments('id');
                 $table->integer('action_id');
                 $table->string('action');
@@ -135,77 +132,99 @@ class ContactFormController extends Controller
                 $table->string('details');
 
                 $table->timestamps();
-              });
+            });
 
 
+////////////// select logs from AdminOpenLog
+            $select = AdminOpenLog::where('recieved_email_id', $recieved_email_id)
+                ->join('users', 'users.id', '=', 'admin_open_logs.user_id')
+                ->select(array('admin_open_logs.id', 'user_id', 'name', 'admin_open_logs.created_at', 'admin_open_logs.updated_at'))->selectSub(function ($query) {
+                    $query->selectRaw(" ( select 'Opened' ) ");
+                }, 'action')->get();
+//////////////////// insert   admin_open_logs in temporay table
+            foreach ($select as $onSelect) {
+                DB::table($temp_table)->insert(
+                    [
+
+                        'action_id' => $onSelect->id,
+
+                        'action' => $onSelect->action,
+
+                        'admin' => $onSelect->name,
+
+                        'admin_id' => $onSelect->user_id,
+
+                        'created_at' => $onSelect->created_at,
+
+                        'updated_at' => $onSelect->updated_at,
+
+                        'details' => 'opened'
+
+                    ]
+                );
+            };
 ////////////// select logs from admin_comments
-              $select =AdminComment::where('recieved_email_id', $recieved_email_id)
-                  ->join('users', 'users.id', '=','admin_comments.user_id' )
-
-                  ->select(array('admin_comments.id','comment','user_id','name','admin_comments.created_at','admin_comments.updated_at' ) ) ->selectSub(function ($query)
-                  {
-                      $query->selectRaw(" ( select 'Comment' ) ");
-                  }, 'action')->get( );
+            $select = AdminComment::where('recieved_email_id', $recieved_email_id)
+                ->join('users', 'users.id', '=', 'admin_comments.user_id')
+                ->select(array('admin_comments.id', 'comment', 'user_id', 'name', 'admin_comments.created_at', 'admin_comments.updated_at'))->selectSub(function ($query) {
+                    $query->selectRaw(" ( select 'Comment' ) ");
+                }, 'action')->get();
 //////////////////// insert   admin_comments in temporay table
-              foreach ($select as $onSelect)
-              {
-                  DB::table($temp_table)->insert(
-                      [
+            foreach ($select as $onSelect) {
+                DB::table($temp_table)->insert(
+                    [
 
-                          'action_id' => $onSelect->id,
+                        'action_id' => $onSelect->id,
 
-                          'action' => $onSelect->action,
+                        'action' => $onSelect->action,
 
-                          'admin' => $onSelect->name,
+                        'admin' => $onSelect->name,
 
-                          'admin_id' => $onSelect->user_id,
-                          
-                          'created_at' => $onSelect->created_at,
+                        'admin_id' => $onSelect->user_id,
 
-                          'updated_at' => $onSelect->updated_at,
+                        'created_at' => $onSelect->created_at,
 
-                          'details' => $onSelect->comment
+                        'updated_at' => $onSelect->updated_at,
 
-                      ]
-                  );
-              };
+                        'details' => $onSelect->comment
+
+                    ]
+                );
+            };
 
 ////////////// select logs from admin_replied_emails
 
-         $select =    AdminRepliedEmail::where('recieved_email_id', $recieved_email_id)
-             ->join('users', 'users.id', '=','admin_replied_emails.user_id' )
-
-             ->select(array('admin_replied_emails.id','replyed_email_title','replyed_email_body','user_id','name','admin_replied_emails.created_at','admin_replied_emails.updated_at' ) ) ->selectSub(function ($query)
-             {
-                 $query->selectRaw(" ( select 'replay' ) ");
-             }, 'action')->get( );
+            $select = AdminRepliedEmail::where('recieved_email_id', $recieved_email_id)
+                ->join('users', 'users.id', '=', 'admin_replied_emails.user_id')
+                ->select(array('admin_replied_emails.id', 'replyed_email_title', 'replyed_email_body', 'user_id', 'name', 'admin_replied_emails.created_at', 'admin_replied_emails.updated_at'))->selectSub(function ($query) {
+                    $query->selectRaw(" ( select 'replay' ) ");
+                }, 'action')->get();
 //////////////////// insert   admin_replied_emails in temporay table
-         foreach ($select as $onSelect)
-         {
-             DB::table($temp_table)->insert(
-                 [
+            foreach ($select as $onSelect) {
+                DB::table($temp_table)->insert(
+                    [
 
-                     'action_id' => $onSelect->id,
+                        'action_id' => $onSelect->id,
 
-                     'action' => $onSelect->action,
+                        'action' => $onSelect->action,
 
-                     'admin' => $onSelect->name,
+                        'admin' => $onSelect->name,
 
-                     'admin_id' => $onSelect->user_id,
+                        'admin_id' => $onSelect->user_id,
 
-                     'created_at' => $onSelect->created_at,
+                        'created_at' => $onSelect->created_at,
 
-                     'updated_at' => $onSelect->updated_at,
-
-
-                     'details' => $onSelect->replyed_email_title . " ". $onSelect->replyed_email_body
+                        'updated_at' => $onSelect->updated_at,
 
 
-                 ]
-             );
-         };
+                        'details' => $onSelect->replyed_email_title . " " . $onSelect->replyed_email_body
+
+
+                    ]
+                );
+            };
 ////////////// select logs from admin_email_assign_logs
-         $select    = DB::select(DB::raw(" 
+            $select = DB::select(DB::raw(" 
             SELECT * FROM
             (
                 select  `recieved_email_id` as `a_recieved_email_id`
@@ -215,7 +234,7 @@ class ContactFormController extends Controller
                 from `admin_email_assign_logs`
                  inner join `users` 
                  on `users`.`id` = `admin_email_assign_logs`.`to_assigned_admin_user_id` 
-                 where (`recieved_email_id` = ".$recieved_email_id.")
+                 where (`recieved_email_id` = " . $recieved_email_id . ")
             )  as a
             ,
             (
@@ -227,103 +246,151 @@ class ContactFormController extends Controller
                    `admin_email_assign_logs`.`created_at`,
                    `admin_email_assign_logs`.`updated_at`,
                    (select ( select 'Assigned' )) as `action` from `admin_email_assign_logs` inner join `users` on `users`.`id` = `admin_email_assign_logs`.`user_id` 
-                   where (`recieved_email_id` = ".$recieved_email_id.")
+                   where (`recieved_email_id` = " . $recieved_email_id . ")
             )   as b
-            where   (`a_id`=`b_id`)     ") );
-
-
+            where   (`a_id`=`b_id`)     "));
 
 
 //////////////////// insert   admin_email_assign_logs in temporay table
-         foreach ($select as $onSelect)
-         {
-             DB::table($temp_table)->insert(
-                 [
+            foreach ($select as $onSelect) {
+                DB::table($temp_table)->insert(
+                    [
 
-                     'action_id' => $onSelect->id,
+                        'action_id' => $onSelect->id,
 
-                     'action' => $onSelect->action,
+                        'action' => $onSelect->action,
 
-                     'admin' => $onSelect->from_assigned_admin_name,
+                        'admin' => $onSelect->from_assigned_admin_name,
 
-                     'admin_id' => $onSelect->from_assigned_admin_id,
+                        'admin_id' => $onSelect->from_assigned_admin_id,
 
-                     'created_at' => $onSelect->created_at,
+                        'created_at' => $onSelect->created_at,
 
-                     'updated_at' => $onSelect->updated_at,
-
-
-                     'details' =>  " assign to admin : ". $onSelect->to_assigned_admin_name ."/". $onSelect->to_assigned_admin_user_id." , from admin : ". $onSelect->from_assigned_admin_name."/".$onSelect->from_assigned_admin_id
+                        'updated_at' => $onSelect->updated_at,
 
 
-                 ]
-             );
-         };
+                        'details' => " assign to admin : " . $onSelect->to_assigned_admin_name . "/" . $onSelect->to_assigned_admin_user_id . " , from admin : " . $onSelect->from_assigned_admin_name . "/" . $onSelect->from_assigned_admin_id
 
-////////////// select logs from AdminOpenLog
-         $select =AdminOpenLog::where('recieved_email_id', $recieved_email_id)
-             ->join('users', 'users.id', '=','admin_open_logs.user_id' )
 
-             ->select(array('admin_open_logs.id','user_id','name','admin_open_logs.created_at','admin_open_logs.updated_at' ) ) ->selectSub(function ($query)
-             {
-                 $query->selectRaw(" ( select 'Opened' ) ");
-             }, 'action')->get( );
-//////////////////// insert   admin_open_logs in temporay table
-         foreach ($select as $onSelect)
-         {
-             DB::table($temp_table)->insert(
-                 [
+                    ]
+                );
+            };
 
-                     'action_id' => $onSelect->id,
-
-                     'action' => $onSelect->action,
-
-                     'admin' => $onSelect->name,
-
-                     'admin_id' => $onSelect->user_id,
-
-                     'created_at' => $onSelect->created_at,
-
-                     'updated_at' => $onSelect->updated_at,
-
-                     'details' =>'opened'
-
-                 ]
-             );
-         };
 
 ////////////// select logs from admin_done_email_logs
-        $select =AdminDoneEmailLog::where('recieved_email_id', $recieved_email_id)
-            ->join('users', 'users.id', '=','admin_done_email_logs.user_id' )
-
-            ->select(array('admin_done_email_logs.id','user_id','name','admin_done_email_logs.created_at','admin_done_email_logs.updated_at' ) ) ->selectSub(function ($query)
-            {
-                $query->selectRaw(" ( select 'Done' ) ");
-            }, 'action')->get( );
+            $select = AdminDoneEmailLog::where('recieved_email_id', $recieved_email_id)
+                ->join('users', 'users.id', '=', 'admin_done_email_logs.user_id')
+                ->select(array('admin_done_email_logs.id', 'user_id', 'name', 'admin_done_email_logs.created_at', 'admin_done_email_logs.updated_at'))->selectSub(function ($query) {
+                    $query->selectRaw(" ( select 'Done' ) ");
+                }, 'action')->get();
 //////////////////// insert   admin_done_email_logs in temporay table
-        foreach ($select as $onSelect)
-        {
+            foreach ($select as $onSelect) {
+                DB::table($temp_table)->insert(
+                    [
+
+                        'action_id' => $onSelect->id,
+
+                        'action' => $onSelect->action,
+
+                        'admin' => $onSelect->name,
+
+                        'admin_id' => $onSelect->user_id,
+
+                        'created_at' => $onSelect->created_at,
+
+                        'updated_at' => $onSelect->updated_at,
+
+                        'details' => 'Done'
+
+                    ]
+                );
+            };
+
+
+////////////// select logs from admin_note_done_email_logs
+            $select = AdminNoteDoneEmailLogs::where('recieved_email_id', $recieved_email_id)
+                ->join('users', 'users.id', '=', 'admin_note_done_email_logs.user_id')
+                ->select(array('admin_note_done_email_logs.id', 'user_id', 'name', 'admin_note_done_email_logs.created_at', 'admin_note_done_email_logs.updated_at'))->selectSub(function ($query) {
+                    $query->selectRaw(" ( select 'Not Done' ) ");
+                }, 'action')->get();
+//////////////////// insert   admin_note_done_email_logs in temporay table
+            foreach ($select as $onSelect) {
+                DB::table($temp_table)->insert(
+                    [
+
+                        'action_id' => $onSelect->id,
+
+                        'action' => $onSelect->action,
+
+                        'admin' => $onSelect->name,
+
+                        'admin_id' => $onSelect->user_id,
+
+                        'created_at' => $onSelect->created_at,
+
+                        'updated_at' => $onSelect->updated_at,
+
+                        'details' => 'No Done'
+
+                    ]
+                );
+            };
+
+////////////// select logs from admin_note_done_email_logs
+            $select = AdminRestoreEmailLog::where('recieved_email_id', $recieved_email_id)
+                ->join('users', 'users.id', '=', 'admin_restore_email_logs.user_id')
+                ->select(array('admin_restore_email_logs.id', 'user_id', 'name', 'admin_restore_email_logs.created_at', 'admin_restore_email_logs.updated_at'))->selectSub(function ($query) {
+                    $query->selectRaw(" ( select 'restore from delete' ) ");
+                }, 'action')->get();
+//////////////////// insert   admin_restore_email_logs in temporay table
+            foreach ($select as $onSelect) {
+                DB::table($temp_table)->insert(
+                    [
+
+                        'action_id' => $onSelect->id,
+
+                        'action' => $onSelect->action,
+
+                        'admin' => $onSelect->name,
+
+                        'admin_id' => $onSelect->user_id,
+
+                        'created_at' => $onSelect->created_at,
+
+                        'updated_at' => $onSelect->updated_at,
+
+                        'details' => 'restore from delete'
+
+                    ]
+                );
+            };
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->first();
+
+            if ($recievedEmail->delete_by_admin_user_id != null)
+            {
+                $user = User::where('id', $recievedEmail->delete_by_admin_user_id)->first();
+
+
             DB::table($temp_table)->insert(
                 [
+                    'action_id' => $recievedEmail->id,
 
-                    'action_id' => $onSelect->id,
+                    'action' => 'delete',
 
-                    'action' => $onSelect->action,
+                    'admin' => $user->name,
 
-                    'admin' => $onSelect->name,
+                    'admin_id' => $recievedEmail->delete_by_admin_user_id,
 
-                    'admin_id' => $onSelect->user_id,
+                    'created_at' => $recievedEmail->deleted_at,
 
-                    'created_at' => $onSelect->created_at,
+                    'updated_at' => $recievedEmail->deleted_at,
 
-                    'updated_at' => $onSelect->updated_at,
-
-                    'details' =>'Done'
-
+                    'details' => 'deleted'
                 ]
             );
-        };
-
+        }
 /////////////////////// select all row from temporay table befor delete if
 
               $recieved_email_activity_log_table  =  DB::select(' SELECT * FROM '.$temp_table.' ORDER BY created_at ');
@@ -359,8 +426,15 @@ class ContactFormController extends Controller
     public function restore_deleted_message_from_archive($recieved_email_id)
 {
 
-    return DB::transaction(function () use ($recieved_email_id) {
-        $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->update(['is_deleted' => 0]);
+    return DB::transaction(function () use ($recieved_email_id)
+    {
+        $adminRestoreEmailLog=new AdminRestoreEmailLog();
+
+        $adminRestoreEmailLog->recieved_email_id=$recieved_email_id;
+
+        $adminRestoreEmailLog->user_id=auth()->user()->id;
+        $adminRestoreEmailLog->save();
+        $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->update(['is_deleted' => 0,'last_admin_restore_email_log_id'=>$adminRestoreEmailLog->id]);
 
         $messages=RecievedEmail::where('is_deleted', 1)->
         with(array('contactSubCategory.cSCTranslation' => function ($query)  {
@@ -740,7 +814,8 @@ $preDefinedEmail=PreDefinedEmail::with(array('contactSubCategory.cSCTranslation'
     public function delete_recieved_message($recieved_email_id)
     {
         return DB::transaction(function () use ($recieved_email_id) {
-            $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->update(['is_deleted' => 1]);
+
+            $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->update(['is_deleted' => 1,'delete_by_admin_user_id'=>auth()->user()->id,'last_admin_restore_email_log_id' => null]);
 
             $messages = RecievedEmail::where('is_deleted', 0)->
             with(array('contactSubCategory.cSCTranslation' => function ($query) {
