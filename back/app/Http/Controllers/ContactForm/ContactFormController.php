@@ -411,6 +411,8 @@ class ContactFormController extends Controller
             $recievedEmail        = RecievedEmail::where('id', $recieved_email_id)->get();
             $adminComment         = AdminComment::where('recieved_email_id', $recieved_email_id)->delete();
             $adminDoneEmailLog    = AdminDoneEmailLog::where('recieved_email_id', $recieved_email_id)->delete();
+            $adminNotDoneEmailLog    = AdminNoteDoneEmailLogs::where('recieved_email_id', $recieved_email_id)->delete();
+
             $adminEmailAssignLog  = AdminEmailAssignLog::where('recieved_email_id', $recieved_email_id)->delete();
             $adminEmailAssignLog  = AdminOpenLog::where('recieved_email_id', $recieved_email_id)->delete();
             $adminRepliedEmail    = AdminRepliedEmail::where('recieved_email_id', $recieved_email_id)->delete();
