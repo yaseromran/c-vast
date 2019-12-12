@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 11 ديسمبر 2019 الساعة 11:00
+-- Generation Time: 12 ديسمبر 2019 الساعة 10:48
 -- إصدار الخادم: 10.1.40-MariaDB
 -- PHP Version: 7.3.5
 
@@ -67,7 +67,9 @@ CREATE TABLE `admin_done_email_logs` (
 
 INSERT INTO `admin_done_email_logs` (`id`, `recieved_email_id`, `user_id`, `created_at`, `updated_at`) VALUES
 (4, 13, 33, '2019-12-10 09:25:06', '2019-12-10 09:25:06'),
-(7, 13, 33, '2019-12-10 09:26:58', '2019-12-10 09:26:58');
+(7, 13, 33, '2019-12-10 09:26:58', '2019-12-10 09:26:58'),
+(8, 13, 33, '2019-12-12 07:16:36', '2019-12-12 07:16:36'),
+(10, 13, 33, '2019-12-12 07:46:57', '2019-12-12 07:46:57');
 
 -- --------------------------------------------------------
 
@@ -113,7 +115,8 @@ CREATE TABLE `admin_note_done_email_logs` (
 --
 
 INSERT INTO `admin_note_done_email_logs` (`id`, `recieved_email_id`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 13, 33, '2019-12-10 09:28:17', '2019-12-10 09:28:17');
+(1, 13, 33, '2019-12-10 09:28:17', '2019-12-10 09:28:17'),
+(2, 13, 33, '2019-12-12 07:22:11', '2019-12-12 07:22:11');
 
 -- --------------------------------------------------------
 
@@ -147,7 +150,7 @@ CREATE TABLE `admin_replied_emails` (
   `id` int(10) UNSIGNED NOT NULL,
   `replyed_email_body` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `replyed_email_title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cc` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cc` int(10) UNSIGNED DEFAULT NULL,
   `recieved_email_id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -159,8 +162,10 @@ CREATE TABLE `admin_replied_emails` (
 --
 
 INSERT INTO `admin_replied_emails` (`id`, `replyed_email_body`, `replyed_email_title`, `cc`, `recieved_email_id`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 'xxxx', 'xxxx', 'xxxx@yy.zz', 13, 31, '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
-(2, 'xxxx', 'xxxx', 'xxxx@yy.zz', 14, 31, '2019-11-23 07:44:56', '2019-11-23 07:44:56');
+(1, 'xxxx', 'xxxx', 0, 13, 31, '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
+(2, 'xxxx', 'xxxx', 0, 14, 31, '2019-11-23 07:44:56', '2019-11-23 07:44:56'),
+(3, 'comment body', 'comment title', NULL, 13, 33, '2019-12-12 07:36:13', '2019-12-12 07:36:13'),
+(4, 'comment body', 'comment title', NULL, 13, 33, '2019-12-12 07:39:40', '2019-12-12 07:39:40');
 
 -- --------------------------------------------------------
 
@@ -185,7 +190,10 @@ INSERT INTO `admin_restore_email_logs` (`id`, `recieved_email_id`, `user_id`, `c
 (2, 13, 33, '2019-12-10 17:53:09', '2019-12-10 17:53:09'),
 (3, 13, 33, '2019-12-10 17:53:47', '2019-12-10 17:53:47'),
 (5, 13, 33, '2019-12-10 17:57:00', '2019-12-10 17:57:00'),
-(6, 13, 33, '2019-12-11 07:58:58', '2019-12-11 07:58:58');
+(6, 13, 33, '2019-12-11 07:58:58', '2019-12-11 07:58:58'),
+(7, 13, 33, '2019-12-11 09:11:51', '2019-12-11 09:11:51'),
+(8, 13, 33, '2019-12-11 09:12:56', '2019-12-11 09:12:56'),
+(9, 13, 33, '2019-12-12 07:18:37', '2019-12-12 07:18:37');
 
 -- --------------------------------------------------------
 
@@ -2959,7 +2967,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (258, '2011_09_30_076268_drop_unique_email_column_recieved_emails_table', 114),
 (260, '2011_09_30_076358_edit_pre_defined_emails_table', 115),
 (261, '2011_09_30_071958_create_admin_not_done_email_logs_table', 116),
-(262, '2011_09_30_073958_add_recieved_emails_table', 117);
+(262, '2011_09_30_073958_add_recieved_emails_table', 117),
+(263, '2011_09_30_076158_edit_admin_replied_emails_table', 118);
 
 -- --------------------------------------------------------
 
@@ -4941,385 +4950,10 @@ CREATE TABLE `recieved_emails` (
 --
 
 INSERT INTO `recieved_emails` (`id`, `contact_main_catagory_id`, `contact_sub_category_id`, `delete_by_admin_user_id`, `last_admin_comment_id`, `last_admin_done_email_log_id`, `last_admin_note_done_email_log_id`, `last_admin_open_log_id`, `last_admin_replied_email_id`, `last_admin_restore_email_log_id`, `translated_languages_id`, `user_id`, `message`, `email`, `is_deleted`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(13, 1, 2, 33, NULL, NULL, 1, 21, 31, 6, 1, NULL, 'problem in …..', 0, 0, '2019-12-11 09:58:58', '2019-11-14 08:45:53', '2019-12-11 07:58:58'),
+(13, 1, 2, 33, NULL, 33, NULL, 21, 33, NULL, 1, NULL, 'problem in …..', 0, 1, '2019-12-12 09:46:57', '2019-11-14 08:45:53', '2019-12-12 07:46:57'),
 (14, 1, 2, NULL, NULL, NULL, NULL, NULL, 31, NULL, 1, 30, 'problem in …..', NULL, 0, '2019-11-23 09:44:56', '2019-11-14 08:46:24', '2019-11-23 07:44:56'),
 (15, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, 'problem in coyrse…..', 0, 0, '2019-11-27 08:43:11', '2019-11-27 06:43:11', '2019-11-27 06:43:11'),
 (16, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, 'problem in …..', 0, 0, '2019-11-27 08:44:15', '2019-11-27 06:44:15', '2019-11-27 06:44:15');
-
--- --------------------------------------------------------
-
---
--- بنية الجدول `recieved_email_activity_log13`
---
-
-CREATE TABLE `recieved_email_activity_log13` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `action_id` int(11) NOT NULL,
-  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `recieved_email_activity_log13`
---
-
-INSERT INTO `recieved_email_activity_log13` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
-(2, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
-(3, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
-(4, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
-(5, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50');
-
--- --------------------------------------------------------
-
---
--- بنية الجدول `recieved_email_activity_log1325`
---
-
-CREATE TABLE `recieved_email_activity_log1325` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `action_id` int(11) NOT NULL,
-  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `recieved_email_activity_log1325`
---
-
-INSERT INTO `recieved_email_activity_log1325` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
-(1, 20, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:14:32', '2019-12-10 09:14:32'),
-(2, 21, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:18:39', '2019-12-10 09:18:39'),
-(3, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
-(4, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
-(5, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
-(6, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
-(7, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50'),
-(8, 4, 'Done', 'yasss', '33', 'Done', '2019-12-10 09:25:06', '2019-12-10 09:25:06'),
-(9, 7, 'Done', 'yasss', '33', 'Done', '2019-12-10 09:26:58', '2019-12-10 09:26:58'),
-(10, 1, 'Not Done', 'yasss', '33', 'No Done', '2019-12-10 09:28:17', '2019-12-10 09:28:17'),
-(11, 1, 'restore from delete', 'yasss', '33', 'restore from delete', '2019-12-10 17:40:39', '2019-12-10 17:40:39'),
-(12, 2, 'restore from delete', 'yasss', '33', 'restore from delete', '2019-12-10 17:53:09', '2019-12-10 17:53:09'),
-(13, 3, 'restore from delete', 'yasss', '33', 'restore from delete', '2019-12-10 17:53:47', '2019-12-10 17:53:47'),
-(14, 5, 'restore from delete', 'yasss', '33', 'restore from delete', '2019-12-10 17:57:00', '2019-12-10 17:57:00');
-
--- --------------------------------------------------------
-
---
--- بنية الجدول `recieved_email_activity_log1328`
---
-
-CREATE TABLE `recieved_email_activity_log1328` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `action_id` int(11) NOT NULL,
-  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `recieved_email_activity_log1328`
---
-
-INSERT INTO `recieved_email_activity_log1328` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
-(1, 20, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:14:32', '2019-12-10 09:14:32'),
-(2, 21, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:18:39', '2019-12-10 09:18:39'),
-(3, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
-(4, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
-(5, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
-(6, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
-(7, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50'),
-(8, 4, 'Done', 'yasss', '33', 'Done', '2019-12-10 09:25:06', '2019-12-10 09:25:06'),
-(9, 7, 'Done', 'yasss', '33', 'Done', '2019-12-10 09:26:58', '2019-12-10 09:26:58'),
-(10, 1, 'Not Done', 'yasss', '33', 'No Done', '2019-12-10 09:28:17', '2019-12-10 09:28:17'),
-(11, 1, 'restore from delete', 'yasss', '33', 'restore from delete', '2019-12-10 17:40:39', '2019-12-10 17:40:39'),
-(12, 2, 'restore from delete', 'yasss', '33', 'restore from delete', '2019-12-10 17:53:09', '2019-12-10 17:53:09'),
-(13, 3, 'restore from delete', 'yasss', '33', 'restore from delete', '2019-12-10 17:53:47', '2019-12-10 17:53:47'),
-(14, 5, 'restore from delete', 'yasss', '33', 'restore from delete', '2019-12-10 17:57:00', '2019-12-10 17:57:00');
-
--- --------------------------------------------------------
-
---
--- بنية الجدول `recieved_email_activity_log1331`
---
-
-CREATE TABLE `recieved_email_activity_log1331` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `action_id` int(11) NOT NULL,
-  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `recieved_email_activity_log1331`
---
-
-INSERT INTO `recieved_email_activity_log1331` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
-(2, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
-(3, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
-(4, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
-(5, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50'),
-(6, 20, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:14:32', '2019-12-10 09:14:32'),
-(7, 21, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:18:39', '2019-12-10 09:18:39');
-
--- --------------------------------------------------------
-
---
--- بنية الجدول `recieved_email_activity_log1355`
---
-
-CREATE TABLE `recieved_email_activity_log1355` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `action_id` int(11) NOT NULL,
-  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `recieved_email_activity_log1355`
---
-
-INSERT INTO `recieved_email_activity_log1355` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
-(1, 20, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:14:32', '2019-12-10 09:14:32'),
-(2, 21, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:18:39', '2019-12-10 09:18:39'),
-(3, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
-(4, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
-(5, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
-(6, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
-(7, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50'),
-(8, 4, 'Done', 'yasss', '33', 'Done', '2019-12-10 09:25:06', '2019-12-10 09:25:06'),
-(9, 7, 'Done', 'yasss', '33', 'Done', '2019-12-10 09:26:58', '2019-12-10 09:26:58'),
-(10, 1, 'Not Done', 'yasss', '33', 'No Done', '2019-12-10 09:28:17', '2019-12-10 09:28:17'),
-(11, 1, 'restore from delete', 'yasss', '33', 'restore from delete', '2019-12-10 17:40:39', '2019-12-10 17:40:39'),
-(12, 2, 'restore from delete', 'yasss', '33', 'restore from delete', '2019-12-10 17:53:09', '2019-12-10 17:53:09'),
-(13, 3, 'restore from delete', 'yasss', '33', 'restore from delete', '2019-12-10 17:53:47', '2019-12-10 17:53:47'),
-(14, 5, 'restore from delete', 'yasss', '33', 'restore from delete', '2019-12-10 17:57:00', '2019-12-10 17:57:00');
-
--- --------------------------------------------------------
-
---
--- بنية الجدول `recieved_email_activity_log1357`
---
-
-CREATE TABLE `recieved_email_activity_log1357` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `action_id` int(11) NOT NULL,
-  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `recieved_email_activity_log1357`
---
-
-INSERT INTO `recieved_email_activity_log1357` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
-(1, 20, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:14:32', '2019-12-10 09:14:32'),
-(2, 21, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:18:39', '2019-12-10 09:18:39'),
-(3, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
-(4, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
-(5, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
-(6, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
-(7, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50'),
-(8, 4, 'Done', 'yasss', '33', 'Done', '2019-12-10 09:25:06', '2019-12-10 09:25:06'),
-(9, 7, 'Done', 'yasss', '33', 'Done', '2019-12-10 09:26:58', '2019-12-10 09:26:58'),
-(10, 1, 'Not Done', 'yasss', '33', 'No Done', '2019-12-10 09:28:17', '2019-12-10 09:28:17'),
-(11, 1, 'restore from delete', 'yasss', '33', 'restore from delete', '2019-12-10 17:40:39', '2019-12-10 17:40:39'),
-(12, 2, 'restore from delete', 'yasss', '33', 'restore from delete', '2019-12-10 17:53:09', '2019-12-10 17:53:09'),
-(13, 3, 'restore from delete', 'yasss', '33', 'restore from delete', '2019-12-10 17:53:47', '2019-12-10 17:53:47'),
-(14, 5, 'restore from delete', 'yasss', '33', 'restore from delete', '2019-12-10 17:57:00', '2019-12-10 17:57:00');
-
--- --------------------------------------------------------
-
---
--- بنية الجدول `recieved_email_activity_log1382`
---
-
-CREATE TABLE `recieved_email_activity_log1382` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `action_id` int(11) NOT NULL,
-  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `recieved_email_activity_log1382`
---
-
-INSERT INTO `recieved_email_activity_log1382` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
-(1, 20, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:14:32', '2019-12-10 09:14:32'),
-(2, 21, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:18:39', '2019-12-10 09:18:39'),
-(3, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
-(4, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
-(5, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
-(6, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
-(7, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50'),
-(8, 4, 'Done', 'yasss', '33', 'Done', '2019-12-10 09:25:06', '2019-12-10 09:25:06'),
-(9, 7, 'Done', 'yasss', '33', 'Done', '2019-12-10 09:26:58', '2019-12-10 09:26:58'),
-(10, 1, 'Not Done', 'yasss', '33', 'No Done', '2019-12-10 09:28:17', '2019-12-10 09:28:17'),
-(11, 1, 'restore from delete', 'yasss', '33', 'restore from delete', '2019-12-10 17:40:39', '2019-12-10 17:40:39'),
-(12, 2, 'restore from delete', 'yasss', '33', 'restore from delete', '2019-12-10 17:53:09', '2019-12-10 17:53:09'),
-(13, 3, 'restore from delete', 'yasss', '33', 'restore from delete', '2019-12-10 17:53:47', '2019-12-10 17:53:47'),
-(14, 5, 'restore from delete', 'yasss', '33', 'restore from delete', '2019-12-10 17:57:00', '2019-12-10 17:57:00');
-
--- --------------------------------------------------------
-
---
--- بنية الجدول `recieved_email_activity_log1392`
---
-
-CREATE TABLE `recieved_email_activity_log1392` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `action_id` int(11) NOT NULL,
-  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `recieved_email_activity_log1392`
---
-
-INSERT INTO `recieved_email_activity_log1392` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
-(1, 20, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:14:32', '2019-12-10 09:14:32'),
-(2, 21, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:18:39', '2019-12-10 09:18:39'),
-(3, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
-(4, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
-(5, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
-(6, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
-(7, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50'),
-(8, 4, 'Done', 'yasss', '33', 'Done', '2019-12-10 09:25:06', '2019-12-10 09:25:06'),
-(9, 7, 'Done', 'yasss', '33', 'Done', '2019-12-10 09:26:58', '2019-12-10 09:26:58'),
-(10, 1, 'Not Done', 'yasss', '33', 'No Done', '2019-12-10 09:28:17', '2019-12-10 09:28:17'),
-(11, 1, 'restore from delete', 'yasss', '33', 'restore from delete', '2019-12-10 17:40:39', '2019-12-10 17:40:39'),
-(12, 2, 'restore from delete', 'yasss', '33', 'restore from delete', '2019-12-10 17:53:09', '2019-12-10 17:53:09'),
-(13, 3, 'restore from delete', 'yasss', '33', 'restore from delete', '2019-12-10 17:53:47', '2019-12-10 17:53:47'),
-(14, 5, 'restore from delete', 'yasss', '33', 'restore from delete', '2019-12-10 17:57:00', '2019-12-10 17:57:00');
-
--- --------------------------------------------------------
-
---
--- بنية الجدول `recieved_email_activity_log1395`
---
-
-CREATE TABLE `recieved_email_activity_log1395` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `action_id` int(11) NOT NULL,
-  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `recieved_email_activity_log1395`
---
-
-INSERT INTO `recieved_email_activity_log1395` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
-(1, 20, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:14:32', '2019-12-10 09:14:32'),
-(2, 21, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:18:39', '2019-12-10 09:18:39'),
-(3, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
-(4, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
-(5, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
-(6, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
-(7, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50'),
-(8, 4, 'Done', 'yasss', '33', 'Done', '2019-12-10 09:25:06', '2019-12-10 09:25:06'),
-(9, 7, 'Done', 'yasss', '33', 'Done', '2019-12-10 09:26:58', '2019-12-10 09:26:58'),
-(10, 1, 'Not Done', 'yasss', '33', 'No Done', '2019-12-10 09:28:17', '2019-12-10 09:28:17'),
-(11, 1, 'restore from delete', 'yasss', '33', 'restore from delete', '2019-12-10 17:40:39', '2019-12-10 17:40:39'),
-(12, 2, 'restore from delete', 'yasss', '33', 'restore from delete', '2019-12-10 17:53:09', '2019-12-10 17:53:09'),
-(13, 3, 'restore from delete', 'yasss', '33', 'restore from delete', '2019-12-10 17:53:47', '2019-12-10 17:53:47'),
-(14, 5, 'restore from delete', 'yasss', '33', 'restore from delete', '2019-12-10 17:57:00', '2019-12-10 17:57:00');
-
--- --------------------------------------------------------
-
---
--- بنية الجدول `recieved_email_activity_log132019-12-10 11:34:05`
---
-
-CREATE TABLE `recieved_email_activity_log132019-12-10 11:34:05` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `action_id` int(11) NOT NULL,
-  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `recieved_email_activity_log132019-12-10 11:34:05`
---
-
-INSERT INTO `recieved_email_activity_log132019-12-10 11:34:05` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
-(2, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
-(3, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
-(4, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
-(5, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50');
-
--- --------------------------------------------------------
-
---
--- بنية الجدول `recieved_email_activity_log132019-12-10 11:34:28`
---
-
-CREATE TABLE `recieved_email_activity_log132019-12-10 11:34:28` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `action_id` int(11) NOT NULL,
-  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `recieved_email_activity_log132019-12-10 11:34:28`
---
-
-INSERT INTO `recieved_email_activity_log132019-12-10 11:34:28` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
-(2, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
-(3, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
-(4, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
-(5, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50'),
-(6, 20, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:14:32', '2019-12-10 09:14:32'),
-(7, 21, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:18:39', '2019-12-10 09:18:39');
 
 -- --------------------------------------------------------
 
@@ -5650,246 +5284,6 @@ CREATE TABLE `work_exp_companies` (
 INSERT INTO `work_exp_companies` (`id`, `work_experience_id`, `name`, `country`, `city`, `company_website`, `company_description`, `verified_by_google`, `created_at`, `updated_at`, `company_size_id`) VALUES
 (5, 10, 'automata4', 'syria', NULL, 'automata4.com', NULL, 1, '2019-05-12 05:36:24', '2019-05-12 05:36:24', 1),
 (8, 11, 'q', 'syria', NULL, 'asasa', NULL, 1, '2019-07-11 09:22:44', '2019-07-11 09:22:44', 1);
-
--- --------------------------------------------------------
-
---
--- بنية الجدول `[recieved_email_activity_log1318]`
---
-
-CREATE TABLE `[recieved_email_activity_log1318]` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `action_id` int(11) NOT NULL,
-  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `[recieved_email_activity_log1318]`
---
-
-INSERT INTO `[recieved_email_activity_log1318]` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
-(2, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
-(3, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
-(4, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
-(5, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50'),
-(6, 20, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:14:32', '2019-12-10 09:14:32'),
-(7, 21, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:18:39', '2019-12-10 09:18:39');
-
--- --------------------------------------------------------
-
---
--- بنية الجدول `[recieved_email_activity_log132019-12-10 11:35:53]`
---
-
-CREATE TABLE `[recieved_email_activity_log132019-12-10 11:35:53]` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `action_id` int(11) NOT NULL,
-  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `[recieved_email_activity_log132019-12-10 11:35:53]`
---
-
-INSERT INTO `[recieved_email_activity_log132019-12-10 11:35:53]` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
-(2, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
-(3, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
-(4, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
-(5, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50'),
-(6, 20, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:14:32', '2019-12-10 09:14:32'),
-(7, 21, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:18:39', '2019-12-10 09:18:39');
-
--- --------------------------------------------------------
-
---
--- بنية الجدول `[recieved_email_activity_log132019-12-10 11:38:40]`
---
-
-CREATE TABLE `[recieved_email_activity_log132019-12-10 11:38:40]` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `action_id` int(11) NOT NULL,
-  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `[recieved_email_activity_log132019-12-10 11:38:40]`
---
-
-INSERT INTO `[recieved_email_activity_log132019-12-10 11:38:40]` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
-(2, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
-(3, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
-(4, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
-(5, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50'),
-(6, 20, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:14:32', '2019-12-10 09:14:32'),
-(7, 21, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:18:39', '2019-12-10 09:18:39');
-
--- --------------------------------------------------------
-
---
--- بنية الجدول `[recieved_email_activity_log132019-12-10 11:39:02]`
---
-
-CREATE TABLE `[recieved_email_activity_log132019-12-10 11:39:02]` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `action_id` int(11) NOT NULL,
-  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `[recieved_email_activity_log132019-12-10 11:39:02]`
---
-
-INSERT INTO `[recieved_email_activity_log132019-12-10 11:39:02]` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
-(2, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
-(3, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
-(4, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
-(5, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50'),
-(6, 20, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:14:32', '2019-12-10 09:14:32'),
-(7, 21, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:18:39', '2019-12-10 09:18:39');
-
--- --------------------------------------------------------
-
---
--- بنية الجدول `[recieved_email_activity_log132019-12-10 11:39:12]`
---
-
-CREATE TABLE `[recieved_email_activity_log132019-12-10 11:39:12]` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `action_id` int(11) NOT NULL,
-  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `[recieved_email_activity_log132019-12-10 11:39:12]`
---
-
-INSERT INTO `[recieved_email_activity_log132019-12-10 11:39:12]` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
-(2, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
-(3, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
-(4, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
-(5, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50'),
-(6, 20, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:14:32', '2019-12-10 09:14:32'),
-(7, 21, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:18:39', '2019-12-10 09:18:39');
-
--- --------------------------------------------------------
-
---
--- بنية الجدول `[recieved_email_activity_log132019-12-10 11:39:32]`
---
-
-CREATE TABLE `[recieved_email_activity_log132019-12-10 11:39:32]` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `action_id` int(11) NOT NULL,
-  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `[recieved_email_activity_log132019-12-10 11:39:32]`
---
-
-INSERT INTO `[recieved_email_activity_log132019-12-10 11:39:32]` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
-(2, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
-(3, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
-(4, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
-(5, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50'),
-(6, 20, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:14:32', '2019-12-10 09:14:32'),
-(7, 21, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:18:39', '2019-12-10 09:18:39');
-
--- --------------------------------------------------------
-
---
--- بنية الجدول `[recieved_email_activity_log132019-12-10 11:40:01]`
---
-
-CREATE TABLE `[recieved_email_activity_log132019-12-10 11:40:01]` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `action_id` int(11) NOT NULL,
-  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `[recieved_email_activity_log132019-12-10 11:40:01]`
---
-
-INSERT INTO `[recieved_email_activity_log132019-12-10 11:40:01]` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
-(2, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
-(3, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
-(4, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
-(5, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50'),
-(6, 20, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:14:32', '2019-12-10 09:14:32'),
-(7, 21, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:18:39', '2019-12-10 09:18:39');
-
--- --------------------------------------------------------
-
---
--- بنية الجدول `[recieved_email_activity_log132019-12-10 11:40:30]`
---
-
-CREATE TABLE `[recieved_email_activity_log132019-12-10 11:40:30]` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `action_id` int(11) NOT NULL,
-  `action` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `admin` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `admin_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `details` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- إرجاع أو استيراد بيانات الجدول `[recieved_email_activity_log132019-12-10 11:40:30]`
---
-
-INSERT INTO `[recieved_email_activity_log132019-12-10 11:40:30]` (`id`, `action_id`, `action`, `admin`, `admin_id`, `details`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Comment', 'y454', '31', 'xxx', '2019-11-25 06:22:55', '2019-11-25 06:22:55'),
-(2, 2, 'Comment', 'y454', '31', 'comment xxx', '2019-11-25 06:23:06', '2019-11-25 06:23:06'),
-(3, 1, 'replay', 'y454', '31', 'xxxx xxxx', '2019-11-23 07:44:50', '2019-11-23 07:44:50'),
-(4, 1, 'Assigned', 'y454', '31', ' assign to admin : ahmad/1 , from admin : y454/31', '2019-11-23 07:39:15', '2019-11-23 07:39:15'),
-(5, 4, 'Assigned', 'y454', '31', ' assign to admin : yaser/2 , from admin : y454/31', '2019-11-23 07:39:50', '2019-11-23 07:39:50'),
-(6, 20, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:14:32', '2019-12-10 09:14:32'),
-(7, 21, 'Opened', 'yasss', '33', 'opened', '2019-12-10 09:18:39', '2019-12-10 09:18:39');
 
 --
 -- Indexes for dumped tables
@@ -6461,72 +5855,6 @@ ALTER TABLE `recieved_emails`
   ADD KEY `recieved_emails_last_admin_note_done_email_log_id_foreign` (`last_admin_note_done_email_log_id`);
 
 --
--- Indexes for table `recieved_email_activity_log13`
---
-ALTER TABLE `recieved_email_activity_log13`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `recieved_email_activity_log1325`
---
-ALTER TABLE `recieved_email_activity_log1325`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `recieved_email_activity_log1328`
---
-ALTER TABLE `recieved_email_activity_log1328`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `recieved_email_activity_log1331`
---
-ALTER TABLE `recieved_email_activity_log1331`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `recieved_email_activity_log1355`
---
-ALTER TABLE `recieved_email_activity_log1355`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `recieved_email_activity_log1357`
---
-ALTER TABLE `recieved_email_activity_log1357`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `recieved_email_activity_log1382`
---
-ALTER TABLE `recieved_email_activity_log1382`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `recieved_email_activity_log1392`
---
-ALTER TABLE `recieved_email_activity_log1392`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `recieved_email_activity_log1395`
---
-ALTER TABLE `recieved_email_activity_log1395`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `recieved_email_activity_log132019-12-10 11:34:05`
---
-ALTER TABLE `recieved_email_activity_log132019-12-10 11:34:05`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `recieved_email_activity_log132019-12-10 11:34:28`
---
-ALTER TABLE `recieved_email_activity_log132019-12-10 11:34:28`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `resumes`
 --
 ALTER TABLE `resumes`
@@ -6599,54 +5927,6 @@ ALTER TABLE `work_exp_companies`
   ADD KEY `work_exp_companies_company_size_id_foreign` (`company_size_id`);
 
 --
--- Indexes for table `[recieved_email_activity_log1318]`
---
-ALTER TABLE `[recieved_email_activity_log1318]`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `[recieved_email_activity_log132019-12-10 11:35:53]`
---
-ALTER TABLE `[recieved_email_activity_log132019-12-10 11:35:53]`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `[recieved_email_activity_log132019-12-10 11:38:40]`
---
-ALTER TABLE `[recieved_email_activity_log132019-12-10 11:38:40]`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `[recieved_email_activity_log132019-12-10 11:39:02]`
---
-ALTER TABLE `[recieved_email_activity_log132019-12-10 11:39:02]`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `[recieved_email_activity_log132019-12-10 11:39:12]`
---
-ALTER TABLE `[recieved_email_activity_log132019-12-10 11:39:12]`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `[recieved_email_activity_log132019-12-10 11:39:32]`
---
-ALTER TABLE `[recieved_email_activity_log132019-12-10 11:39:32]`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `[recieved_email_activity_log132019-12-10 11:40:01]`
---
-ALTER TABLE `[recieved_email_activity_log132019-12-10 11:40:01]`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `[recieved_email_activity_log132019-12-10 11:40:30]`
---
-ALTER TABLE `[recieved_email_activity_log132019-12-10 11:40:30]`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -6660,7 +5940,7 @@ ALTER TABLE `admin_comments`
 -- AUTO_INCREMENT for table `admin_done_email_logs`
 --
 ALTER TABLE `admin_done_email_logs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `admin_email_assign_logs`
@@ -6672,7 +5952,7 @@ ALTER TABLE `admin_email_assign_logs`
 -- AUTO_INCREMENT for table `admin_note_done_email_logs`
 --
 ALTER TABLE `admin_note_done_email_logs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `admin_open_logs`
@@ -6684,13 +5964,13 @@ ALTER TABLE `admin_open_logs`
 -- AUTO_INCREMENT for table `admin_replied_emails`
 --
 ALTER TABLE `admin_replied_emails`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `admin_restore_email_logs`
 --
 ALTER TABLE `admin_restore_email_logs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `companies`
@@ -6984,7 +6264,7 @@ ALTER TABLE `marital_status_translations`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=263;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=264;
 
 --
 -- AUTO_INCREMENT for table `minors`
@@ -7071,72 +6351,6 @@ ALTER TABLE `recieved_emails`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT for table `recieved_email_activity_log13`
---
-ALTER TABLE `recieved_email_activity_log13`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `recieved_email_activity_log1325`
---
-ALTER TABLE `recieved_email_activity_log1325`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT for table `recieved_email_activity_log1328`
---
-ALTER TABLE `recieved_email_activity_log1328`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT for table `recieved_email_activity_log1331`
---
-ALTER TABLE `recieved_email_activity_log1331`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `recieved_email_activity_log1355`
---
-ALTER TABLE `recieved_email_activity_log1355`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT for table `recieved_email_activity_log1357`
---
-ALTER TABLE `recieved_email_activity_log1357`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT for table `recieved_email_activity_log1382`
---
-ALTER TABLE `recieved_email_activity_log1382`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT for table `recieved_email_activity_log1392`
---
-ALTER TABLE `recieved_email_activity_log1392`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT for table `recieved_email_activity_log1395`
---
-ALTER TABLE `recieved_email_activity_log1395`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT for table `recieved_email_activity_log132019-12-10 11:34:05`
---
-ALTER TABLE `recieved_email_activity_log132019-12-10 11:34:05`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `recieved_email_activity_log132019-12-10 11:34:28`
---
-ALTER TABLE `recieved_email_activity_log132019-12-10 11:34:28`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
 -- AUTO_INCREMENT for table `resumes`
 --
 ALTER TABLE `resumes`
@@ -7195,54 +6409,6 @@ ALTER TABLE `work_experiences`
 --
 ALTER TABLE `work_exp_companies`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `[recieved_email_activity_log1318]`
---
-ALTER TABLE `[recieved_email_activity_log1318]`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `[recieved_email_activity_log132019-12-10 11:35:53]`
---
-ALTER TABLE `[recieved_email_activity_log132019-12-10 11:35:53]`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `[recieved_email_activity_log132019-12-10 11:38:40]`
---
-ALTER TABLE `[recieved_email_activity_log132019-12-10 11:38:40]`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `[recieved_email_activity_log132019-12-10 11:39:02]`
---
-ALTER TABLE `[recieved_email_activity_log132019-12-10 11:39:02]`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `[recieved_email_activity_log132019-12-10 11:39:12]`
---
-ALTER TABLE `[recieved_email_activity_log132019-12-10 11:39:12]`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `[recieved_email_activity_log132019-12-10 11:39:32]`
---
-ALTER TABLE `[recieved_email_activity_log132019-12-10 11:39:32]`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `[recieved_email_activity_log132019-12-10 11:40:01]`
---
-ALTER TABLE `[recieved_email_activity_log132019-12-10 11:40:01]`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `[recieved_email_activity_log132019-12-10 11:40:30]`
---
-ALTER TABLE `[recieved_email_activity_log132019-12-10 11:40:30]`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- قيود الجداول المحفوظة

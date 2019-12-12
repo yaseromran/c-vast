@@ -72,7 +72,7 @@ class ContactFormController extends Controller
                 $adminDoneEmailLog->user_id=auth()->user()->id;
                 $adminDoneEmailLog->save();
 
-                $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->update(['last_admin_done_email_log_id' => $adminDoneEmailLog->id]);
+                $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->update(['last_admin_done_email_log_id' => $adminDoneEmailLog->user_id]);
                 $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->update(['last_admin_note_done_email_log_id' => null]);
                 return response()->json([
                     'success' => 'true',
@@ -610,6 +610,12 @@ class ContactFormController extends Controller
                 'success' => 'true',
                 'messages' => "email must be opened befor make replay: recieved_email_id ".$request->recieved_email_Id], 200);
         }
+        if($resultRecievedEmail->is_deleted==0)
+        {
+            return response()->json([
+                'success' => 'true',
+                'messages' => "this email must   deleted  recieved_email_id ".$request->recieved_email_Id], 200);
+        }
         return DB::transaction(function () use ($resultRecievedEmail,$request)
         {
             $adminRepliedEmail                      = new AdminRepliedEmail();
@@ -785,20 +791,19 @@ class ContactFormController extends Controller
     }
     public function show_all_templates()
     {
-$preDefinedEmail=PreDefinedEmail::with(array('contactSubCategory.cSCTranslation' => function ($query)  {
-      $query->where('translated_languages_id', 1);
-})) -> with(array('contactMainCatagory.cMCTranslation' => function ($query)  {
-      $query->where('translated_languages_id', 1);
-}))->get( );
+        $preDefinedEmail=PreDefinedEmail::with(array('contactSubCategory.cSCTranslation' => function ($query)  {
+              $query->where('translated_languages_id', 1);
+        })) -> with(array('contactMainCatagory.cMCTranslation' => function ($query)  {
+              $query->where('translated_languages_id', 1);
+        }))->get( );
 
         $filters= ContactMainCatagory::with(array('cMCTranslation' => function ($query)  {
-            // $query->where('translated_languages_id', $main_language_id);
-        }))
-            ->with(array('contactSubCategory.cSCTranslation' => function ($query)  {
-                // $query->where('translated_languages_id', $main_language_id);
-            }))
-
-            ->get( );
+                    // $query->where('translated_languages_id', $main_language_id);
+         }))
+          ->with(array('contactSubCategory.cSCTranslation' => function ($query)  {
+                        // $query->where('translated_languages_id', $main_language_id);
+          }))
+                     ->get( );
         return response()->json([
             'success' => 'true',
             'data'=>$preDefinedEmail  ,
@@ -871,15 +876,22 @@ $preDefinedEmail=PreDefinedEmail::with(array('contactSubCategory.cSCTranslation'
 
     public function delete_recieved_message($recieved_email_id)
     {
-        $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->update(['is_deleted' => 1,'delete_by_admin_user_id'=>auth()->user()->id,'last_admin_restore_email_log_id' => null]);
-        if($recievedEmail->last_admin_done_email_log_id==null)
-        {
-            return response()->json([
-                'success' => 'true',
-                'messages' => "email must be done befor delete: recieved_email_id ".$recieved_email_id], 200);
-        }
+        $recievedEmail = RecievedEmail::
+            where('id', $recieved_email_id)
+            ->update(
+                        ['is_deleted' => 1
+                         ,'delete_by_admin_user_id'=>auth()->user()->id
+                         ,'last_admin_restore_email_log_id' => null
+                        ]);
+        $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->first();
+            if($recievedEmail->last_admin_done_email_log_id==null)
+            {
+                return response()->json([
+                    'success' => 'true',
+                    'messages' => "email must be done befor delete: recieved_email_id ".$recieved_email_id], 200);
+            }
 
-        if($recievedEmail->last_admin_open_log_id!=null)
+        if($recievedEmail->last_admin_open_log_id==null)
         {
             return response()->json([
                 'success' => 'true',
