@@ -413,6 +413,7 @@ class ContactFormController extends Controller
        }        );
 
     }
+
     public  function permanent_delete_for_deleted_message_from_archive($recieved_email_id)
     {
         return DB::transaction(function () use ($recieved_email_id)
@@ -937,7 +938,18 @@ class ContactFormController extends Controller
                 'filters' => $filters], 200);
         });
     }
-
+    public function delete_multi_recieved_messages(Request $request)
+    {
+        foreach ($request->recieved_messages_ids  as $value) {
+            //$nationality = Nationality::where('name', $value)->first();
+            //return $value['id'];
+            $this->delete_recieved_message($value['id']);
+        }
+        return response()->json([
+            'success' => 'true',
+            'messages' => 'deleted']
+           , 200);
+    }
     public function save_message(Request $request)
     {
         $rules = [

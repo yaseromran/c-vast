@@ -132,6 +132,8 @@ Route::Post('save_message', 'ContactForm\ContactFormController@save_message');
 Route::get('get_data_for_browse_messages', 'ContactForm\ContactFormController@get_data_for_browse_messages')->middleware(['auth:api', 'scope:admin']);
 
 Route::delete('delete_recieved_message/{recieved_email_id}', 'ContactForm\ContactFormController@delete_recieved_message')->middleware(['auth:api', 'scope:admin']);
+Route::delete('delete_multi_recieved_messages', 'ContactForm\ContactFormController@delete_multi_recieved_messages')->middleware(['auth:api', 'scope:admin']);
+
 
 Route::get('get_data_for_one_message/{recieved_email_id}', 'ContactForm\ContactFormController@get_data_for_one_message')->middleware(['auth:api', 'scope:admin']);
 Route::Post('save_replay_message', 'ContactForm\ContactFormController@save_replay_message')->middleware(['auth:api', 'scope:admin']);
