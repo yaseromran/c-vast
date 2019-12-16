@@ -151,10 +151,15 @@ Route::delete('delete_template/{template_id}', 'ContactForm\ContactFormControlle
 
 
 Route::get('get_data_for_update_template_message_view/{template_id}', 'ContactForm\ContactFormController@get_data_for_update_template_message_view')->middleware(['auth:api', 'scope:admin']);
- Route::get('get_all_deleted_message_in_archive', 'ContactForm\ContactFormController@get_all_deleted_message_in_archive')->middleware(['auth:api', 'scope:admin']);
- Route::put('restore_deleted_message_from_archive/{recieved_email_id}', 'ContactForm\ContactFormController@restore_deleted_message_from_archive')->middleware(['auth:api', 'scope:admin']);
- Route::delete('permanent_delete_for_deleted_message_from_archive/{recieved_email_id}', 'ContactForm\ContactFormController@permanent_delete_for_deleted_message_from_archive')->middleware(['auth:api', 'scope:admin']);
- Route::get('recieved_email_activity_log/{recieved_email_id}', 'ContactForm\ContactFormController@recieved_email_activity_log')->middleware(['auth:api', 'scope:admin']);
+Route::get('get_all_deleted_message_in_archive', 'ContactForm\ContactFormController@get_all_deleted_message_in_archive')->middleware(['auth:api', 'scope:admin']);
+Route::put('restore_deleted_message_from_archive/{recieved_email_id}', 'ContactForm\ContactFormController@restore_deleted_message_from_archive')->middleware(['auth:api', 'scope:admin']);
+Route::put('restore_multi_deleted_messages_from_archive', 'ContactForm\ContactFormController@restore_multi_deleted_messages_from_archive')->middleware(['auth:api', 'scope:admin']);
+
+
+Route::delete('permanent_delete_for_deleted_message_from_archive/{recieved_email_id}', 'ContactForm\ContactFormController@permanent_delete_for_deleted_message_from_archive')->middleware(['auth:api', 'scope:admin']);
+Route::delete('multi_permanent_delete_for_deleted_message_from_archive', 'ContactForm\ContactFormController@multi_permanent_delete_for_deleted_message_from_archive')->middleware(['auth:api', 'scope:admin']);
+
+Route::get('recieved_email_activity_log/{recieved_email_id}', 'ContactForm\ContactFormController@recieved_email_activity_log')->middleware(['auth:api', 'scope:admin']);
 
 Route::Post('set_message_as_open/{recieved_email_id}', 'ContactForm\ContactFormController@set_message_as_open')->middleware(['auth:api', 'scope:admin']);
 Route::Post('set_message_as_done/{recieved_email_id}', 'ContactForm\ContactFormController@set_message_as_done')->middleware(['auth:api', 'scope:admin']);

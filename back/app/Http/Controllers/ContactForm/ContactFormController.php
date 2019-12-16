@@ -414,7 +414,7 @@ class ContactFormController extends Controller
 
     }
 
-    public  function permanent_delete_for_deleted_message_from_archive($recieved_email_id)
+    public  function permanent_delete_for_deleted_message_from_archive(Request $request,$recieved_email_id)
     {
         return DB::transaction(function () use ($recieved_email_id)
         {
@@ -435,8 +435,79 @@ class ContactFormController extends Controller
                 'message that deleted' => $recievedEmail], 200);
         });
     }
-    public function restore_deleted_message_from_archive($recieved_email_id)
-{
+
+    public function multi_permanent_delete_for_deleted_message_from_archive(Request $request)
+    {
+        if($request->recieved_messages_ids == null)
+        {
+
+            return response()->json([
+                    'success' => 'false',
+                    'messages' => 'no ids found']
+                , 200);
+        }
+        if($request->recieved_messages_ids == null)
+        {
+
+            return response()->json([
+                    'success' => 'false',
+                    'messages' => 'no ids found']
+                , 200);
+        }
+        foreach ($request->recieved_messages_ids  as $value)
+        {
+            if($value == null)
+            {
+
+                return response()->json([
+                        'success' => 'false',
+                        'messages' => 'no ids found']
+                    , 200);
+            }
+            //$nationality = Nationality::where('name', $value)->first();
+            //return $value['id'];
+            $this->permanent_delete_for_deleted_message_from_archive($request,$value['id']);
+        }
+    }
+    public function restore_multi_deleted_messages_from_archive(Request $request)
+    {
+        if($request->recieved_messages_ids == null)
+        {
+
+            return response()->json([
+                    'success' => 'false',
+                    'messages' => 'no ids found']
+                , 200);
+        }
+        if($request->recieved_messages_ids == null)
+        {
+
+            return response()->json([
+                    'success' => 'false',
+                    'messages' => 'no ids found']
+                , 200);
+        }
+        foreach ($request->recieved_messages_ids  as $value)
+        {
+            if($value == null)
+            {
+
+                return response()->json([
+                        'success' => 'false',
+                        'messages' => 'no ids found']
+                    , 200);
+            }
+            //$nationality = Nationality::where('name', $value)->first();
+            //return $value['id'];
+            $this->restore_deleted_message_from_archive($request,$value['id']);
+        }
+        return response()->json([
+                'success' => 'true',
+                'messages' => 'restore deleted messages']
+            , 200);
+    }
+    public function restore_deleted_message_from_archive(Request $request,$recieved_email_id)
+    {
     $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->first();
     if($recievedEmail->is_deleted==0){
         return response()->json([
@@ -454,7 +525,7 @@ class ContactFormController extends Controller
 
         $adminRestoreEmailLog->save();
 
-        $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->update(['is_deleted' => 0,'delete_by_admin_user_id'=>null,'last_admin_restore_email_log_id'=>$adminRestoreEmailLog->id]);
+        $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->update(['is_deleted' => 0,'delete_by_admin_user_id'=>null,'last_admin_restore_email_log_id'=>auth()->user()->id]);
 
         $messages=RecievedEmail::where('is_deleted', 1)->
         with(array('contactSubCategory.cSCTranslation' => function ($query)  {
@@ -940,7 +1011,16 @@ class ContactFormController extends Controller
     }
     public function delete_multi_recieved_messages(Request $request)
     {
-        foreach ($request->recieved_messages_ids  as $value) {
+        if($request->recieved_messages_ids == null)
+        {
+
+             return response()->json([
+                     'success' => 'false',
+                     'messages' => 'no ids found']
+                 , 200);
+        }
+        foreach ($request->recieved_messages_ids  as $value)
+        {
             //$nationality = Nationality::where('name', $value)->first();
             //return $value['id'];
             $this->delete_recieved_message($value['id']);
