@@ -4,12 +4,12 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class EditRecievedEmailsTable extends Migration
+class EditColRecievedEmailsTable extends Migration
 {
     /**
      * Run the migrations.
      *
-     * @return void
+     * @re2019_09_31_073958_edit_recieved_emails_table.phpturn void
      */
     public function up()
     {
