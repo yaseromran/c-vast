@@ -634,6 +634,7 @@ class ContactFormController extends Controller
             $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->update(['last_admin_name' => auth()->user()->name]);
             $recievedEmail = RecievedEmail::where('id', $recieved_email_id)->update(['last_admin_action_id' =>  auth()->user()->id]);
         $resultRecievedEmail=RecievedEmail            ::where('id',$recieved_email_id)
+
             ->            with(array('contactSubCategory.cSCTranslation' => function ($query)  {
                 // $query->where('translated_languages_id', $main_language_id);
             })) -> with(array('contactMainCatagory.cMCTranslation' => function ($query)  {
@@ -1094,7 +1095,12 @@ class ContactFormController extends Controller
     }
     public function get_data_for_browse_messages()
     {
-        $messages=RecievedEmail::where('is_deleted', 0)->
+        $messages=RecievedEmail::where('is_deleted', 0)
+            ->            with(array('last_admin_name' => function ($query)  {
+                // $query->where('translated_languages_id', $main_language_id);
+            }))
+            ->
+
              with(array('contactSubCategory.cSCTranslation' => function ($query)  {
             // $query->where('translated_languages_id', $main_language_id);
         })) -> with(array('contactMainCatagory.cMCTranslation' => function ($query)  {

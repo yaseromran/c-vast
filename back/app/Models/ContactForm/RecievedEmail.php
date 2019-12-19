@@ -21,6 +21,10 @@ class RecievedEmail extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function last_admin_name()
+    {
+        return $this->belongsTo(User::class,'last_admin_action_id');
+    }
     public function adminComment()
     {
         return $this->hasMany(AdminComment::class);
