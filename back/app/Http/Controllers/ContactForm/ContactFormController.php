@@ -681,6 +681,9 @@ class ContactFormController extends Controller
         ];
         $this->validate($request, $rules);
         $resultRecievedEmail=RecievedEmail  ::where('id', $request->recieved_email_Id)->first();
+        $recievedEmail = RecievedEmail::where('id', $request->recieved_email_Id)->update(['last_action_name' => 'replyed']);
+        $recievedEmail = RecievedEmail::where('id', $request->recieved_email_Id)->update(['last_admin_name' => auth()->user()->name]);
+        $recievedEmail = RecievedEmail::where('id', $request->recieved_email_Id)->update(['last_admin_action_id' =>  auth()->user()->id]);
 
         if(!$resultRecievedEmail)
         {
@@ -761,6 +764,10 @@ class ContactFormController extends Controller
        ];
        $this->validate($request, $rules);
        $resultRecievedEmail=RecievedEmail            ::where('id', $request->recieved_email_id)->first();
+       $recievedEmail = RecievedEmail::where('id', $request->recieved_email_Id)->update(['last_action_name' => 'assigned']);
+       $recievedEmail = RecievedEmail::where('id', $request->recieved_email_Id)->update(['last_admin_name' => auth()->user()->name]);
+       $recievedEmail = RecievedEmail::where('id', $request->recieved_email_Id)->update(['last_admin_action_id' =>  auth()->user()->id]);
+
 
        if(!$resultRecievedEmail)
        {
@@ -939,6 +946,9 @@ class ContactFormController extends Controller
         ];
         $this->validate($request, $rules);
         $resultRecievedEmail=RecievedEmail            ::where('id', $request->recieved_email_id)->first();
+        $recievedEmail = RecievedEmail::where('id', $request->recieved_email_Id)->update(['last_action_name' => 'commented']);
+        $recievedEmail = RecievedEmail::where('id', $request->recieved_email_Id)->update(['last_admin_name' => auth()->user()->name]);
+        $recievedEmail = RecievedEmail::where('id', $request->recieved_email_Id)->update(['last_admin_action_id' =>  auth()->user()->id]);
 
         if(!$resultRecievedEmail)
         {
